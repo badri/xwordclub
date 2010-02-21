@@ -2,12 +2,12 @@
 @import url(/content/style/openid.css);
 @import url(/content/style/prettify.css);
 /* 公用 */
-body{background:#FFF; font-size:12px; line-height:150%; margin:0; padding:0; color:#000; font-family: sans-serif; 
+body{background:#FFF; font-size:15px; line-height:150%; margin:0; padding:0; color:#000; font-family: sans-serif; 
 }
 div{margin:0 auto; padding:0;}
 h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,form,img,p{margin:0; padding:0; border:none; }
 input, select {font-family:Trebuchet MS,"segoe ui",Helvetica,"Microsoft YaHei",宋体,Tahoma,Verdana,MingLiu,PMingLiu,Arial,sans-serif;}
-p{margin-bottom:13px; font-size:13px; line-height:140%;}
+p{margin-bottom:13px; font-size:15px; line-height:140%;}
 a {color:#333333; text-decoration:none;}
 
 .badges a {color:#763333;text-decoration:underline;}
