@@ -13,7 +13,7 @@ LOGIN_URL = '/%s%s' % (ugettext('account/'), ugettext('signin/'))
 
 #EMAIL AND ADMINS
 ADMINS = (
-    ('CNProg team', 'team@cnprog.com'),
+    ('xwordclub team', 'admin@xwordclub.com'),
 )
 MANAGERS = ADMINS
 
@@ -21,7 +21,7 @@ SITE_ID = 1
 MEDIA_URL = 'http://xwordclub.com/content/'
 STATIC_URL = MEDIA_URL
 
-ADMIN_MEDIA_PREFIX = 'http://xowrdclub.com/admin-media/'
+ADMIN_MEDIA_PREFIX = 'http://xwordclub.com/admin-media/'
 SECRET_KEY = '$oo^&_m&qwbib=(_4m_n*zn-d=g#s0he5fx9xonnym#8p6yigm'
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
