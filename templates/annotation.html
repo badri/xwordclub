@@ -8,7 +8,7 @@
 {% endblock %}
 {% block content %}
 <div class="headNormal">
-	{% trans "Clue annotation guide" %}
+	{% trans "Answers annotation guide" %}
 </div>
 <div id="main-body" style="width:100%">
     <p>
@@ -22,25 +22,57 @@
 	<br/>
 	Poor stewardship - mates naming me, unfortunately (13) MISMANAGEMENT*
     </p>
-    
-        <h3 class="subtitle">{% trans "Personal Information" %}</h3>
-    <p>   
-		{% trans "details on personal information policies" %}
+
+
+        <h3 class="subtitle">{% trans "Homophones" %}</h3>
+    <p>    
+	indicated by a "~" followed by the homophone word.
+	<br/>
+	Star is lazy in audition (4) (~idle)IDOL
     </p>
-   
-        <h3 class="subtitle">{% trans "Other Services" %}</h3>
-     <p>   
-	 {% trans "details on sharing data with third parties" %}
+
+        <h3 class="subtitle">{% trans "Embedded constructions" %}</h3>
+    <p>    
+	embedded word/letter is enclosed by "{}".
+	<br/>
+	Get the answers to only about five (5) SOL{V}E
+	Hear evidence about old disaster (7) TR{AGED}Y
     </p>
-    
-        <h3 class="subtitle">Cookies</h3>
-    <p>
-		{% trans "cookie policy details" %}
+
+        <h3 class="subtitle">{% trans "Telescopic clues" %}</h3>
+    <p>    
+	indicated by "[T]" after the answer.
+	<br/>
+	Deactivate part of lunar module (5) UNARM [T]
     </p>
-        <h3 class="subtitle">{% trans "Policy Changes" %}</h3>
-    <p>{% trans "how privacy policies can be changed" %}
+
+        <h3 class="subtitle">{% trans "Cryptic definitions" %}</h3>
+    <p>    
+	indicated by "[CD]" after the answer.
+	<br/>
+	The girl next door (9) NEIGHBOUR [CD]
     </p>
+
+        <h3 class="subtitle">{% trans "Double definitions" %}</h3>
+    <p>    
+	indicated by "[DD]" after the answer.
+	<br/>
+	Elevation popular with salaried workers (5) RAISE [DD]
+    </p>
+
+        <h3 class="subtitle">{% trans "Additions, deletions, reverse etc" %}</h3>
+    <p>    
+	indicated by +,- and <- respectively.
+	<br/>
+	The latest thing in an initially fixed deposit with first rate return (7) {F}{ASH}{ION<-}
+    </p>
+
     <br><br>
+    <div class="headNormal">
+      References:
+    </div>  
+    <br/>
+    <a href="http://thehinducrosswordcorner.blogspot.com">Captain Gopinath's blog</a>
 </div>
 {% endblock %}
-<!-- end privacy.html -->
+<!-- end annotation.html -->
