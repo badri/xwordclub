@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 <!-- template ask.html -->
 {% load i18n %}
-{% block title %}{% spaceless %}{% trans "Ask a question" %}{% endspaceless %}{% endblock %}
+{% block title %}{% spaceless %}{% trans "Post a topic" %}{% endspaceless %}{% endblock %}
 {% block forejs %}
         <script type='text/javascript' src='/content/js/com.cnprog.editor.js'></script>
         <script type='text/javascript' src='/content/js/com.cnprog.post.js'></script>
@@ -64,7 +64,7 @@
         <form id="fmask" action="" method="post" >
 			{% if not request.user.is_authenticated %}
             <div class="message">
-			    <p>{% trans "login to post question info" %}</p>
+			    <p>{% trans "login to post" %}</p>
             </div>
             {% else %}
                 {% ifequal settings.EMAIL_VALIDATION 'on' %}
@@ -112,9 +112,9 @@
 				{{ form.tags.help_text }}
 			</p>
             {% if not request.user.is_authenticated %}
-            <input type="submit" value="{% trans "Login/signup to post your question" %}" class="submit" />
+            <input type="submit" value="{% trans "Login/signup to post your topic" %}" class="submit" />
 			{% else %}
-            <input type="submit" value="{% trans "Ask your question" %}" class="submit" />
+            <input type="submit" value="{% trans "Post" %}" class="submit" />
             {% endif %}
         </form>
     </div>

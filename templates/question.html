@@ -203,7 +203,7 @@
                                                 <table width="200px">
                                                     <tr>
                                                         <td colspan="2"> 
-                                                        {% trans "asked" %} <strong title="{{ question.added_at }}">{% diff_date question.added_at %}</strong>
+                                                        {% trans "posted" %} <strong title="{{ question.added_at }}">{% diff_date question.added_at %}</strong>
                                                         </td>
                                                         
                                                     </tr>
@@ -384,7 +384,7 @@
                                                         <table width="200px">
                             	                            <tr>
                                 	                           	<td colspan="2"> 
-                                                                {% trans "asked" %} <strong title="{{answer.added_at}}">{% diff_date answer.added_at %}</strong>
+                                                                {% trans "posted" %} <strong title="{{answer.added_at}}">{% diff_date answer.added_at %}</strong>
                                                                 </td>
                             	                            </tr>
                             	                            <tr>
@@ -488,10 +488,10 @@
         {% endfor %}
     </p>
     <p>
-        {% trans "question asked" %}: <strong title="{{ question.added_at }}">{{ question.added_at|timesince }} {% trans "ago" %}</strong>
+        {% trans "topic posted" %}: <strong title="{{ question.added_at }}">{{ question.added_at|timesince }} {% trans "ago" %}</strong>
     </p>
     <p> 
-     	{% trans "question was seen" %}: <strong>{{ question.view_count|intcomma }} {% trans "times" %}</strong>
+     	{% trans "topic was seen" %}: <strong>{{ question.view_count|intcomma }} {% trans "times" %}</strong>
     </p>
     <p> 
         {% trans "last updated" %}: <strong title="{{ question.last_activity_at }}">{{ question.last_activity_at|timesince }} {% trans "ago" %}</strong>
