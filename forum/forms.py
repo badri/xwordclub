@@ -12,7 +12,7 @@ class TitleField(forms.CharField):
         self.widget = forms.TextInput(attrs={'size' : 70, 'autocomplete' : 'off'})
         self.max_length = 255
         self.label  = _('title')
-        self.help_text = _('please enter a descriptive title for your question')
+        self.help_text = _('please enter a descriptive title for your post')
         self.initial = ''
 
     def clean(self, value):

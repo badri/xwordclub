@@ -203,7 +203,7 @@
                                                 <table width="200px">
                                                     <tr>
                                                         <td colspan="2"> 
-                                                        {% trans "asked" %} <strong title="{{ question.added_at }}">{% diff_date question.added_at %}</strong>
+                                                        {% trans "posted" %} <strong title="{{ question.added_at }}">{% diff_date question.added_at %}</strong>
                                                         </td>
                                                         
                                                     </tr>
@@ -256,11 +256,11 @@
             {% ifnotequal answers.length 0 %}
                 <div class="tabBar">
                     <a name="sort-top"></a>
-                    <div class="headQuestions">{{ answers|length }}{% trans "Answers" %}:</div>
+                    <div class="headQuestions">{{ answers|length }} {% trans "Replies" %}:</div>
                     <div class="tabsA">
-                         <a id="oldest" href="?sort=oldest#sort-top" title="{% trans "oldest answers will be shown first" %}">{% trans "oldest answers" %}</a>
-                        <a id="latest" href="?sort=latest#sort-top" title="{% trans "newest answers will be shown first" %}">{% trans "newest answers" %}</a>
-                        <a id="votes" href="?sort=votes#sort-top" title="{% trans "most voted answers will be shown first" %}">{% trans "popular answers" %}</a>   
+                         <a id="oldest" href="?sort=oldest#sort-top" title="{% trans "oldest posts will be shown first" %}">{% trans "oldest answers" %}</a>
+                        <a id="latest" href="?sort=latest#sort-top" title="{% trans "newest posts will be shown first" %}">{% trans "newest answers" %}</a>
+                        <a id="votes" href="?sort=votes#sort-top" title="{% trans "most voted posts will be shown first" %}">{% trans "popular answers" %}</a>   
                     </div>
                 </div>
                 {% cnprog_paginator context %}
@@ -384,7 +384,7 @@
                                                         <table width="200px">
                             	                            <tr>
                                 	                           	<td colspan="2"> 
-                                                                {% trans "asked" %} <strong title="{{answer.added_at}}">{% diff_date answer.added_at %}</strong>
+                                                                {% trans "posted" %} <strong title="{{answer.added_at}}">{% diff_date answer.added_at %}</strong>
                                                                 </td>
                             	                            </tr>
                             	                            <tr>
@@ -435,10 +435,10 @@
             
             {% if not question.closed %}
             <div style="padding:10px 0 0 0;">
-                <div class="headNormal">{% trans "Your answer" %}:</div>
+                <div class="headNormal">{% trans "Your reply" %}:</div>
             </div>
             {% if not request.user.is_authenticated %}
-                <div class="message">{% trans "you can answer anonymously and then login" %}</div>
+                <div class="message">{% trans "you can reply anonymously and then login" %}</div>
             {% endif %}
 
             <div id="description" class="" >
@@ -462,9 +462,9 @@
                 {{ answer.text.errors }}
             </div>
             <br>
-            <input type="submit" value="{% trans "Answer the question" %}" class="submit"><span class="form-error"></span>
+            <input type="submit" value="{% trans "Reply" %}" class="submit"><span class="form-error"></span>
                 {% if request.user.is_authenticated %}
-                    {{ answer.email_notify }} <label for="question-subscribe-updates">{% trans "Notify me daily if there are any new answers." %}</label>
+                    {{ answer.email_notify }} <label for="question-subscribe-updates">{% trans "Notify me daily if there are any new replies." %}</label>
                 {% else %}
                     <input type="checkbox" disabled><label>{% trans "once you sign in you will be able to subscribe for any updates here" %}</label>
                 {% endif %}
@@ -488,10 +488,10 @@
         {% endfor %}
     </p>
     <p>
-        {% trans "question asked" %}: <strong title="{{ question.added_at }}">{{ question.added_at|timesince }} {% trans "ago" %}</strong>
+        {% trans "topic posted" %}: <strong title="{{ question.added_at }}">{{ question.added_at|timesince }} {% trans "ago" %}</strong>
     </p>
     <p> 
-     	{% trans "question was seen" %}: <strong>{{ question.view_count|intcomma }} {% trans "times" %}</strong>
+     	{% trans "topic was seen" %}: <strong>{{ question.view_count|intcomma }} {% trans "times" %}</strong>
     </p>
     <p> 
         {% trans "last updated" %}: <strong title="{{ question.last_activity_at }}">{{ question.last_activity_at|timesince }} {% trans "ago" %}</strong>
@@ -499,7 +499,7 @@
 </div>
 
 <div class="boxC">
-    <h3 class="subtitle">{% trans "Related questions" %}</h3>
+    <h3 class="subtitle">{% trans "Related posts" %}</h3>
     <div class="questions-related">
         {% for question in similar_questions %}
         <p>
