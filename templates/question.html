@@ -435,10 +435,10 @@
             
             {% if not question.closed %}
             <div style="padding:10px 0 0 0;">
-                <div class="headNormal">{% trans "Your answer" %}:</div>
+                <div class="headNormal">{% trans "Your reply" %}:</div>
             </div>
             {% if not request.user.is_authenticated %}
-                <div class="message">{% trans "you can answer anonymously and then login" %}</div>
+                <div class="message">{% trans "you can reply anonymously and then login" %}</div>
             {% endif %}
 
             <div id="description" class="" >
@@ -499,7 +499,7 @@
 </div>
 
 <div class="boxC">
-    <h3 class="subtitle">{% trans "Related questions" %}</h3>
+    <h3 class="subtitle">{% trans "Related posts" %}</h3>
     <div class="questions-related">
         {% for question in similar_questions %}
         <p>
