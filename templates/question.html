@@ -256,11 +256,11 @@
             {% ifnotequal answers.length 0 %}
                 <div class="tabBar">
                     <a name="sort-top"></a>
-                    <div class="headQuestions">{{ answers|length }}{% trans "Answers" %}:</div>
+                    <div class="headQuestions">{{ answers|length }}{% trans "Replies" %}:</div>
                     <div class="tabsA">
-                         <a id="oldest" href="?sort=oldest#sort-top" title="{% trans "oldest answers will be shown first" %}">{% trans "oldest answers" %}</a>
-                        <a id="latest" href="?sort=latest#sort-top" title="{% trans "newest answers will be shown first" %}">{% trans "newest answers" %}</a>
-                        <a id="votes" href="?sort=votes#sort-top" title="{% trans "most voted answers will be shown first" %}">{% trans "popular answers" %}</a>   
+                         <a id="oldest" href="?sort=oldest#sort-top" title="{% trans "oldest posts will be shown first" %}">{% trans "oldest answers" %}</a>
+                        <a id="latest" href="?sort=latest#sort-top" title="{% trans "newest posts will be shown first" %}">{% trans "newest answers" %}</a>
+                        <a id="votes" href="?sort=votes#sort-top" title="{% trans "most voted posts will be shown first" %}">{% trans "popular answers" %}</a>   
                     </div>
                 </div>
                 {% cnprog_paginator context %}
@@ -462,7 +462,7 @@
                 {{ answer.text.errors }}
             </div>
             <br>
-            <input type="submit" value="{% trans "Answer the question" %}" class="submit"><span class="form-error"></span>
+            <input type="submit" value="{% trans "Reply" %}" class="submit"><span class="form-error"></span>
                 {% if request.user.is_authenticated %}
                     {{ answer.email_notify }} <label for="question-subscribe-updates">{% trans "Notify me daily if there are any new answers." %}</label>
                 {% else %}
