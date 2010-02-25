@@ -32,6 +32,7 @@
                     <th width="230"  align="right">
                         {% if request.user|can_view_user_edit:view_user %}
                         <span class="user-edit-link"><a href="/users/{{ view_user.id }}/edit/">{% trans "update profile" %}</a></span>
+                        <a href="/account/delete">{% trans "Delete account" %}</a>
                         {% endif %}
                     </th>
                 </tr>
