@@ -465,8 +465,9 @@ function createComments(type) {
     };
 
     var canPostComments = function(id, jDiv) {
-        var jHidden = jDiv.siblings("#can-post-comments-" + objectType + '-' + id);
-        return jHidden.val().toLowerCase() == "true";
+        //var jHidden = jDiv.siblings("#can-post-comments-" + objectType + '-' + id);
+        //return jHidden.val().toLowerCase() == "true";
+        return true;
     };
 
     var renderForm = function(id, jDiv) {
