@@ -13,91 +13,31 @@
 <div id="main-body" class="about" style="width:100%">
 
         <div class="first">
-            <h3 class="subtitle">{% trans "What kinds of questions can I ask here?" %}</h3>
-            <p>{% trans "Most importanly - questions should be <strong>relevant</strong> to cryptic crosswords." %}
-            {% trans "Before asking the question - please make sure to use search to see whether your question has alredy been answered."%}
+            <h3 class="subtitle">{% trans "What's this site all about?" %}</h3>
+            <p>
+	      A forum for solving The Hindustan Times cryptics.
             </p>
         </div>
     
         <div>
-            <h3 class="subtitle">{% trans "Can I answer my own questions?" %}</h3>
+            <h3 class="subtitle">{% trans "How does it work?" %}</h3>
             <p>
-            {% trans "yes." %}
+            Everyday, someone from the forum uploads the Hindustan times crossword clues and junta start putting in the answers.This is usually done in a piecemeal fashion similar to Orkut THC forum's posting conventions.
             </p>
         </div>
 
         <div>
-            <h3 class="subtitle">{% trans "Who moderates this community?" %}</h3>
-            <p>{% trans "The short answer is: <strong>you</strong>." %}
-            {% trans "This website is moderated by the users." %}
-            {% trans "The reputation system allows users earn the authorization to perform a variety of moderation tasks." %} 
+            <h3 class="subtitle">{% trans "Do I have to annotate my answers?" %}</h3>
+            <p>
+	      Yes. It helps newbies to understand and deconstruct the clue, given the fact that HT cryptics have high standards.
             </p>
         </div>
 
         <div>
-            <h3 class="subtitle">{% trans "How does reputation system work?" %}</h3>
-            <p>{% trans "Rep system summary" %}</p>
+            <h3 class="subtitle">{% trans "I want to post the clues. How do I do it?" %}</h3>
             <p>
-                For example, if you ask an interesting question or give a helpful answer, your input will be upvoted.
-                On the other hand if the answer is misleading - it will be downvoted.
-                Each vote in favor will generate <strong>10</strong> points, each vote against will subtract <strong>2</strong> points.
-                There is a limit of <strong>200</strong> points that can be accumulated per question or answer.
-
-                The table below explains reputation point requirements for each type of moderation task.
+	      Sure. Go to <a href="http://epaper.hindustantimes.com/"> Hindustan Times</a>, click on the "search" link. Search for the crossword. You'll get the concise and the cryptic crosswords. Click the cryptic and you'll get a printable image of the day's crossword. You can key in the clues you see there. A detailed procedure is given <a href="http://www.crosswordunclued.com/2009/12/times-crossword-syndicated-in-hindustan.html">here</a>.
             </p>
-
-            <table style="font-family:arial;" cellspacing="3" cellpadding="3">
-                <tr>
-                    <th width="40px" style="text-align:right"></th>
-                    <th width="300px"></th>
-                </tr>
-                <!--
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>15</strong></td>
-                    <td>{% trans "upvote" %}</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>15</strong></td>
-                    <td>{% trans "use tags" %}</td>
-                </tr>
-                -->
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>50</strong></td>
-                    <td>{% trans "add comments" %}</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>100</strong></td>
-                    <td>{% trans "downvote" %}</td>
-                </tr><tr>
-                    <td style="text-align:right;padding-right:5px"><strong>250</strong></td>
-                    <td>{% trans "open and close own questions" %}</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>500</strong></td>
-                    <td>{% trans "retag questions" %}</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>750</strong></td>
-                    <td>{% trans "edit community wiki questions" %}</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>2000</strong></td>
-                    <td>{% trans "edit any answer" %}</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>3000</strong></td>
-                    <td>{% trans "open any closed question" %}</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>5000</strong></td>
-                    <td>{% trans "delete any comment" %}</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right;padding-right:5px"><strong>10000</strong></td>
-                    <td>{% trans "delete any questions and answers and perform other moderation tasks" %}</td>
-                </tr>
-
-            </table>
         </div>
         {% ifequal settings.EMAIL_VALIDATION 'on' %}
         <div>
@@ -118,8 +58,9 @@
         </div>
     
         <div>
-            <h3 class="subtitle">{% trans "Why other people can edit my questions/answers?" %}</h3>
-            <p> {% trans "Goal of this site is a central knowledge repository for cyptic crosswords." %} {% trans "So questions and answers can be edited like wiki pages by experienced users of this site and this improves the overall quality of the knowledge base content." %}
+            <h3 class="subtitle">{% trans "I don't understand how an answer came. Can I ask a question about that?" %}</h3>
+            <p>
+	      Sure. General questions about cryptic crosswords are welcome.
             </p>
         </div>
         <div>
