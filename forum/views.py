@@ -320,13 +320,13 @@ def question(request, id):
         page = int(request.GET.get('page', '1'))
     except ValueError:
         page = 1
-    view_id = request.GET.get('sort', 'votes')
-    view_dic = {"latest":"-added_at", "oldest":"added_at", "votes":"-score"}
+    view_id = request.GET.get('sort', 'oldest')
+    view_dic = {"latest":"-added_at", "oldest":"added_at"}
     try:
         orderby = view_dic[view_id]
     except KeyError:
-        view_id = "votes"
-        orderby = "-score"
+        view_id = "oldest"
+        orderby = "added_at"
 
     question = get_object_or_404(Question, id=id)
     if question.deleted and not can_view_deleted_post(request.user, question):
