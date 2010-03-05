@@ -320,12 +320,12 @@ def question(request, id):
         page = int(request.GET.get('page', '1'))
     except ValueError:
         page = 1
-    view_id = request.GET.get('sort', 'votes')
+    view_id = request.GET.get('sort', 'oldest')
     view_dic = {"latest":"-added_at", "oldest":"added_at", "votes":"-score"}
     try:
         orderby = view_dic[view_id]
     except KeyError:
-        view_id = "votes"
+        view_id = "oldest"
         orderby = "-score"
 
     question = get_object_or_404(Question, id=id)
