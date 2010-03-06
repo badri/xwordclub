@@ -350,10 +350,7 @@ def question(request, id):
     
     filtered_answers = []
     for answer in answers:
-        if answer.deleted == True:
-            if answer.author_id == request.user.id:
-                filtered_answers.append(answer)
-        else:
+        if answer.deleted == False:
             filtered_answers.append(answer)
 
     objects_list = Paginator(filtered_answers, ANSWERS_PAGE_SIZE)
