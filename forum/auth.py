@@ -143,7 +143,8 @@ def can_delete_post(user, post):
         user.id == post.author_id) or user.is_superuser
 
 def can_view_deleted_post(user, post):
-    return user.is_superuser
+    #return user.is_superuser
+    return False
 
 # user preferences view permissions
 def is_user_self(request_user, target_user):
