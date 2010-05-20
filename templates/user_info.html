@@ -63,13 +63,6 @@
                     <td>{{view_user.location}}</td>
                 </tr>
                 {% endif %}
-                {% if view_user.date_of_birth%}
-                <tr>
-					<!--todo  - redo this with blocktrans -->
-                    <td>{% trans "age" %}</td>
-                    <td>{% get_age view_user.date_of_birth %} {% trans "age unit" %}</td>
-                </tr>
-                {% endif %}
 				<!--
                 {% if votes_today_left %}
                 <tr>
