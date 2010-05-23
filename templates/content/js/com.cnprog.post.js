@@ -568,7 +568,7 @@ function createComments(type) {
     // public methods..
     return {
 
-        init: function() {
+        init: function() {	    
             // Setup "show comments" clicks..
             $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length)); });
         },
@@ -617,13 +617,15 @@ function createComments(type) {
 
 var questionComments = createComments('question');
 var answerComments = createComments('answer');
+var clueComments = createComments('clue');
 
 $().ready(function() {
     questionComments.init();
     answerComments.init();
+    clueComments.init();
 });
 
-var commentsFactory = {'question' : questionComments, 'answer' : answerComments};
+var commentsFactory = {'question' : questionComments, 'answer' : answerComments, 'clue' : clueComments};
 
 /*
 Prettify

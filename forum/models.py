@@ -173,8 +173,19 @@ class Question(models.Model):
                 clue_text=match.group(2).strip()
                 clue = Clue(gridno=int(grid_no), clue=clue_text, crossword=question)
                 clue.save()
-                each_line = '<p><a class="comments-link" id="comments-link-clue-'+ str(clue.id) +'">' + grid_no + ' ' + clue_text + '</a></p>'
+                each_line = '''
+                             <div>
+                               <input type="hidden" value="False" id="can-post-comments-clue-%d"/>
+                               <p>
+                                   <a class="comments-link" id="comments-link-clue-%d">%s %s</a>
+                               </p>
+                               <div class="comments-container" id="comments-clue-%d">
+                                   <div class="comments"/>
+                               </div>
+                             </div>'''%(clue.id, clue.id, grid_no, clue_text, clue.id)
+            print each_line
             modified_html.append(each_line)
+        print modified_html
         return '\n'.join(modified_html)
 
     def save(self, **kwargs):
@@ -306,7 +317,8 @@ class Clue(models.Model):
     gridno         = models.PositiveIntegerField()
     clue           = models.TextField()
     crossword      = models.ForeignKey(Question, related_name='clues')
-
+    comments       = generic.GenericRelation(Comment)
+    comment_count  = models.PositiveIntegerField(default=0)
 
 class QuestionRevision(models.Model):
     """A revision of a Question."""

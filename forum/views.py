@@ -1725,6 +1725,11 @@ def user_preferences(request, user_id, user_view):
                               "view_user": user,
                               }, context_instance=RequestContext(request))
 
+def clue_comments(request, id):
+    clue = get_object_or_404(Clue, id=id)
+    user = request.user
+    return __comments(request, clue, 'clue', user)
+
 def question_comments(request, id):
     question = get_object_or_404(Question, id=id)
     user = request.user
@@ -1749,7 +1754,7 @@ def __comments(request, obj, type, user):
             return __generate_comments_json(obj, type, user)
 
 def __generate_comments_json(obj, type, user):
-    comments = obj.comments.all().order_by('-id')
+    comments = obj.comments.all().order_by('-id')    
     # {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
     json_comments = []
     for comment in comments:
