@@ -20,6 +20,7 @@ from markdown2 import Markdown
 import os.path
 import random
 import time
+import re
 
 import datetime
 from forum import auth
@@ -289,7 +290,6 @@ def ask(request):
                                                summary=summary,
                                                text=text
                                                )
-
                 return HttpResponseRedirect(question.get_absolute_url())
             else:
                 request.session.flush()
@@ -304,6 +304,8 @@ def ask(request):
                                              added_at=added_at,
                                              ip_addr=request.META['REMOTE_ADDR'],
                                              )
+                if 'HT' in tagnames:
+                    create_clues(question, text)
                 question.save()
                 return HttpResponseRedirect('%s%s%s' % (_('/account/'), _('signin/'), ('newquestion/')))
     else:

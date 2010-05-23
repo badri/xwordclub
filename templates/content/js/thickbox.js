@@ -11,9 +11,14 @@ var tb_pathToImage = "/content/images/loadingAnimation.gif";
 
 //on page load call tb_init
 $(document).ready(function(){
-		    var clue_regex = /^\d{1,2}\s+[\w,'\?:;" -_]+\([\d,-]+\)/;
+		    var clue_regex = /^(\d{1,2})([\w,'\?:;" -_]+\([\d,-]+\))/;
 	    $(".question-body>p").each(function() {
-	            if($(this).text().match(clue_regex)) {
+		    var match = $(this).text().match(clue_regex);
+	            if(match) {
+		    // alert(match[1]);
+		    // alert(match[2]);
+		    // alert($(this).text());
+		    // $(this).html("<span>" + match[1] + " " + $.trim(match[2])+ "</span>");
 		    $(this).wrap('<a href="#TB_inline?height=155&width=300&inlineId=PageContent" class="thickbox clue"/>');
               }
 	    });

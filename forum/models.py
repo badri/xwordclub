@@ -1,6 +1,7 @@
 # encoding:utf-8
 import datetime
 import hashlib
+import re
 from urllib import quote_plus, urlencode
 from django.db import models
 from django.utils.http import urlquote  as django_urlquote
@@ -67,6 +68,7 @@ class Comment(models.Model):
     comment        = models.CharField(max_length=300)
     added_at       = models.DateTimeField(default=datetime.datetime.now)
 
+    
     class Meta:
         ordering = ('-added_at',)
         db_table = u'comment'
@@ -160,6 +162,21 @@ class Question(models.Model):
 
     objects = QuestionManager()
 
+    def create_clues(self,question=None,html=None):
+        '''creates clues if it is a daily crossword question'''
+        crossword_clue = re.compile('^<p>(\d{1,2})([\w,\'\?:;" -_]+\([\d,-]+\))</p>$')
+        modified_html = []
+        for each_line in html.split('\n'):
+            match = crossword_clue.match(each_line)
+            if match:
+                grid_no=match.group(1).strip()
+                clue_text=match.group(2).strip()
+                clue = Clue(gridno=int(grid_no), clue=clue_text, crossword=question)
+                clue.save()
+                each_line = '<p><a class="comments-link" id="comments-link-clue-'+ str(clue.id) +'">' + grid_no + ' ' + clue_text + '</a></p>'
+            modified_html.append(each_line)
+        return '\n'.join(modified_html)
+
     def save(self, **kwargs):
         """
         Overridden to manually manage addition of tags when the object
@@ -169,6 +186,9 @@ class Question(models.Model):
         adding and editing tags.
         """
         initial_addition = (self.id is None)
+        super(Question, self).save(**kwargs)
+        if 'HT' in self.tagnames:
+            self.html = self.create_clues(self, self.html)
         super(Question, self).save(**kwargs)
         if initial_addition:
             tags = Tag.objects.get_or_create_multiple(self.tagname_list(),
@@ -281,6 +301,12 @@ class Question(models.Model):
 
     class Meta:
         db_table = u'question'
+
+class Clue(models.Model):
+    gridno         = models.PositiveIntegerField()
+    clue           = models.TextField()
+    crossword      = models.ForeignKey(Question, related_name='clues')
+
 
 class QuestionRevision(models.Model):
     """A revision of a Question."""
