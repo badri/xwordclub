@@ -21,10 +21,6 @@
 	
         var repNeededForComments = 0;
         $().ready(function(){
-	    // $(".question-body").append('<a href="#TB_inline?height=155&width=300&inlineId=PageContent&modal=true" class="thickbox">click</a><div id="PageContent"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p><p><select name=""><option>test</option></select></p></div>')
-	    $(".question-body>p").click(function() {
-	             $(this).html('<p>'+$(this).text()+'</p><a href="#TB_inline?height=155&width=300&inlineId=PageContent&modal=true" class="thickbox">click</a>');
-	    });
             $("#nav_questions").attr('className',"on");
             var answer_sort_tab = "{{ tab_id }}";
             $("#" + answer_sort_tab).attr('className',"on");
@@ -54,7 +50,7 @@
             });
             
             setupFormValidation("#fmanswer", CPValidator.getQuestionFormRules(), CPValidator.getQuestionFormMessages());
-        }	         
+        }
         </script>
 {% endblock %}
         
