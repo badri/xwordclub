@@ -579,9 +579,10 @@ function createComments(type) {
             renderForm(id, jDiv);
             jDiv.show();
             if (canPostComments(id, jDiv)) jDiv.find("textarea").get(0).focus();
-            jDiv.siblings("a").unbind("click").click(function(){ 
-													commentsFactory[objectType].hide(id); 
-													}).text($.i18n._('hide comments'));
+            $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
+		commentsFactory[objectType].hide(id);
+	    });
+	    //jDiv.siblings("p>a").unbind("click").click(function(){ commentsFactory[objectType].hide(id); });
         },
 
         hide: function(id) {
@@ -590,7 +591,11 @@ function createComments(type) {
             var anchorText = len == 0 ? $.i18n._('add a comment') : $.i18n._('comments') + ' (<b>' + len + "</b>)";
 
             jDiv.hide();
-            jDiv.siblings("a").unbind("click").click(function() { commentsFactory[objectType].show(id); }).html(anchorText);
+            $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
+		commentsFactory[objectType].show(id);
+	    });
+
+            //jDiv.siblings("a").unbind("click").click(function() { commentsFactory[objectType].show(id); }).html(anchorText);
             jDiv.children("div.comments").children().hide();
         },
 
