@@ -1747,7 +1747,8 @@ def __comments(request, obj, type, user):
             return __generate_comments_json(obj, type, user)
         elif request.method == "POST":
             comment_data = request.POST.get('comment')
-            comment = Comment(content_object=obj, comment=comment_data, user=request.user)
+            html_comment_data = sanitize_html(markdowner.convert(comment_data))
+            comment = Comment(content_object=obj, comment=html_comment_data, user=request.user)
             comment.save()
             obj.comment_count = obj.comment_count + 1
             obj.save()
@@ -1765,7 +1766,7 @@ def __generate_comments_json(obj, type, user):
             delete_url = "/" + type + "s/%s/comments/%s/delete/" % (obj.id, comment.id)
         json_comments.append({"id": comment.id,
                              "object_id": obj.id,
-                             "add_date": comment.added_at.strftime('%Y-%m-%d'),
+                             "add_date": comment.added_at.strftime('%d %b %Y %H:%M:%S'),
                              "text": comment.comment,
                              "user_display_name": comment_user.username,
                              "user_url": "/users/%s/%s" % (comment_user.id, comment_user.username),
@@ -1774,6 +1775,17 @@ def __generate_comments_json(obj, type, user):
 
     data = simplejson.dumps(json_comments)
     return HttpResponse(data, mimetype="application/json")
+
+def delete_clue_comment(request, clue_id, comment_id):
+    if request.is_ajax():
+        clue = get_object_or_404(Clue, id=clue_id)
+        comment = get_object_or_404(Comment, id=comment_id)
+
+        clue.comments.remove(comment)
+        clue.comment_count = clue.comment_count - 1
+        clue.save()
+        user = request.user
+        return __generate_comments_json(clue, 'clue', user)
 
 def delete_question_comment(request, question_id, comment_id):
     if request.is_ajax():

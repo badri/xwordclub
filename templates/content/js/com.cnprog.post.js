@@ -480,8 +480,7 @@ function createComments(type) {
         if (canPostComments(id, jDiv)) {
             if (jDiv.find("#" + formId).length == 0) {
                 var form = '<form id="' + formId + '" class="post-comments"><div>';
-                form += '<h3>Add an answer</h3><textarea name="comment" cols="60" rows="5" maxlength="300"></textarea>';
-                // form += 'onfocus="' + objectType + 'Comments.updateTextCounter(this)" onkeyup="'+ objectType +'Comments.updateTextCounter(this)"></textarea>';
+                form += '<h3>Add an answer</h3><textarea class="comment-box" cols="60" rows="5"/>';
                 form += '<input type="submit" value="'
 						+ $.i18n._('Done!') + '" /><br><span class="text-counter"></span>';
                 form += '<span class="form-error"></span></div></form>';
@@ -599,7 +598,6 @@ function createComments(type) {
             var jDiv = jDivInit(id);
             var len = jDiv.children("div.comments").children().length;
             var anchorText = len == 0 ? $.i18n._('add a comment') : $.i18n._('comments') + ' (<b>' + len + "</b>)";
-
             jDiv.hide();
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
 		commentsFactory[objectType].show(id);
