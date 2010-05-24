@@ -318,6 +318,9 @@ class Clue(models.Model):
     comments       = generic.GenericRelation(Comment)
     comment_count  = models.PositiveIntegerField(default=0)
 
+    class Meta:
+        db_table = u'clue'
+
 class QuestionRevision(models.Model):
     """A revision of a Question."""
     question   = models.ForeignKey(Question, related_name='revisions')

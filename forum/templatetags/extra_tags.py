@@ -216,7 +216,7 @@ def diff_date(date, limen=2):
     diff = current_time - date
     diff_days = diff.days
     if diff_days > limen:
-        return date
+        return date.strftime("%d %b %Y %H:%M:%S")
     else:
         return timesince(date) + _(' ago')
         
@@ -234,7 +234,7 @@ def get_latest_changed_timestamp():
         )
         stamp = (path.getmtime(d) for d in dir)
         latest = max(stamp)
-        timestr = strftime("%H:%M %b-%d-%Y %Z", localtime(latest))
+        timestr = strftime("%d %b %Y %H:%M:%S", localtime(latest))
     except:
         timestr = ''
     return timestr

@@ -1655,7 +1655,7 @@ def user_reputation(request, user_id, user_view):
         rep_list.append(dic)
     reps = ','.join(rep_list)
     reps = '[%s]' % reps
-
+    print reps
     return render_to_response(user_view.template_file, {
                               "tab_name": user_view.id,
                               "tab_description": user_view.tab_description,
