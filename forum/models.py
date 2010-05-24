@@ -65,7 +65,7 @@ class Comment(models.Model):
     object_id      = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     user           = models.ForeignKey(User, related_name='comments')
-    comment        = models.CharField(max_length=300)
+    comment        = models.TextField()
     added_at       = models.DateTimeField(default=datetime.datetime.now)
 
     
