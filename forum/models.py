@@ -183,9 +183,7 @@ class Question(models.Model):
                                    <div class="comments"/>
                                </div>
                              </div>'''%(clue.id, clue.id, grid_no, clue_text, clue.id)
-            print each_line
             modified_html.append(each_line)
-        print modified_html
         return '\n'.join(modified_html)
 
     def save(self, **kwargs):

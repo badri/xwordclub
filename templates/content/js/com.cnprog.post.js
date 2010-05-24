@@ -455,6 +455,11 @@ var Vote = function(){
 
 // site comments
 function createComments(type) {
+    var commentAnonymousMessage = $.i18n._('anonymous users cannot post answers.') 
+					+ "<a href='/account/signin/?next=/questions/{{QuestionID}}'>"
+					+ $.i18n._('please login') + "</a>";
+    var questionId;
+    var currentUserId;
     var objectType = type;
     var jDivInit = function(id) {
         return $("#comments-" + objectType + '-' + id);
@@ -568,13 +573,19 @@ function createComments(type) {
     // public methods..
     return {
 
-        init: function() {	    
+        init: function(qId, uId) {
+	    questionId = qId;
+            currentUserId = uId; 
             // Setup "show comments" clicks..
             $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length)); });
         },
 
         show: function(id) {
             var jDiv = jDivInit(id);
+            if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
+                showMessage($("#comments-link-" + objectType + '-' + id), commentAnonymousMessage.replace("{{QuestionID}}", questionId));
+                return false;
+            }
             getComments(id, jDiv);
             renderForm(id, jDiv);
             jDiv.show();
@@ -582,7 +593,6 @@ function createComments(type) {
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
 		commentsFactory[objectType].hide(id);
 	    });
-	    //jDiv.siblings("p>a").unbind("click").click(function(){ commentsFactory[objectType].hide(id); });
         },
 
         hide: function(id) {
@@ -594,8 +604,6 @@ function createComments(type) {
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
 		commentsFactory[objectType].show(id);
 	    });
-
-            //jDiv.siblings("a").unbind("click").click(function() { commentsFactory[objectType].show(id); }).html(anchorText);
             jDiv.children("div.comments").children().hide();
         },
 
@@ -624,11 +632,6 @@ var questionComments = createComments('question');
 var answerComments = createComments('answer');
 var clueComments = createComments('clue');
 
-$().ready(function() {
-    questionComments.init();
-    answerComments.init();
-    clueComments.init();
-});
 
 var commentsFactory = {'question' : questionComments, 'answer' : answerComments, 'clue' : clueComments};
 
