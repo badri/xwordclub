@@ -480,7 +480,7 @@ function createComments(type) {
         if (canPostComments(id, jDiv)) {
             if (jDiv.find("#" + formId).length == 0) {
                 var form = '<form id="' + formId + '" class="post-comments"><div>';
-                form += '<h3>Add an answer</h3><textarea class="comment-box" cols="60" rows="5"/>';
+                form += '<h3>Add an answer</h3><textarea class="comment-box" name="comment" cols="60" rows="5"/>';
                 form += '<input type="submit" value="'
 						+ $.i18n._('Done!') + '" /><br><span class="text-counter"></span>';
                 form += '<span class="form-error"></span></div></form>';
@@ -619,9 +619,9 @@ function createComments(type) {
             var length = textarea.value ? textarea.value.length : 0;
             var color = length > 270 ? "#f00" : length > 200 ? "#f60" : "#999";
             var jSpan = $(textarea).siblings("span.text-counter");
-            jSpan.html($.i18n._('can write')
+            /* jSpan.html($.i18n._('can write')
 					+ (300 - length) + ' ' 
-					+ $.i18n._('characters')).css("color", color);
+					+ $.i18n._('characters')).css("color", color); */
         }
     };
 }
