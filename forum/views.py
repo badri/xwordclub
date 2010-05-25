@@ -100,6 +100,9 @@ def index(request):
 def about(request):
     return render_to_response('about.html', context_instance=RequestContext(request))
 
+def help(request):
+    return render_to_response('help.html', context_instance=RequestContext(request))
+
 def annotation(request):
     return render_to_response('annotation.html', context_instance=RequestContext(request))
 

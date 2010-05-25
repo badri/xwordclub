@@ -1,0 +1,40 @@
+{% extends "base_content.html" %}
+<!-- template about.html -->
+{% load i18n %}
+{% load extra_tags %}
+{% load humanize %}
+{% block title %}{% spaceless %}{% trans "About" %}{% endspaceless %}{% endblock %}
+{% block forejs %}
+{% endblock %}
+{% block content %}
+<div class="headNormal">
+{% trans "Posting answers howto" %}
+</div>
+
+<div class="content">
+        <p> This howto deals with posting answers to the daily crossword.
+	</p>
+
+        <p>1.Clicking on the clue for a forum topic labelled "HT" opens a new window.
+	  <img src="/content/images/click-clue.png" alt="click-clue"/>
+        </p>
+
+        <p>2.Post your answer, preferably with annotations in the text box.
+	  <a href="http://en.wikipedia.org/wiki/Markdown"> Markdown</a> syntax is accepted here.
+	  <img src="/content/images/post-answer.png" alt="post-answer"/>
+        </p>
+
+        <p>3.You can delete your answer anytime by clicking the (x) next to your answer. Note that this operation has NO "undo".
+	  <img src="/content/images/delete-answer.png" alt="delete-answer"/>
+        </p>
+
+        <p>4. By 8 PM everyday, all the answers entered for that clue will appear.
+        </p>
+
+        <p><strong>more.</strong></p>
+	<p>Check the <a href="/faq">FAQ</a> for more information about xwordclub.
+	</p>
+
+</div>
+{% endblock %}
+<!-- end template about.html -->
