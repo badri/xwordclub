@@ -488,7 +488,7 @@ function createComments(type) {
                 jDiv.append(form);
 
                 setupFormValidation("#" + formId,
-                    { comment: { required: true, minlength: 10} }, '',
+                    { comment: { required: true} }, '',
                     function() { postComment(id, formId); });
             }
         }
