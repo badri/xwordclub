@@ -479,7 +479,8 @@ function createComments(type) {
         var formId = "form-comments-" + objectType + "-" + id;
         if (canPostComments(id, jDiv)) {
             if (jDiv.find("#" + formId).length == 0) {
-                var form = '<form id="' + formId + '" class="post-comments"><div>';
+	        var form = '<span class="form-error">click on the clue again to close this box.</span>';
+                form += '<form id="' + formId + '" class="post-comments"><div>';		
                 form += '<h3>Add an answer</h3><textarea class="comment-box" name="comment" cols="60" rows="5"/>';
                 form += '<input type="submit" value="'
 						+ $.i18n._('Done!') + '" /><br><span class="text-counter"></span>';

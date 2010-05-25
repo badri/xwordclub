@@ -1756,7 +1756,7 @@ def __comments(request, obj, type, user):
 
 def __generate_comments_json(obj, type, user):
     now = datetime.datetime.now()
-    today8pm = now.replace(hour=20, minute=0, second=0, microsecond=0)
+    today8pm = now.replace(hour=8, minute=0, second=0, microsecond=0)
     if now > today8pm:
         comments = obj.comments.all().order_by('added_at')
     else:

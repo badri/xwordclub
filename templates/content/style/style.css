@@ -1123,3 +1123,9 @@ ul.bulleta li {background:url(/content/images/bullet_green.gif) no-repeat 0px 2p
 .highlight {
     background-color:#FFF8C6;
 }
+
+div.comments > div > p {
+font-size:15px;
+line-height:140%;
+margin-bottom:0px;
+}
