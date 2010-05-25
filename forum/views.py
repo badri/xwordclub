@@ -1755,7 +1755,12 @@ def __comments(request, obj, type, user):
             return __generate_comments_json(obj, type, user)
 
 def __generate_comments_json(obj, type, user):
-    comments = obj.comments.all().order_by('-id')    
+    now = datetime.datetime.now()
+    today8pm = now.replace(hour=20, minute=0, second=0, microsecond=0)
+    if now > today8pm:
+        comments = obj.comments.all().order_by('added_at')
+    else:
+        comments = obj.comments.filter(user=user).order_by('added_at')
     # {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
     json_comments = []
     for comment in comments:
@@ -1766,7 +1771,7 @@ def __generate_comments_json(obj, type, user):
             delete_url = "/" + type + "s/%s/comments/%s/delete/" % (obj.id, comment.id)
         json_comments.append({"id": comment.id,
                              "object_id": obj.id,
-                             "add_date": comment.added_at.strftime('%d %b %Y %H:%M:%S'),
+                             "add_date": comment.added_at.strftime('%b %d %Y %H:%M %p'),
                              "text": comment.comment,
                              "user_display_name": comment_user.username,
                              "user_url": "/users/%s/%s" % (comment_user.id, comment_user.username),
