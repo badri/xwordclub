@@ -577,7 +577,7 @@ function createComments(type) {
 	    questionId = qId;
             currentUserId = uId; 
             // Setup "show comments" clicks..
-            $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length)); });
+            $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length)); });	    
         },
 
         show: function(id) {
@@ -588,7 +588,7 @@ function createComments(type) {
             }
             getComments(id, jDiv);
             renderForm(id, jDiv);
-            jDiv.show();
+            jDiv.show();	    
             if (canPostComments(id, jDiv)) jDiv.find("textarea").get(0).focus();
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
 		commentsFactory[objectType].hide(id);

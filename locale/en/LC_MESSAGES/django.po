@@ -2215,7 +2215,7 @@ msgstr ""
 
 #: templates/authopenid/complete.html:47
 msgid "Screen name label"
-msgstr "<strong>Screen Name</strong> (<i>will be shown to others</i>)"
+msgstr "<strong>Screen Name</strong> (<i>will be shown to others and you <b>won't</b> be able to change it later</i>)"
 
 #: templates/authopenid/complete.html:48
 msgid "Email address label"
