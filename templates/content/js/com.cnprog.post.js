@@ -589,7 +589,7 @@ function createComments(type) {
             getComments(id, jDiv);
             renderForm(id, jDiv);
             jDiv.show();	    
-            if (canPostComments(id, jDiv)) jDiv.find("textarea").get(0).focus();
+            // if (canPostComments(id, jDiv)) jDiv.find("textarea").get(0).focus();
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
 		commentsFactory[objectType].hide(id);
 	    });
