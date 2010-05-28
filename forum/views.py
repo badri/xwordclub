@@ -362,6 +362,12 @@ def question(request, id):
     page_objects = objects_list.page(page)
     # update view count
     Question.objects.update_view_count(question)
+    now = datetime.datetime.now()
+    thatday8pm = question.added_at.replace(hour=20, minute=0, second=0, microsecond=0)
+    if now > thatday8pm:
+        render_replies = True
+    else:
+        render_replies = False
     return render_to_response('question.html', {
                               "question": question,
                               "question_vote": question_vote,
@@ -373,6 +379,7 @@ def question(request, id):
                               "tab_id": view_id,
                               "favorited": favorited,
                               "similar_questions": Question.objects.get_similar_questions(question),
+                              "render_replies": render_replies,
                               "context": {
                               'is_paginated': True,
                               'pages': objects_list.num_pages,
@@ -382,7 +389,7 @@ def question(request, id):
                               'previous': page_objects.previous_page_number(),
                               'next': page_objects.next_page_number(),
                               'base_url': request.path + '?sort=%s&' % view_id,
-                              'extend_url': "#sort-top"
+                              'extend_url': "#sort-top"                              
                               }
                               }, context_instance=RequestContext(request))
 
