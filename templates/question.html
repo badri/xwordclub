@@ -36,7 +36,6 @@
 	    {% else %}
 	    $("a[id^='comments-link-clue-']").click();
 	    $(".comment-div").hide();
-	    $( 'html, body' ).animate( { scrollTop: 0 }, 0 );	
             {% endif %}
             lanai.highlightSyntax();
             $('#btLogin').bind('click', function(){window.location.href='/account/signin/'; } )
