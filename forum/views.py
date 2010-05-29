@@ -362,12 +362,15 @@ def question(request, id):
     page_objects = objects_list.page(page)
     # update view count
     Question.objects.update_view_count(question)
-    now = datetime.datetime.now()
-    thatday8pm = question.added_at.replace(hour=20, minute=0, second=0, microsecond=0)
-    if now > thatday8pm:
-        render_replies = True
+    if 'HT' in question.tagnames:
+        now = datetime.datetime.now()
+        thatday8pm = question.added_at.replace(hour=20, minute=0, second=0, microsecond=0)
+        if now > thatday8pm:
+            render_replies = True
+        else:
+            render_replies = False
     else:
-        render_replies = False
+        render_replies = True
     return render_to_response('question.html', {
                               "question": question,
                               "question_vote": question_vote,
@@ -1765,10 +1768,13 @@ def __comments(request, obj, type, user):
             return __generate_comments_json(obj, type, user)
 
 def __generate_comments_json(obj, type, user):
-    now = datetime.datetime.now()
-    thatday8pm = obj.crossword.added_at.replace(hour=20, minute=0, second=0, microsecond=0)
-    if now > thatday8pm:
-        comments = obj.comments.all().order_by('added_at')
+    if type == 'clue':
+        now = datetime.datetime.now()
+        thatday8pm = obj.crossword.added_at.replace(hour=20, minute=0, second=0, microsecond=0)
+        if now > thatday8pm:
+            comments = obj.comments.all().order_by('added_at')
+        else:
+            comments = obj.comments.filter(user=user).order_by('added_at')
     else:
         comments = obj.comments.filter(user=user).order_by('added_at')
     # {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
