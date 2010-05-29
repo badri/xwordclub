@@ -481,9 +481,14 @@ function createComments(type) {
             if (jDiv.find("#" + formId).length == 0) {
 	        var form = '<span class="form-error">click on the clue again to close this box.</span>';
                 form += '<form id="' + formId + '" class="post-comments"><div class="comment-div">';		
-                form += '<h3>Add an answer</h3><textarea class="comment-box" name="comment" cols="60" rows="5"/>';
-                form += '<input type="submit" value="'
+                if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
+                    form += '<span class="form-error">Please login to post answers.</span>';
+                }
+                else {
+                    form += '<h3>Add an answer</h3><textarea class="comment-box" name="comment" cols="60" rows="5"/>';
+                    form += '<input type="submit" value="'
 						+ $.i18n._('Done!') + '" /><br><span class="text-counter"></span>';
+                }
                 form += '<span class="form-error"></span></div></form>';
 
                 jDiv.append(form);
@@ -582,10 +587,10 @@ function createComments(type) {
 
         show: function(id) {
             var jDiv = jDivInit(id);
-            if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
+            /*if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
                 showMessage($("#comments-link-" + objectType + '-' + id), commentAnonymousMessage.replace("{{QuestionID}}", questionId));
                 return false;
-            }
+            }*/
             getComments(id, jDiv);
             renderForm(id, jDiv);
             jDiv.show();	    
