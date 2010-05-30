@@ -416,16 +416,16 @@
                                             </table>
                                             
                                         </div>
-                                        <div id="comment-{{ answer.id }}" class="post-comments" >
-                                            <input id="can-post-comments-answer-{{answer.id}}" type="hidden" value="{{ request.user|can_add_comments }}"/>
-                                            <a id="comments-link-answer-{{answer.id}}" class="comments-link">
-												{% if answer.comment_count %}{% trans "comments" %} 
-												<strong>({{answer.comment_count}})</strong>{% else %}{% trans "add comment" %}{% endif %}</a>
-                                            <div id="comments-answer-{{answer.id}}" class="comments-container">
-                                            <div class="comments"/></div>
-                                        </div>
+                                    <!--     <div id="comment-{{ answer.id }}" class="post-comments" > -->
+                                    <!--         <input id="can-post-comments-answer-{{answer.id}}" type="hidden" value="{{ request.user|can_add_comments }}"/> -->
+                                    <!--         <a id="comments-link-answer-{{answer.id}}" class="comments-link"> -->
+				    <!-- 								{% if answer.comment_count %}{% trans "comments" %}  -->
+				    <!-- 								<strong>({{answer.comment_count}})</strong>{% else %}{% trans "add comment" %}{% endif %}</a> -->
+                                    <!--         <div id="comments-answer-{{answer.id}}" class="comments-container"> -->
+                                    <!--         <div class="comments"/></div> -->
+                                    <!--     </div> -->
                                         
-                                    </div>
+                                    <!-- </div> -->
                                     
                                 </td>
                             </tr>

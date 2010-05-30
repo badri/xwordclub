@@ -460,6 +460,7 @@ function createComments(type) {
 					+ $.i18n._('please login') + "</a>";
     var questionId;
     var currentUserId;
+    var clue_regex = /^(\d{1,2}\s+)([\w,'\?:;" -_]+\([\d,-]+\))/;
     var objectType = type;
     var jDivInit = function(id) {
         return $("#comments-" + objectType + '-' + id);
@@ -485,9 +486,11 @@ function createComments(type) {
                     form += '<span class="form-error">Please login to post answers.</span>';
                 }
                 else {
-                    form += '<h3>Add an answer</h3><textarea class="comment-box" name="comment" cols="60" rows="5"/>';
+                    form += '<h3>Add an answer</h3>';
+                    form += '<textarea class="comment-box" name="comment" cols="60" rows="5"/>';
                     form += '<input type="submit" value="'
 						+ $.i18n._('Done!') + '" /><br><span class="text-counter"></span>';
+                    form+='<a class="copy-clue">copy clue to textbox</a>';		    
                 }
                 form += '<span class="form-error"></span></div></form>';
 
@@ -587,16 +590,18 @@ function createComments(type) {
 
         show: function(id) {
             var jDiv = jDivInit(id);
-            /*if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
-                showMessage($("#comments-link-" + objectType + '-' + id), commentAnonymousMessage.replace("{{QuestionID}}", questionId));
-                return false;
-            }*/
             getComments(id, jDiv);
             renderForm(id, jDiv);
             jDiv.show();	    
             // if (canPostComments(id, jDiv)) jDiv.find("textarea").get(0).focus();
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
 		commentsFactory[objectType].hide(id);
+	    });
+	    $("a.copy-clue").click(function(){
+	        var matches = $("#comments-link-" + objectType + '-' + id).text().match(clue_regex);
+		var textBox = $("#form-comments-clue-" + id + "> div.comment-div > textarea.comment-box");
+                textBox.text(matches[2]);
+		textBox.focus();
 	    });
         },
 
