@@ -460,7 +460,7 @@ function createComments(type) {
 					+ $.i18n._('please login') + "</a>";
     var questionId;
     var currentUserId;
-    var clue_regex = /^(\d{1,2}\s+)([\w,'\?:;" -_]+\([\d,-]+\))/;
+    var clue_regex = /^(\d{1,2}\s+)([\w,'\?:;" -_]+)\([\d,-]+\)/;
     var objectType = type;
     var jDivInit = function(id) {
         return $("#comments-" + objectType + '-' + id);
