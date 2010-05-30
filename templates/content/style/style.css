@@ -105,7 +105,8 @@ blockquote
 /*#header {width:960px;}*/
 #top a {height:35px; text-align:right;
 	/*letter-spacing:1px; */
-		margin-left:20px;text-decoration:underline; font-size:12px; color:#333333;}
+		margin-left:20px; font-size:16px; color:#333333; background-color: lemonChiffon; padding:12px; text-decoration:none;}
+#top a:hover { background-color: lightSalmon; }
 #logo {
 	padding: 5px 0px 0px 0px;
 }
@@ -117,7 +118,7 @@ blockquote
                 border: 1px solid #aaaaaa;
                 border-bottom: none;
 				padding:0px 12px 3px 12px; height:25px; line-height:30px;margin-left:10px; font-size:14px; font-weight:400; text-decoration:none;display: block;float: left;}
-#navBar .nav a:hover {text-decoration:underline}
+#navBar .nav a:hover {background-color:Khaki;}
 #navBar .nav a.on {height:24px;line-height:28px;border:1px solid #d64000; background:#B02B2C; color:#FFF; font-weight:600; text-decoration:none}
 #navBar .nav a.special {font-size:15px; color:#B02B2C; font-weight:bold; text-decoration:none; }
 #navBar .nav a.special:hover {text-decoration:underline;}
@@ -307,7 +308,7 @@ a:hover.medal  {color:#333; text-decoration:none; background:url(/content/images
 .headUser {text-align:left;padding:5px; font-size:20px; letter-spacing:1px;margin-bottom:12px; font-weight:800;border-bottom:1px solid #777;}
 /*RSS订阅*/
 #feeds {margin:10px 0; }
-#feeds a {background:url(/content/images/feed-icon-small.png) no-repeat 0; padding-left:18px; font-weight:700; font-size:13px; }
+#feeds a {/*background:url(/content/images/feed-icon-small.png) no-repeat 0; padding-left:18px; font-weight:700;*/ font-size:20px; text-decoration:none;}
 
 /*问题*/
 #question {margin-bottom:30px;}
