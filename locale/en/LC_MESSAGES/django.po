@@ -2432,9 +2432,8 @@ msgstr ""
 #: templates/authopenid/signin.html:40
 msgid "Click to sign in through any of these services."
 msgstr ""
-"<p><span class=\"big strong\">We accept <a href=\"http://openid.net"
-"\">OpenID</a> login.</span> <font color=\"gray\">Instead of creating a new "
-"password - log in through any of the services below.<p><span class=\"big "
+"<font color=\"gray\">Instead of creating a new "
+"account, log in through any of the services below.<p><span class=\"big "
 "strong\">1. Select the login service by clicking one of the icons</span></p>"
 
 #: templates/authopenid/signin.html:103

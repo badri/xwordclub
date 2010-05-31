@@ -20,6 +20,7 @@
         var repNeededForComments = 0;
 	var noAnswersTill8PMMessage = $.i18n._('cannot post replies till 8PM.');
         $().ready(function(){
+            $("div.preview-toggle > table > tbody > tr > td:eq(1)").hide();
             $("#nav_questions").attr('className',"on");
             var answer_sort_tab = "{{ tab_id }}";
             $("#" + answer_sort_tab).attr('className',"on");
@@ -40,7 +41,6 @@
             lanai.highlightSyntax();
             $('#btLogin').bind('click', function(){window.location.href='/account/signin/'; } )
         });
-        
         function initEditor(){
             $('#editor').TextAreaResizer();
             //highlight code synctax when editor has new text
@@ -470,7 +470,7 @@
                 {{ answer.text.errors }}
             </div>
             <br>
-            <input id="reply" type="submit" value="{% trans "Reply" %}" class="submit"><span class="form-error"></span>
+            <input id="reply" type="submit" value="{% trans "Submit" %}" class="submit"><span class="form-error"></span>
                 {% if request.user.is_authenticated %}
                     {{ answer.email_notify }} <label for="question-subscribe-updates">{% trans "Notify me daily if there are any new replies." %}</label>
                 {% else %}
@@ -506,17 +506,17 @@
     </p>
 </div>
 
-<div class="boxC">
-    <h3 class="subtitle">{% trans "Related posts" %}</h3>
-    <div class="questions-related">
-        {% for question in similar_questions %}
-        <p>
-            <a href="/questions/{{question.id}}/{{ question.get_question_title }}">{{ question.get_question_title }}</a>
-        </p>
-        {% endfor %}
-    </div>
-    <br>  
-</div>
+<!-- <div class="boxC"> -->
+<!--     <h3 class="subtitle">{% trans "Related posts" %}</h3> -->
+<!--     <div class="questions-related"> -->
+<!--         {% for question in similar_questions %} -->
+<!--         <p> -->
+<!--             <a href="/questions/{{question.id}}/{{ question.get_question_title }}">{{ question.get_question_title }}</a> -->
+<!--         </p> -->
+<!--         {% endfor %} -->
+<!--     </div> -->
+<!--     <br>   -->
+<!-- </div> -->
 
 {% endblock %}
 
