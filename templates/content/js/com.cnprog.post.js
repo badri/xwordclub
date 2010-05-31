@@ -479,9 +479,9 @@ function createComments(type) {
     var renderForm = function(id, jDiv) {
         var formId = "form-comments-" + objectType + "-" + id;
         if (canPostComments(id, jDiv)) {
-            if (jDiv.find("#" + formId).length == 0) {	        
-                var form = '<form id="' + formId + '" class="post-comments"><div class="comment-div">';
-                form += '<span class="form-error">click on the clue again to close this box.</span>';
+            if (jDiv.find("#" + formId).length == 0) {
+	        var form = '<span class="form-error">click on the clue again to close this box.</span>';
+                form += '<form id="' + formId + '" class="post-comments"><div class="comment-div">';		
                 if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
                     form += '<span class="form-error">Please login to post answers.</span>';
                 }
