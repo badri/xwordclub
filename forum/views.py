@@ -1760,8 +1760,7 @@ def __comments(request, obj, type, user):
             return __generate_comments_json(obj, type, user)
         elif request.method == "POST":
             comment_data = request.POST.get('comment')
-            html_comment_data = sanitize_html(markdowner.convert(comment_data))
-            comment = Comment(content_object=obj, comment=html_comment_data, user=request.user)
+            comment = Comment(content_object=obj, comment=comment_data, user=request.user)
             comment.save()
             obj.comment_count = obj.comment_count + 1
             obj.save()

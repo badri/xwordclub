@@ -436,10 +436,9 @@ form.post-comments textarea {
 }
 
 form.post-comments input {
-    margin-left:10px;
-    margin-top:1px;
+    margin-left:600px;
+    margin-top:20px;
     vertical-align:top;
-    width:100px;
 }
 span.text-counter {
     margin-right:20px;

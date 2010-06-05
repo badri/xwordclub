@@ -480,25 +480,22 @@ function createComments(type) {
         var formId = "form-comments-" + objectType + "-" + id;
         if (canPostComments(id, jDiv)) {
             if (jDiv.find("#" + formId).length == 0) {
-	        var form = '<span class="form-error">click on the clue again to close this box.</span>';
-                form += '<form id="' + formId + '" class="post-comments"><div class="comment-div">';		
+                var form = '<form id="' + formId + '" class="post-comments"><div class="comment-div">';		
                 if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
                     form += '<span class="form-error">Please login to post answers.</span>';
+		    form += '<span class="form-error">click on the clue again to close this box.</span>';
                 }
                 else {
-                    form += '<h3>Add an answer</h3>';
-                    form += '<textarea class="comment-box" name="comment" cols="60" rows="5"/>';
-                    form += '<input type="submit" value="'
+		    form += '<span class="form-error">click on the clue again to close this box.</span>';
+                    form += '<textarea id="comment-'+ id +'" class="comment-box" name="comment" cols="60" rows="5"/>';
+                    form += '<span class="form-error empty"></span>';
+                    form += '<input class="submit" type="submit" value="'
 						+ $.i18n._('Done!') + '" /><br><span class="text-counter"></span>';
                     form+='<a class="copy-clue">copy clue to textbox</a>';		    
                 }
-                form += '<span class="form-error"></span></div></form>';
+                form += '</div></form>';
 
                 jDiv.append(form);
-
-                setupFormValidation("#" + formId,
-                    { comment: { required: true} }, '',
-                    function() { postComment(id, formId); });
             }
         }
         else {
@@ -555,27 +552,25 @@ function createComments(type) {
 
     var postComment = function(id, formId) {
         appendLoaderImg(id);
-
-        var formSelector = "#" + formId;
-        var textarea = $(formSelector + " textarea");
-
-        $.ajax({
-            type: "POST",
-            url: "/" + objectType + "s/" + id + "/comments/",
-            dataType: "json",
-            data: { comment: textarea.val() },
-            success: function(json) {
-                showComments(id, json);
-                textarea.val("");
-                commentsFactory[objectType].updateTextCounter(textarea);
-                enableSubmitButton(formSelector);
-            },
-            error: function(res, textStatus, errorThrown) {
-                removeLoader();
-                showMessage(formSelector, res.responseText);
-                enableSubmitButton(formSelector);
-            }
-        });
+	var ans = myEditor.getEditorHTML();
+        alert(ans);
+	$.ajax({
+	    type: "POST",
+	    url: "/" + objectType + "s/" + id + "/comments/",
+	    dataType: "json",
+	    data: { comment: ans },
+	    success: function(json) {
+		showComments(id, json);
+		// textarea.val("");
+		commentsFactory[objectType].updateTextCounter(textarea);
+		enableSubmitButton(formSelector);
+	    },
+	    error: function(res, textStatus, errorThrown) {
+		removeLoader();
+		showMessage(formSelector, res.responseText);
+		enableSubmitButton(formSelector);
+	    }
+	});
     };
 
     // public methods..
@@ -593,15 +588,57 @@ function createComments(type) {
             getComments(id, jDiv);
             renderForm(id, jDiv);
             jDiv.show();	    
-            // if (canPostComments(id, jDiv)) jDiv.find("textarea").get(0).focus();
-            $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
-		commentsFactory[objectType].hide(id);
+	    var yui = $("#form-comments-clue-" + id + "> div.comment-div > div.yui-editor-container");
+
+	    var myEditor = new YAHOO.widget.SimpleEditor('comment-'+id, {
+		height: '200px',
+		width: '622px',
+		titlebar: 'Post annotation',
+		dompath: true //Turns on the bar at the bottom
 	    });
+
+	    if(yui.length == 0) {
+                myEditor.render();
+            }
+
 	    $("a.copy-clue").click(function(){
 	        var matches = $("#comments-link-" + objectType + '-' + id).text().match(clue_regex);
-		var textBox = $("#form-comments-clue-" + id + "> div.comment-div > textarea.comment-box");
-                textBox.text(matches[2]);
-		textBox.focus();
+		myEditor.setEditorHTML(matches[2]);
+		myEditor.focus();
+	    });
+	    
+            var done = $("#form-comments-clue-" + id + "> div.comment-div > input");
+
+	    $("#form-comments-clue-" + id).submit(function() {
+		var formSelector = "#form-comments-clue-" + id;
+		var ans = myEditor.getEditorHTML();
+		if(ans == '<br>' || ans == ''){
+                   $("#form-comments-clue-" + id + "> div.comment-div > span.empty").text("can't be empty!");
+		   return false;
+                }
+		$.ajax({
+		    type: "POST",
+		    url: "/" + objectType + "s/" + id + "/comments/",
+		    dataType: "json",
+		    data: { comment: ans },
+		    success: function(json) {
+			showComments(id, json);
+			myEditor.setEditorHTML('');
+			commentsFactory[objectType].updateTextCounter(textarea);
+			enableSubmitButton(formSelector);
+		    },
+		    error: function(res, textStatus, errorThrown) {
+			removeLoader();
+			showMessage(formSelector, res.responseText);
+			enableSubmitButton(formSelector);
+		    }
+		});
+		$("#form-comments-clue-" + id + "> div.comment-div > span.empty").text("");
+		return false;
+            });
+
+            $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
+		commentsFactory[objectType].hide(id);
 	    });
         },
 
