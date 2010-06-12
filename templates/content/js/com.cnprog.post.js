@@ -460,6 +460,7 @@ function createComments(type) {
 					+ $.i18n._('please login') + "</a>";
     var questionId;
     var currentUserId;
+    var userName;
     var clue_regex = /^(\d{1,2}\s+)([\w,'\?:;" -_]+)\([\d,-]+\)/;
     var objectType = type;
     var jDivInit = function(id) {
@@ -530,6 +531,17 @@ function createComments(type) {
         }
     };
 
+    var changeClueColor = function(id, userurl, json) {
+        removeLoader();
+        if (json && json.length > 0) {
+            for (var i = 0; i < json.length; i++) {
+                if(json[i].user_url == userurl) {
+		    $("#comments-link-clue-" + id).addClass("comments-link-solved");
+                }
+	    }
+        }
+    };
+
     // {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
     var renderComment = function(jDiv, json) {
         var html = '<div id="comment-' + objectType + "-" + json.id + '" style="display:none">' + json.text;
@@ -553,7 +565,6 @@ function createComments(type) {
     var postComment = function(id, formId) {
         appendLoaderImg(id);
 	var ans = myEditor.getEditorHTML();
-        alert(ans);
 	$.ajax({
 	    type: "POST",
 	    url: "/" + objectType + "s/" + id + "/comments/",
@@ -561,9 +572,8 @@ function createComments(type) {
 	    data: { comment: ans },
 	    success: function(json) {
 		showComments(id, json);
-		// textarea.val("");
 		commentsFactory[objectType].updateTextCounter(textarea);
-		enableSubmitButton(formSelector);
+		enableSubmitButton(formSelector);		
 	    },
 	    error: function(res, textStatus, errorThrown) {
 		removeLoader();
@@ -576,9 +586,10 @@ function createComments(type) {
     // public methods..
     return {
 
-        init: function(qId, uId) {
+        init: function(qId, uId, username) {
 	    questionId = qId;
-            currentUserId = uId; 
+            currentUserId = uId;
+	    userName = username;
             // Setup "show comments" clicks..
             $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length)); });	    
         },
@@ -624,8 +635,8 @@ function createComments(type) {
 		    success: function(json) {
 			showComments(id, json);
 			myEditor.setEditorHTML('');
-			commentsFactory[objectType].updateTextCounter(textarea);
-			enableSubmitButton(formSelector);
+			enableSubmitButton(formSelector);			
+                        $("#comments-link-clue-" + id).addClass("comments-link-solved");
 		    },
 		    error: function(res, textStatus, errorThrown) {
 			removeLoader();
@@ -640,6 +651,11 @@ function createComments(type) {
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
 		commentsFactory[objectType].hide(id);
 	    });
+        },
+
+        fetchComments: function(id, userurl) {
+            appendLoaderImg(id);
+            $.getJSON("/clues/" + id + "/comments/", function(json) { changeClueColor(id, userurl, json); });
         },
 
         hide: function(id) {
@@ -659,6 +675,11 @@ function createComments(type) {
                 appendLoaderImg(id);
                 $.post(deleteUrl, { dataNeeded: "forIIS7" }, function(json) {
                     showComments(id, json);
+		    var comments = $("#comments-clue-"+id+" > .comments").html();
+		    var userUrl = "/users/"+currentUserId+"/"+userName;
+		    if(comments.indexOf(userUrl) == -1) {
+			$("#comments-link-clue-" + id).removeClass("comments-link-solved");
+		    }
                 }, "json");
             }
         },

@@ -464,6 +464,11 @@ div.comments-container, a.comments-link {
     margin-bottom: 20px;
 }
 
+a.comments-link-solved {
+    background-color:yellow;
+    margin-bottom: 20px;
+}
+
 .post-comments a {
     color:#888888;
     padding:0 3px 2px;
@@ -477,6 +482,12 @@ a.comments-link, a.comments-link-accepted, a.comments-link-owner, a.comments-lin
 
 .question-body a.comments-link:hover {
     background-color:#777777;
+    color:white;
+    text-decoration:none;
+}
+
+.question-body a.comments-link-solved:hover {
+    background-color:#CDAD00;
     color:white;
     text-decoration:none;
 }

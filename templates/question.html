@@ -34,9 +34,9 @@
             $("#nav_questions").attr('className',"on");
             var answer_sort_tab = "{{ tab_id }}";
             $("#" + answer_sort_tab).attr('className',"on");
-            clueComments.init({{ question.id }},'{{ request.user.id }}');
-            questionComments.init({{ question.id }},'{{ request.user.id }}');
-            answerComments.init({{ question.id }},'{{ request.user.id }}');	    
+            clueComments.init({{ question.id }},'{{ request.user.id }}', '{{ request.user.username }}');
+            questionComments.init({{ question.id }},'{{ request.user.id }}', '{{ request.user.username }}');
+            answerComments.init({{ question.id }},'{{ request.user.id }}', '{{ request.user.username }}');	    
             Vote.init({{ question.id }}, '{{ question.author.id }}','{{ request.user.id }}');
             
             {% if not question.closed and request.user.is_authenticated %}initEditor();{% endif %}
@@ -44,10 +44,20 @@
 	    $("#reply").click(function(e) {
 	              e.preventDefault();  showMessage($("#previewer"),noAnswersTill8PMMessage);
 	    });
+
+            {% if request.user.is_authenticated %}
+	    $(".comments-link").each(function(index) {
+	              var l = ("comments-link-clue-").length;
+                      var id = $(this).attr("id").substring(l);
+                      clueComments.fetchComments(id, "/users/{{ request.user.id }}/{{ request.user.username }}");
+	    });
+            {% endif %}
+
 	    {% else %}
 	    $("a[id^='comments-link-clue-']").click();
 	    $(".comment-div").hide();
             {% endif %}
+
             lanai.highlightSyntax();
             $('#btLogin').bind('click', function(){window.location.href='/account/signin/'; } )
         });
