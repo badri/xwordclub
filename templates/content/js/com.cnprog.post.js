@@ -49,16 +49,16 @@ var Vote = function(){
     var removeQuestionLinkIdPrefix = 'question-delete-link-';
     var removeAnswerLinkIdPrefix = 'answer-delete-link-';
     var questionSubscribeUpdates = 'question-subscribe-updates';
-    
+
     var acceptAnonymousMessage = $.i18n._('insufficient privilege');
     var acceptOwnAnswerMessage = $.i18n._('cannot pick own answer as best');
-    var favoriteAnonymousMessage = $.i18n._('anonymous users cannot select favorite questions') 
+    var favoriteAnonymousMessage = $.i18n._('anonymous users cannot select favorite questions')
 					+ "<a href='/account/signin/?next=/questions/{{QuestionID}}'>"
 					+ $.i18n._('please login') + "</a>";
-    var voteAnonymousMessage = $.i18n._('anonymous users cannot vote') 
+    var voteAnonymousMessage = $.i18n._('anonymous users cannot vote')
 					+ "<a href='/account/signin/?next=/questions/{{QuestionID}}'>"
 					+ $.i18n._('please login') + "</a>";
-    var upVoteRequiredScoreMessage = $.i18n._('>15 points requried to upvote') 
+    var upVoteRequiredScoreMessage = $.i18n._('>15 points requried to upvote')
 					+ $.i18n._('please see') + "<a href='/faq'>faq</a>";
     var downVoteRequiredScoreMessage = $.i18n._('>100 points requried to downvote')
 					+ $.i18n._('please see') + "<a href='/faq'>faq</a>";
@@ -81,7 +81,7 @@ var Vote = function(){
     var removeAnonymousMessage = $.i18n._('anonymous users cannot delete/undelete');
     var recoveredMessage = $.i18n._('post recovered');
     var deletedMessage = $.i18n._('post deleted');
-    
+
     var VoteType = {
         acceptAnswer : 0,
         questionUpVote : 1,
@@ -95,6 +95,7 @@ var Vote = function(){
         removeAnswer:10,
         questionSubscribeUpdates:11,
         questionUnsubscribeUpdates:12,
+        rating:20,
     };
 
     var getFavoriteButton = function(){
@@ -129,17 +130,17 @@ var Vote = function(){
         var answerVoteDownButton = 'div.'+ voteContainerId +' img[id='+ imgIdPrefixAnswerVotedown + id + ']';
         return $(answerVoteDownButton);
     };
-    
+
     var getOffensiveQuestionFlag = function(){
         var offensiveQuestionFlag = 'table[id=question-table] span[class='+ offensiveClassFlag +']';
         return $(offensiveQuestionFlag);
     };
-    
+
     var getOffensiveAnswerFlags = function(){
         var offensiveQuestionFlag = 'div.answer span[class='+ offensiveClassFlag +']';
         return $(offensiveQuestionFlag);
     };
-    
+
     var getremoveQuestionLink = function(){
         var removeQuestionLink = 'div#question-controls a[id^='+ removeQuestionLinkIdPrefix +']';
         return $(removeQuestionLink);
@@ -148,17 +149,17 @@ var Vote = function(){
     var getquestionSubscribeUpdatesCheckbox = function(){
         return $('#' + questionSubscribeUpdates);
     };
-    
+
     var getremoveAnswersLinks = function(){
         var removeAnswerLinks = 'div.answer-controls a[id^='+ removeAnswerLinkIdPrefix +']';
         return $(removeAnswerLinks);
     };
-   
+
     var setVoteImage = function(voteType, undo, object){
         var flag = undo ? "" : "-on";
         var arrow = (voteType == VoteType.questionUpVote || voteType == VoteType.answerUpVote) ? "up" : "down";
         object.attr("src", "/content/images/vote-arrow-"+ arrow + flag +".png");
-        
+
         // if undo voting, then undo the pair of arrows.
         if(undo){
             if(voteType == VoteType.questionUpVote || voteType == VoteType.questionDownVote){
@@ -171,12 +172,12 @@ var Vote = function(){
             }
         }
     };
-    
+
     var setVoteNumber = function(object, number){
         var voteNumber = object.parent('div.'+ voteContainerId).find('div.'+ voteNumberClass);
         $(voteNumber).text(number);
     };
-    
+
     var bindEvents = function(){
         // accept answers
         if(questionAuthorId == currentUserId){
@@ -190,36 +191,36 @@ var Vote = function(){
         favoriteButton.unbind('click').click(function(event){
            Vote.favorite($(event.target))
         });
-    
+
         // question vote up
         var questionVoteUpButton = getQuestionVoteUpButton();
         questionVoteUpButton.unbind('click').click(function(event){
            Vote.vote($(event.target), VoteType.questionUpVote)
         });
-    
+
         var questionVoteDownButton = getQuestionVoteDownButton();
         questionVoteDownButton.unbind('click').click(function(event){
            Vote.vote($(event.target), VoteType.questionDownVote)
         });
-    
+
         var answerVoteUpButton = getAnswerVoteUpButtons();
         answerVoteUpButton.unbind('click').click(function(event){
            Vote.vote($(event.target), VoteType.answerUpVote)
         });
-        
+
         var answerVoteDownButton = getAnswerVoteDownButtons();
         answerVoteDownButton.unbind('click').click(function(event){
            Vote.vote($(event.target), VoteType.answerDownVote)
         });
-    
+
         getOffensiveQuestionFlag().unbind('click').click(function(event){
            Vote.offensive(this, VoteType.offensiveQuestion)
         });
-    
+
         getOffensiveAnswerFlags().unbind('click').click(function(event){
            Vote.offensive(this, VoteType.offensiveAnswer)
         });
-    
+
         getremoveQuestionLink().unbind('click').click(function(event){
             Vote.remove(this, VoteType.removeQuestion);
         });
@@ -232,23 +233,24 @@ var Vote = function(){
                 Vote.vote($(event.target), VoteType.questionUnsubscribeUpdates);
             }
         });
-    
+
         getremoveAnswersLinks().unbind('click').click(function(event){
             Vote.remove(this, VoteType.removeAnswer)
         });
     };
-    
-    var submit = function(object, voteType, callback) {
+
+    var submit = function(object, voteType, callback, rating) {
+	rating = typeof(rating) != 'undefined' ? rating : 0;
         $.ajax({
             type: "POST",
             cache: false,
             dataType: "json",
             url: "/questions/" + questionId + "/vote/",
-            data: { "type": voteType, "postId": postId },
+            data: { "type": voteType, "postId": postId, "rating" : rating },
             error: handleFail,
             success: function(data){callback(object, voteType, data)}});
     };
-    
+
     var handleFail = function(xhr, msg){
         alert("Callback invoke error: " + msg)
     };
@@ -273,7 +275,7 @@ var Vote = function(){
             $(answers).removeClass("accepted-answer");
             var commentLinks = ("div[id^="+answerContainerIdPrefix +"] div[id^="+ commentLinkIdPrefix +"]");
             $(commentLinks).removeClass("comment-link-accepted");
-            
+
             object.attr("src", "/content/images/vote-accepted-on.png");
             $("#"+answerContainerIdPrefix+postId).addClass("accepted-answer");
             $("#"+commentLinkIdPrefix+postId).addClass("comment-link-accepted");
@@ -305,7 +307,7 @@ var Vote = function(){
             showMessage(object, data.message);
         }
     };
-        
+
     var callback_vote = function(object, voteType, data){
         if(data.allowed == "0" && data.success == "0"){
             showMessage(object, voteAnonymousMessage.replace("{{QuestionID}}", questionId));
@@ -330,7 +332,7 @@ var Vote = function(){
         else if(data.status == "1"){
             setVoteImage(voteType, true, object);
             setVoteNumber(object, data.count);
-        }     
+        }
         else if(data.success == "1"){
             setVoteImage(voteType, false, object);
             setVoteNumber(object, data.count);
@@ -338,7 +340,7 @@ var Vote = function(){
                 showMessage(object, data.message);
         }
     };
-        
+
     var callback_offensive = function(object, voteType, data){
         object = $(object);
         if(data.allowed == "0" && data.success == "0"){
@@ -346,18 +348,18 @@ var Vote = function(){
         }
         else if(data.allowed == "-3"){
             showMessage(object, offensiveNoFlagsLeftMessage);
-        }  
+        }
         else if(data.allowed == "-2"){
             showMessage(object, offensiveNoPermissionMessage);
-        }  
+        }
         else if(data.status == "1"){
             showMessage(object, offensiveTwiceMessage);
-        }  
+        }
         else if(data.success == "1"){
             $(object).children('span[class=darkred]').text("("+ data.count +")");
         }
     };
-        
+
     var callback_remove = function(object, voteType, data){
         if(data.allowed == "0" && data.success == "0"){
             showMessage(object, removeAnonymousMessage.replace("{{QuestionID}}", questionId));
@@ -375,7 +377,7 @@ var Vote = function(){
 			}
 		}
     };
-        
+
     return {
         init : function(qId, questionAuthor, userId){
             questionId = qId;
@@ -383,13 +385,13 @@ var Vote = function(){
             currentUserId = userId;
             bindEvents();
         },
-        
+
         // Accept answer public function
         accept: function(object){
             postId = object.attr("id").substring(imgIdPrefixAccept.length);
             submit(object, VoteType.acceptAnswer, callback_accept);
         },
-        
+
         favorite: function(object){
             if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
                 showMessage(object, favoriteAnonymousMessage.replace("{{QuestionID}}", questionId));
@@ -397,11 +399,11 @@ var Vote = function(){
             }
             submit(object, VoteType.favorite, callback_favorite);
         },
-            
+
         vote: function(object, voteType){
             if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
                 showMessage(object, voteAnonymousMessage.replace("{{QuestionID}}", questionId));
-                return false;   
+                return false;
             }
             if(voteType == VoteType.answerUpVote){
                 postId = object.attr("id").substring(imgIdPrefixAnswerVoteup.length);
@@ -409,25 +411,25 @@ var Vote = function(){
             else if(voteType == VoteType.answerDownVote){
                 postId = object.attr("id").substring(imgIdPrefixAnswerVotedown.length);
             }
-            
+
             submit(object, voteType, callback_vote);
         },
-        
+
         offensive: function(object, voteType){
             if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
                 showMessage($(object), offensiveAnonymousMessage.replace("{{QuestionID}}", questionId));
-                return false;   
+                return false;
             }
             if(confirm(offensiveConfirmation)){
                 postId = object.id.substr(object.id.lastIndexOf('-') + 1);
                 submit(object, voteType, callback_offensive);
             }
         },
-            
+
         remove: function(object, voteType){
             if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
                 showMessage($(object), removeAnonymousMessage.replace("{{QuestionID}}", questionId));
-                return false;   
+                return false;
             }
             if(confirm(removeConfirmation)){
 				bits = object.id.split('-');
@@ -455,7 +457,7 @@ var Vote = function(){
 
 // site comments
 function createComments(type) {
-    var commentAnonymousMessage = $.i18n._('anonymous users cannot post answers.') 
+    var commentAnonymousMessage = $.i18n._('anonymous users cannot post answers.')
 					+ "<a href='/account/signin/?next=/questions/{{QuestionID}}'>"
 					+ $.i18n._('please login') + "</a>";
     var questionId;
@@ -481,7 +483,7 @@ function createComments(type) {
         var formId = "form-comments-" + objectType + "-" + id;
         if (canPostComments(id, jDiv)) {
             if (jDiv.find("#" + formId).length == 0) {
-                var form = '<form id="' + formId + '" class="post-comments"><div class="comment-div">';		
+                var form = '<form id="' + formId + '" class="post-comments"><div class="comment-div">';
                 if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
                     form += '<span class="form-error">Please login to post answers.</span>';
 		    form += '<span class="form-error">click on the clue again to close this box.</span>';
@@ -492,7 +494,7 @@ function createComments(type) {
                     form += '<span class="form-error empty"></span>';
                     form += '<input class="submit" type="submit" value="'
 						+ $.i18n._('Done!') + '" /><br><span class="text-counter"></span>';
-                    form+='<a class="copy-clue">copy clue to textbox</a>';		    
+                    form+='<a class="copy-clue">copy clue to textbox</a>';
                 }
                 form += '</div></form>';
 
@@ -508,6 +510,13 @@ function createComments(type) {
 					+ '<a href="/faq" class="comment-user">' + $.i18n._('please see') + 'faq</a></span>');
             }
         }
+    };
+
+    var renderRatingWidget = function(id, jDiv) {
+        // alert(id);
+        var slider = '<div id="rating-' + id + '" class="slider-vertical" style="width:100px;"></div>';
+        slider += '<input type="text" disabled="true" id="amount-'+ id + '" class="amount" style="background-color:#EEEEEE;border:0; color:#f6931f; font-weight:bold;" />';
+        jDiv.append(slider);
     };
 
     var getComments = function(id, jDiv) {
@@ -573,7 +582,7 @@ function createComments(type) {
 	    success: function(json) {
 		showComments(id, json);
 		commentsFactory[objectType].updateTextCounter(textarea);
-		enableSubmitButton(formSelector);		
+		enableSubmitButton(formSelector);
 	    },
 	    error: function(res, textStatus, errorThrown) {
 		removeLoader();
@@ -591,14 +600,15 @@ function createComments(type) {
             currentUserId = uId;
 	    userName = username;
             // Setup "show comments" clicks..
-            $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length)); });	    
+            $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length)); });
         },
 
         show: function(id) {
             var jDiv = jDivInit(id);
             getComments(id, jDiv);
+            renderRatingWidget(id,jDiv);
             renderForm(id, jDiv);
-            jDiv.show();	    
+            jDiv.show();
 	    var yui = $("#form-comments-clue-" + id + "> div.comment-div > div.yui-editor-container");
 
 	    var myEditor = new YAHOO.widget.SimpleEditor('comment-'+id, {
@@ -617,7 +627,7 @@ function createComments(type) {
 		myEditor.setEditorHTML(matches[2]);
 		myEditor.focus();
 	    });
-	    
+
             var done = $("#form-comments-clue-" + id + "> div.comment-div > input");
 
 	    $("#form-comments-clue-" + id).submit(function() {
@@ -635,7 +645,7 @@ function createComments(type) {
 		    success: function(json) {
 			showComments(id, json);
 			myEditor.setEditorHTML('');
-			enableSubmitButton(formSelector);			
+			enableSubmitButton(formSelector);
                         $("#comments-link-clue-" + id).addClass("comments-link-solved");
 		    },
 		    error: function(res, textStatus, errorThrown) {
@@ -651,6 +661,22 @@ function createComments(type) {
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
 		commentsFactory[objectType].hide(id);
 	    });
+
+		$("#rating-"+id).slider({
+			/*orientation: "vertical",*/
+			range: "min",
+			min: 0,
+			max: 100,
+			value: 65,
+			stop: function(event, ui) {
+				alert(ui.value/20);
+			},
+			slide: function(event, ui) {
+				$("#amount-"+id).val(ui.value/20);
+			}
+		});
+		$("#amount-"+id).val($("#rating-"+id).slider("value")/20);
+
         },
 
         fetchComments: function(id, userurl) {
@@ -689,7 +715,7 @@ function createComments(type) {
             var color = length > 270 ? "#f00" : length > 200 ? "#f60" : "#999";
             var jSpan = $(textarea).siblings("span.text-counter");
             /* jSpan.html($.i18n._('can write')
-					+ (300 - length) + ' ' 
+					+ (300 - length) + ' '
 					+ $.i18n._('characters')).css("color", color); */
         }
     };

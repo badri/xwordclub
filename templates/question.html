@@ -15,7 +15,8 @@
 	<script src="http://yui.yahooapis.com/2.8.1/build/container/container_core-min.js"></script>
 	<!-- Source file for Rich Text Editor-->
 	<script src="http://yui.yahooapis.com/2.8.1/build/editor/simpleeditor-min.js"></script>
-
+        <script>google.load("jqueryui", "1.8");</script>
+	<link rel="stylesheet" type="text/css" href="/content/style/ui/jquery.ui.all.css" />
         {% if not question.closed and request.user.is_authenticated %}
         <script type='text/javascript' src='/content/js/com.cnprog.editor.js'></script>
         <script type='text/javascript' src='/content/js/wmd/showdown.js'></script>

@@ -812,6 +812,8 @@ def vote(request, id):
         elif request.is_ajax():
             question = get_object_or_404(Question, id=id)
             vote_type = request.POST.get('type')
+            rating = request.POST.get('rating')
+            print rating
 
             #accept answer
             if vote_type == '0':
