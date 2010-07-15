@@ -17,6 +17,7 @@ from django.utils import simplejson
 from django.utils.html import *
 from django.utils.translation import ugettext as _
 from markdown2 import Markdown
+from django.contrib.auth.models import AnonymousUser
 import os.path
 import random
 import time
@@ -341,7 +342,10 @@ def question(request, id):
     answers = answers.select_related(depth=1)
 
     favorited = question.has_favorite_by_user(request.user)
-    question_vote = question.votes.select_related().filter(user=request.user)
+    if isinstance(request.user,AnonymousUser):
+        question_vote = question.votes.select_related()
+    else:
+        question_vote = question.votes.select_related().filter(user=request.user)
     if question_vote is not None and question_vote.count() > 0:
         question_vote = question_vote[0]
 
@@ -812,8 +816,6 @@ def vote(request, id):
         elif request.is_ajax():
             question = get_object_or_404(Question, id=id)
             vote_type = request.POST.get('type')
-            rating = request.POST.get('rating')
-            print rating
 
             #accept answer
             if vote_type == '0':
@@ -861,6 +863,27 @@ def vote(request, id):
                     new_item.save()
                     response_data['count']  = FavoriteQuestion.objects.filter(question=question).count()
                 Question.objects.update_favorite_count(question)
+
+            # rating of clue
+            elif vote_type=='20':
+                clue_rating = request.POST.get('rating')
+                clue_id = request.POST.get('postId')
+                rated_clue = get_object_or_404(Clue, id=clue_id)
+
+                if Rating.objects.filter(clue=rated_clue,user=request.user).count() > 0:                    
+                    already_rated = Rating.objects.filter(clue=rated_clue,user=request.user)[0]
+                    already_rated.rating = clue_rating
+                    already_rated.save()
+                else:
+                    print clue_rating
+                    rating = Rating(clue=rated_clue, user=request.user, rating=clue_rating)
+                    rating.save()
+
+                #get average rating
+                all_ratings = [x.rating for x in Rating.objects.filter(clue=rated_clue)]
+                rated_clue.avg_rating = sum(all_ratings)/float(Rating.objects.filter(clue=rated_clue).count())
+                rated_clue.save()
+                response_data['average_rating'] = rated_clue.avg_rating                
 
             elif vote_type in ['1', '2', '5', '6']:
                 post_id = id

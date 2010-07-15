@@ -67,7 +67,6 @@ class Comment(models.Model):
     user           = models.ForeignKey(User, related_name='comments')
     comment        = models.TextField()
     added_at       = models.DateTimeField(default=datetime.datetime.now)
-
     
     class Meta:
         ordering = ('-added_at',)
@@ -317,7 +316,7 @@ class Clue(models.Model):
     crossword      = models.ForeignKey(Question, related_name='clues')
     comments       = generic.GenericRelation(Comment)
     comment_count  = models.PositiveIntegerField(default=0)
-    avg_rating = models.DecimalField(null=True, max_digits=1, decimal_places=1)
+    avg_rating = models.FloatField()
 
     class Meta:
         db_table = u'clue'
@@ -325,7 +324,7 @@ class Clue(models.Model):
 class Rating(models.Model):
     clue        = models.ForeignKey(Clue, related_name='rating')
     user        = models.ForeignKey(User, related_name='rated')
-    rating      = models.DecimalField(null=True, max_digits=1, decimal_places=1)
+    rating      = models.FloatField()
     rated_at    = models.DateTimeField(default=datetime.datetime.now)
 
     class Meta:

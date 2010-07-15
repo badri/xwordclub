@@ -49,6 +49,7 @@ var Vote = function(){
     var removeQuestionLinkIdPrefix = 'question-delete-link-';
     var removeAnswerLinkIdPrefix = 'answer-delete-link-';
     var questionSubscribeUpdates = 'question-subscribe-updates';
+    var ratingPrefix = 'rating-';
 
     var acceptAnonymousMessage = $.i18n._('insufficient privilege');
     var acceptOwnAnswerMessage = $.i18n._('cannot pick own answer as best');
@@ -58,6 +59,11 @@ var Vote = function(){
     var voteAnonymousMessage = $.i18n._('anonymous users cannot vote')
 					+ "<a href='/account/signin/?next=/questions/{{QuestionID}}'>"
 					+ $.i18n._('please login') + "</a>";
+
+    var rateAnonymousMessage = $.i18n._('anonymous users cannot rate.')
+					+ "<a href='/account/signin/?next=/questions/{{QuestionID}}'>"
+					+ $.i18n._('please login') + "</a>";
+
     var upVoteRequiredScoreMessage = $.i18n._('>15 points requried to upvote')
 					+ $.i18n._('please see') + "<a href='/faq'>faq</a>";
     var downVoteRequiredScoreMessage = $.i18n._('>100 points requried to downvote')
@@ -95,7 +101,8 @@ var Vote = function(){
         removeAnswer:10,
         questionSubscribeUpdates:11,
         questionUnsubscribeUpdates:12,
-        rating:20,
+      rating:20,
+      annoUpVote: 21
     };
 
     var getFavoriteButton = function(){
@@ -155,6 +162,7 @@ var Vote = function(){
         return $(removeAnswerLinks);
     };
 
+
     var setVoteImage = function(voteType, undo, object){
         var flag = undo ? "" : "-on";
         var arrow = (voteType == VoteType.questionUpVote || voteType == VoteType.answerUpVote) ? "up" : "down";
@@ -208,7 +216,7 @@ var Vote = function(){
            Vote.vote($(event.target), VoteType.answerUpVote)
         });
 
-        var answerVoteDownButton = getAnswerVoteDownButtons();
+       var answerVoteDownButton = getAnswerVoteDownButtons();
         answerVoteDownButton.unbind('click').click(function(event){
            Vote.vote($(event.target), VoteType.answerDownVote)
         });
@@ -248,7 +256,7 @@ var Vote = function(){
             url: "/questions/" + questionId + "/vote/",
             data: { "type": voteType, "postId": postId, "rating" : rating },
             error: handleFail,
-            success: function(data){callback(object, voteType, data)}});
+            success: function(data){callback(object, voteType, data);}});
     };
 
     var handleFail = function(xhr, msg){
@@ -303,7 +311,7 @@ var Vote = function(){
             fav.text(data.count);
             fav.addClass("my-favorite-number");
         }
-        else{
+        else {
             showMessage(object, data.message);
         }
     };
@@ -339,6 +347,12 @@ var Vote = function(){
             if(data.message.length > 0)
                 showMessage(object, data.message);
         }
+    };
+
+
+    var callback_rating = function(object, voteType, data){
+      //alert(data);
+      showMessage(object, "avg rating:"+data.average_rating);
     };
 
     var callback_offensive = function(object, voteType, data){
@@ -400,8 +414,12 @@ var Vote = function(){
             submit(object, VoteType.favorite, callback_favorite);
         },
 
-        vote: function(object, voteType){
+      vote: function(object, voteType, rating){
             if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
+	      if(rating != 0) {
+                showMessage(object, rateAnonymousMessage.replace("{{QuestionID}}", questionId));
+                return false;
+	      }
                 showMessage(object, voteAnonymousMessage.replace("{{QuestionID}}", questionId));
                 return false;
             }
@@ -411,6 +429,16 @@ var Vote = function(){
             else if(voteType == VoteType.answerDownVote){
                 postId = object.attr("id").substring(imgIdPrefixAnswerVotedown.length);
             }
+
+            else if(voteType == VoteType.rating){
+                postId = object.attr("id").substring(ratingPrefix.length);
+	        submit(object, voteType, callback_rating, rating);
+	        return false;
+            }
+
+            else if(voteType == VoteType.annoUpVote) {
+                postId = object.attr("id").substring("upvote-".length);
+	    }
 
             submit(object, voteType, callback_vote);
         },
@@ -513,7 +541,6 @@ function createComments(type) {
     };
 
     var renderRatingWidget = function(id, jDiv) {
-        // alert(id);
         var slider = '<div id="rating-' + id + '" class="slider-vertical" style="width:100px;"></div>';
         slider += '<input type="text" disabled="true" id="amount-'+ id + '" class="amount" style="background-color:#EEEEEE;border:0; color:#f6931f; font-weight:bold;" />';
         jDiv.append(slider);
@@ -523,6 +550,15 @@ function createComments(type) {
         appendLoaderImg(id);
         $.getJSON("/" + objectType + "s/" + id + "/comments/", function(json) { showComments(id, json); });
     };
+
+
+    var setAnnoUpvote = function() {
+            var annoUpVoteButton = $('span[id^=upvote-]');
+            annoUpVoteButton.unbind('click').click(function(event){
+	    alert('clicked');
+	    Vote.vote($(event.target), VoteType.annoUpVote);
+            });
+      };
 
     var showComments = function(id, json) {
         var jDiv = jDivInit(id);
@@ -537,6 +573,7 @@ function createComments(type) {
                 renderComment(jDiv, json[i]);
 
             jDiv.children().show();
+	    setAnnoUpvote();
         }
     };
 
@@ -553,7 +590,8 @@ function createComments(type) {
 
     // {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
     var renderComment = function(jDiv, json) {
-        var html = '<div id="comment-' + objectType + "-" + json.id + '" style="display:none">' + json.text;
+	var upvote = '<span id="upvote-' + json.id + '"><img src="/content/images/answer-upvote.png"></span>';
+        var html = '<div id="comment-' + objectType + "-" + json.id + '" style="display:none">' + upvote + json.text;
         html += json.user_url ? '&nbsp;&ndash;&nbsp;<a href="' + json.user_url + '"' : '<span';
         html += ' class="comment-user">' + json.user_display_name + (json.user_url ? '</a>' : '</span>');
         html += ' <span class="comment-date">(' + json.add_date + ')</span>';
@@ -562,7 +600,7 @@ function createComments(type) {
             var img = "/content/images/close-small.png";
             var imgHover = "/content/images/close-small-hover.png";
             html += '<img onclick="' + objectType + 'Comments.deleteComment($(this), ' + json.object_id + ', \'' + json.delete_url + '\')" src="' + img;
-            html += '" onmouseover="$(this).attr(\'src\', \'' + imgHover + '\')" onmouseout="$(this).attr(\'src\', \'' + img
+            html += '" onmouseover="$(this).attr(\'src\', \'' + imgHover + '\')" onmouseout="$(this).attr(\'src\', \'' + img;
             html += '\')" title="' + $.i18n._('delete this comment') + '" />';
         }
 
@@ -628,7 +666,8 @@ function createComments(type) {
 		myEditor.focus();
 	    });
 
-            var done = $("#form-comments-clue-" + id + "> div.comment-div > input");
+
+	    var done = $("#form-comments-clue-" + id + "> div.comment-div > input");
 
 	    $("#form-comments-clue-" + id).submit(function() {
 		var formSelector = "#form-comments-clue-" + id;
@@ -669,7 +708,7 @@ function createComments(type) {
 			max: 100,
 			value: 65,
 			stop: function(event, ui) {
-				alert(ui.value/20);
+                                Vote.vote($(this), /*VoteType.rating*/ 20, ui.value/20);
 			},
 			slide: function(event, ui) {
 				$("#amount-"+id).val(ui.value/20);
