@@ -67,6 +67,7 @@ class Comment(models.Model):
     user           = models.ForeignKey(User, related_name='comments')
     comment        = models.TextField()
     added_at       = models.DateTimeField(default=datetime.datetime.now)
+    vote_up_count  = models.IntegerField(default=0)
     
     class Meta:
         ordering = ('-added_at',)

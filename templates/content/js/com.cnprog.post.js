@@ -437,7 +437,7 @@ var Vote = function(){
             }
 
             else if(voteType == VoteType.annoUpVote) {
-                postId = object.attr("id").substring("upvote-".length);
+                postId = object.parent().attr("id").substring("upvote-".length);
 	    }
 
             submit(object, voteType, callback_vote);
@@ -555,8 +555,7 @@ function createComments(type) {
     var setAnnoUpvote = function() {
             var annoUpVoteButton = $('span[id^=upvote-]');
             annoUpVoteButton.unbind('click').click(function(event){
-	    alert('clicked');
-	    Vote.vote($(event.target), VoteType.annoUpVote);
+	    Vote.vote($(event.target), 21);
             });
       };
 

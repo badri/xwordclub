@@ -816,6 +816,7 @@ def vote(request, id):
         elif request.is_ajax():
             question = get_object_or_404(Question, id=id)
             vote_type = request.POST.get('type')
+            print vote_type
 
             #accept answer
             if vote_type == '0':
@@ -885,15 +886,24 @@ def vote(request, id):
                 rated_clue.save()
                 response_data['average_rating'] = rated_clue.avg_rating                
 
-            elif vote_type in ['1', '2', '5', '6']:
+            elif vote_type in ['1', '2', '5', '6', '21']:
                 post_id = id
                 post = question
                 vote_score = 1
+                print id
                 if vote_type in ['5', '6']:
                     answer_id = request.POST.get('postId')
                     answer = get_object_or_404(Answer, id=answer_id)
                     post_id = answer_id
                     post = answer
+                    
+                if vote_type == '21':
+                    comment_id = request.POST.get('postId')
+                    comment = get_object_or_404(Comment, id=comment_id)
+                    print comment.comment
+                    post_id = comment_id
+                    post = comment
+                    
                 if vote_type in ['2', '6']:
                     vote_score = -1
 

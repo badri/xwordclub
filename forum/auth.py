@@ -292,7 +292,7 @@ def onUpVoted(vote, post, user):
     post.vote_up_count = int(post.vote_up_count) + 1
     post.score = int(post.score) + 1
     post.save()
-
+    print ContentType.objects.get_for_model(post)
     if not post.wiki:
         author = post.author
         if Repute.objects.get_reputation_by_upvoted_today(author) <  int(REPUTATION_RULES['scope_per_day_by_upvotes']):
