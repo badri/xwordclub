@@ -910,17 +910,17 @@ def vote(request, id):
                 elif post.votes.filter(user=request.user).count() > 0:
                     vote = post.votes.filter(user=request.user)[0]
                     # unvote should be less than certain time
-                    if (datetime.datetime.now().day - vote.voted_at.day) >= VOTE_RULES['scope_deny_unvote_days']:
-                        response_data['status'] = 2
-                    else:
-                        voted = vote.vote
-                        if voted > 0:
-                            # cancel upvote
-                            onUpVotedCanceled(vote, post, request.user)
+                    # if (datetime.datetime.now().day - vote.voted_at.day) >= VOTE_RULES['scope_deny_unvote_days']:
+                    #   response_data['status'] = 2
+                    # else:
+                    voted = vote.vote
+                    if voted > 0:
+                        # cancel upvote
+                        onUpVotedCanceled(vote, post, request.user)
 
-                        else:
-                            # cancel downvote
-                            onDownVotedCanceled(vote, post, request.user)
+                    else:
+                        # cancel downvote
+                        onDownVotedCanceled(vote, post, request.user)
 
                         response_data['status'] = 1
                         response_data['count'] = post.score
@@ -930,7 +930,6 @@ def vote(request, id):
                     vote = Vote(user=request.user, content_object=post, vote=vote_score, voted_at=datetime.datetime.now())
                     if vote_score > 0:
                         # upvote
-                        print vote
                         onUpVoted(vote, post, request.user)
                     else:
                         # downvote
@@ -1785,7 +1784,6 @@ def clue_ratings(request, id):
     json_rating = {}
     json_rating["rating"] = str(rating)
     data = simplejson.dumps(json_rating)
-    print data
     return HttpResponse(data, mimetype="application/json")
 
 def question_comments(request, id):

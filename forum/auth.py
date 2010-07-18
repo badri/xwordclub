@@ -319,24 +319,25 @@ def onUpVotedCanceled(vote, post, user):
     if post.vote_up_count < 0:
         post.vote_up_count  = 0
     post.score = int(post.score) - 1
+    if post.score < 0:
+        post.score  = 0
     post.save()
 
-    if not post.wiki:
-        author = post.author
-        author.reputation = calculate_reputation(author.reputation,
-                          int(REPUTATION_RULES['lose_by_upvote_canceled']))
-        author.save()
+    author = post.author
+    author.reputation = calculate_reputation(author.reputation,
+                                             int(REPUTATION_RULES['lose_by_upvote_canceled']))
+    author.save()
 
-        question = post
-        if ContentType.objects.get_for_model(post) == answer_type:
-            question = post.question
+    question = post
+    if ContentType.objects.get_for_model(post) == answer_type:
+        question = post.question
 
         reputation = Repute(user=author,
-                   negative=int(REPUTATION_RULES['lose_by_upvote_canceled']),
-                   question=question,
-                   reputed_at=datetime.datetime.now(),
-                   reputation_type=-8,
-                   reputation=author.reputation)
+                            negative=int(REPUTATION_RULES['lose_by_upvote_canceled']),
+                            question=question,
+                            reputed_at=datetime.datetime.now(),
+                            reputation_type=-8,
+                            reputation=author.reputation)
         reputation.save()
 
 @transaction.commit_on_success

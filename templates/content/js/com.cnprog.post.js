@@ -164,10 +164,17 @@ var Vote = function(){
 
 
     var setVoteImage = function(voteType, undo, object){
+      if(voteType == VoteType.annoUpVote) {
+	if(undo) {
+	 object.attr("src", "/content/images/answer-downvote.png");
+	} else {
+	  object.attr("src", "/content/images/answer-upvote.png");
+	}
+      } else {
         var flag = undo ? "" : "-on";
         var arrow = (voteType == VoteType.questionUpVote || voteType == VoteType.answerUpVote) ? "up" : "down";
         object.attr("src", "/content/images/vote-arrow-"+ arrow + flag +".png");
-
+        }
         // if undo voting, then undo the pair of arrows.
         if(undo){
             if(voteType == VoteType.questionUpVote || voteType == VoteType.questionDownVote){
@@ -184,6 +191,11 @@ var Vote = function(){
     var setVoteNumber = function(object, number){
         var voteNumber = object.parent('div.'+ voteContainerId).find('div.'+ voteNumberClass);
         $(voteNumber).text(number);
+    };
+
+    var setAnnoVoteNumber = function(object, number){
+      var voteNumber = object.parent().find("span.score");
+      $(voteNumber).text(number);
     };
 
     var bindEvents = function(){
@@ -342,8 +354,18 @@ var Vote = function(){
             setVoteNumber(object, data.count);
         }
         else if(data.success == "1"){
-            setVoteImage(voteType, false, object);
-            setVoteNumber(object, data.count);
+	  if(data.count == 0) {
+	    setVoteImage(voteType, true, object);
+	  } else {
+	   setVoteImage(voteType, false, object);
+	  }
+	  if(voteType == VoteType.annoUpVote) {
+	    setAnnoVoteNumber(object, data.count);
+	  }
+	  else {
+	    setVoteNumber(object, data.count);
+	  }
+
             if(data.message.length > 0)
                 showMessage(object, data.message);
         }
@@ -589,7 +611,12 @@ function createComments(type) {
 
     // {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
     var renderComment = function(jDiv, json) {
-	var upvote = '<span id="upvote-' + json.id + '"><span class="score">'+ json.score +'</span><img src="/content/images/answer-upvote.png"></span>';
+	var upvote = '<span id="upvote-' + json.id + '" class="clue-vote"><span class="score">'+ json.score +'</span>';
+	if(json.score == 1) {
+    	    upvote += '<img src="/content/images/answer-upvote.png"></span>';
+        } else {
+    	    upvote += '<img src="/content/images/answer-downvote.png"></span>';
+        }
         var html = '<div id="comment-' + objectType + "-" + json.id + '" style="display:none">' + upvote + json.text;
         html += json.user_url ? '&nbsp;&ndash;&nbsp;<a href="' + json.user_url + '"' : '<span';
         html += ' class="comment-user">' + json.user_display_name + (json.user_url ? '</a>' : '</span>');
