@@ -416,7 +416,7 @@ var Vote = function(){
 
       vote: function(object, voteType, rating){
             if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
-	      if(rating != 0) {
+	      if(rating != 0 && voteType == VoteType.rating) {
                 showMessage(object, rateAnonymousMessage.replace("{{QuestionID}}", questionId));
                 return false;
 	      }
@@ -589,7 +589,7 @@ function createComments(type) {
 
     // {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
     var renderComment = function(jDiv, json) {
-	var upvote = '<span id="upvote-' + json.id + '"><img src="/content/images/answer-upvote.png"></span>';
+	var upvote = '<span id="upvote-' + json.id + '"><span class="score">'+ json.score +'</span><img src="/content/images/answer-upvote.png"></span>';
         var html = '<div id="comment-' + objectType + "-" + json.id + '" style="display:none">' + upvote + json.text;
         html += json.user_url ? '&nbsp;&ndash;&nbsp;<a href="' + json.user_url + '"' : '<span';
         html += ' class="comment-user">' + json.user_display_name + (json.user_url ? '</a>' : '</span>');
@@ -713,7 +713,16 @@ function createComments(type) {
 				$("#amount-"+id).val(ui.value/20);
 			}
 		});
-		$("#amount-"+id).val($("#rating-"+id).slider("value")/20);
+
+                if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
+	            $("#rating-"+id).slider("option", "value", 0);
+	            $("#amount-"+id).hide();
+                } else {
+	            $.getJSON("/clues/" + id + "/ratings/", function(json) {
+	            $("#rating-"+id).slider("option", "value", json.rating * 20);
+	            $("#amount-"+id).val(json.rating);
+	           });
+                }
 
         },
 

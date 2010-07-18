@@ -816,7 +816,6 @@ def vote(request, id):
         elif request.is_ajax():
             question = get_object_or_404(Question, id=id)
             vote_type = request.POST.get('type')
-            print vote_type
 
             #accept answer
             if vote_type == '0':
@@ -876,7 +875,6 @@ def vote(request, id):
                     already_rated.rating = clue_rating
                     already_rated.save()
                 else:
-                    print clue_rating
                     rating = Rating(clue=rated_clue, user=request.user, rating=clue_rating)
                     rating.save()
 
@@ -890,7 +888,6 @@ def vote(request, id):
                 post_id = id
                 post = question
                 vote_score = 1
-                print id
                 if vote_type in ['5', '6']:
                     answer_id = request.POST.get('postId')
                     answer = get_object_or_404(Answer, id=answer_id)
@@ -900,7 +897,6 @@ def vote(request, id):
                 if vote_type == '21':
                     comment_id = request.POST.get('postId')
                     comment = get_object_or_404(Comment, id=comment_id)
-                    print comment.comment
                     post_id = comment_id
                     post = comment
                     
@@ -934,6 +930,7 @@ def vote(request, id):
                     vote = Vote(user=request.user, content_object=post, vote=vote_score, voted_at=datetime.datetime.now())
                     if vote_score > 0:
                         # upvote
+                        print vote
                         onUpVoted(vote, post, request.user)
                     else:
                         # downvote
@@ -1703,7 +1700,6 @@ def user_reputation(request, user_id, user_view):
         rep_list.append(dic)
     reps = ','.join(rep_list)
     reps = '[%s]' % reps
-    print reps
     return render_to_response(user_view.template_file, {
                               "tab_name": user_view.id,
                               "tab_description": user_view.tab_description,
@@ -1778,6 +1774,20 @@ def clue_comments(request, id):
     user = request.user
     return __comments(request, clue, 'clue', user)
 
+def clue_ratings(request, id):
+    clue = get_object_or_404(Clue, id=id)
+    user = request.user
+    try:
+        rating = Rating.objects.filter(clue=clue, user=user)[0]
+        rating = rating.rating
+    except IndexError:
+        rating = 0.0
+    json_rating = {}
+    json_rating["rating"] = str(rating)
+    data = simplejson.dumps(json_rating)
+    print data
+    return HttpResponse(data, mimetype="application/json")
+
 def question_comments(request, id):
     question = get_object_or_404(Question, id=id)
     user = request.user
@@ -1795,7 +1805,7 @@ def __comments(request, obj, type, user):
             return __generate_comments_json(obj, type, user)
         elif request.method == "POST":
             comment_data = request.POST.get('comment')
-            comment = Comment(content_object=obj, comment=comment_data, user=request.user)
+            comment = Comment(content_object=obj, comment=comment_data, author=request.user)
             comment.save()
             obj.comment_count = obj.comment_count + 1
             obj.save()
@@ -1808,13 +1818,13 @@ def __generate_comments_json(obj, type, user):
         if now > thatday8pm:
             comments = obj.comments.all().order_by('added_at')
         else:
-            comments = obj.comments.filter(user=user).order_by('added_at')
+            comments = obj.comments.filter(author=user).order_by('added_at')
     else:
-        comments = obj.comments.filter(user=user).order_by('added_at')
+        comments = obj.comments.filter(author=user).order_by('added_at')
     # {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
     json_comments = []
     for comment in comments:
-        comment_user = comment.user
+        comment_user = comment.author
         delete_url = ""
         if user != None and auth.can_delete_comment(user, comment):
             #/posts/392845/comments/219852/delete
@@ -1824,10 +1834,10 @@ def __generate_comments_json(obj, type, user):
                              "add_date": comment.added_at.strftime('%b %d %Y %H:%M %p'),
                              "text": comment.comment,
                              "user_display_name": comment_user.username,
+                             "score":comment.score,
                              "user_url": "/users/%s/%s" % (comment_user.id, comment_user.username),
                              "delete_url": delete_url
                              })
-
     data = simplejson.dumps(json_comments)
     return HttpResponse(data, mimetype="application/json")
 

@@ -60,21 +60,6 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
-class Comment(models.Model):
-    content_type   = models.ForeignKey(ContentType)
-    object_id      = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
-    user           = models.ForeignKey(User, related_name='comments')
-    comment        = models.TextField()
-    added_at       = models.DateTimeField(default=datetime.datetime.now)
-    vote_up_count  = models.IntegerField(default=0)
-    
-    class Meta:
-        ordering = ('-added_at',)
-        db_table = u'comment'
-    def __unicode__(self):
-        return self.comment
-
 class Vote(models.Model):
     VOTE_UP = +1
     VOTE_DOWN = -1
@@ -103,6 +88,23 @@ class Vote(models.Model):
 
     def is_downvote(self):
         return self.vote == self.VOTE_DOWN
+
+class Comment(models.Model):
+    content_type   = models.ForeignKey(ContentType)
+    object_id      = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    author         = models.ForeignKey(User, related_name='comments')
+    comment        = models.TextField()
+    added_at       = models.DateTimeField(default=datetime.datetime.now)
+    vote_up_count  = models.IntegerField(default=0)
+    votes          = generic.GenericRelation(Vote)
+    score          = models.IntegerField(default=0)
+    
+    class Meta:
+        ordering = ('-added_at',)
+        db_table = u'comment'
+    def __unicode__(self):
+        return self.comment
 
 class FlaggedItem(models.Model):
     """A flag on a Question or Answer indicating offensive content."""

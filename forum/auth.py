@@ -99,7 +99,7 @@ def can_edit_post(user, post):
 def can_delete_comment(user, comment):
     """Determines if a User can delete the given Comment."""
     return user.is_authenticated() and (
-        user.id == comment.user_id or
+        user.id == comment.author_id or
         user.reputation >= DELETE_COMMENTS or
         user.is_superuser)
 
@@ -293,23 +293,22 @@ def onUpVoted(vote, post, user):
     post.score = int(post.score) + 1
     post.save()
     print ContentType.objects.get_for_model(post)
-    if not post.wiki:
-        author = post.author
-        if Repute.objects.get_reputation_by_upvoted_today(author) <  int(REPUTATION_RULES['scope_per_day_by_upvotes']):
-            author.reputation = calculate_reputation(author.reputation,
-                              int(REPUTATION_RULES['gain_by_upvoted']))
-            author.save()
+    author = post.author
+    if Repute.objects.get_reputation_by_upvoted_today(author) <  int(REPUTATION_RULES['scope_per_day_by_upvotes']):
+        author.reputation = calculate_reputation(author.reputation,
+                                                 int(REPUTATION_RULES['gain_by_upvoted']))
+        author.save()
 
-            question = post
-            if ContentType.objects.get_for_model(post) == answer_type:
-                question = post.question
+        question = post
+        if ContentType.objects.get_for_model(post) == answer_type:
+            question = post.question
 
             reputation = Repute(user=author,
-                       positive=int(REPUTATION_RULES['gain_by_upvoted']),
-                       question=question,
-                       reputed_at=datetime.datetime.now(),
-                       reputation_type=1,
-                       reputation=author.reputation)
+                                positive=int(REPUTATION_RULES['gain_by_upvoted']),
+                                question=question,
+                                reputed_at=datetime.datetime.now(),
+                                reputation_type=1,
+                                reputation=author.reputation)
             reputation.save()
 
 @transaction.commit_on_success
