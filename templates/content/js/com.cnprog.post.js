@@ -374,7 +374,7 @@ var Vote = function(){
 
     var callback_rating = function(object, voteType, data){
       object = object.children();
-      showMessage(object, "avg rating:"+data.average_rating);
+      // showMessage(object, "avg rating:"+data.average_rating);
     };
 
     var callback_offensive = function(object, voteType, data){
@@ -738,7 +738,27 @@ function createComments(type) {
                                 Vote.vote($(this), /*VoteType.rating*/ 20, ui.value/20);
 			},
 			slide: function(event, ui) {
-				$("#amount-"+id).val(ui.value/20);
+	                    $("#amount-"+id).show();
+	                    var rating = ui.value/20;
+	    	            if(rating == 0) {
+	                        $(this).min = 1;
+	                    }
+	                    else if(rating > 0.0 && rating <= 2.0) {
+	                        $("#amount-"+id).val("Piece of cake");
+	                        //$("#amount-"+id).css("color","brown1");
+	                    }
+	                    else if(rating > 2.0 && rating <= 3.0) {
+	                        $("#amount-"+id).val("hmmm...");
+	                       // $("#amount-"+id).css("color","brown2");
+	                    }
+	                    else if(rating > 3.0 && rating <= 4.5) {
+	                        $("#amount-"+id).val("Toughie");
+	                        //$("#amount-"+id).css("color","brown3");
+		           }
+	                    else {
+	                      $("#amount-"+id).val("Ouch!");
+	                      //$("#amount-"+id).css("color","red");
+	                    }
 			}
 		});
 
@@ -748,7 +768,26 @@ function createComments(type) {
                 } else {
 	            $.getJSON("/clues/" + id + "/ratings/", function(json) {
 	            $("#rating-"+id).slider("option", "value", json.rating * 20);
-	            $("#amount-"+id).val(json.rating);
+	            // alert(json.rating);
+	            if(json.rating == 0) {
+	                $("#amount-"+id).hide();
+	            }
+	            else if(json.rating > 0 && json.rating <= 2.0) {
+	                $("#amount-"+id).val("Piece of cake");
+	                        //$("#amount-"+id).css("color","brown1");
+	            }
+	            else if(json.rating > 2.0 && json.rating <= 3.0) {
+	                $("#amount-"+id).val("hmmm...");
+	                        //$("#amount-"+id).css("color","brown2");
+	            }
+	            else if(json.rating > 3.0 && json.rating <= 4.5) {
+	                $("#amount-"+id).val("Toughie");
+	                        //$("#amount-"+id).css("color","brown3");
+	            }
+	            else {
+	              $("#amount-"+id).val("Ouch!");
+	                        //$("#amount-"+id).css("color","red");
+	            }
 	           });
                 }
 
