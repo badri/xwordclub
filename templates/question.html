@@ -6,17 +6,6 @@
 {% load i18n %}
 {% block title %}{% spaceless %}{{ question.get_question_title }}{% endspaceless %}{% endblock %}
 {% block forejs %}
-        {% if 0 %}
-	<!-- Skin CSS file -->
-	<link rel="stylesheet" type="text/css" href="/build/assets/skins/sam/skin.css">
-	<!-- Utility Dependencies -->
-	<script src="/content/js/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
-	<script src="/content/js/yui/build/element/element-min.js"></script> 
-	<!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
-	<script src="/content/js/yui/build/container/container_core-min.js"></script>
-	<!-- Source file for Rich Text Editor-->
-	<script src="/content/js/yui/build/editor/simpleeditor-min.js"></script>
-        {% else %}
 	<!-- Skin CSS file -->
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/assets/skins/sam/skin.css">
 	<!-- Utility Dependencies -->
@@ -26,12 +15,8 @@
 	<script src="http://yui.yahooapis.com/2.8.1/build/container/container_core-min.js"></script>
 	<!-- Source file for Rich Text Editor-->
 	<script src="http://yui.yahooapis.com/2.8.1/build/editor/simpleeditor-min.js"></script>
-	{% endif %}
-	{% if 1 %}
-	    <script type='text/javascript' src='/content/js/jquery-ui-1.8.2.custom.min.js'></script>
-	{% else %}	
-            <script>google.load("jqueryui", "1.8");</script>
-	{% endif %}	        
+        <script>google.load("jqueryui", "1.8");</script>
+
 	<link rel="stylesheet" type="text/css" href="/content/style/ui/jquery.ui.all.css" />
         {% if not question.closed and request.user.is_authenticated %}
         <script type='text/javascript' src='/content/js/com.cnprog.editor.js'></script>

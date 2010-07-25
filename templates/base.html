@@ -13,11 +13,7 @@
         <link rel="shortcut icon" href="/content/images/favicon.ico" >
         <link href="/content/style/style.css" rel="stylesheet" type="text/css" />
         <script src="http://www.google.com/jsapi"></script>
-	{% if 1 %} <!-- change it to some meaningful setting value later -->
-	    <script type='text/javascript' src='/content/js/jquery-1.4.2.min.js'></script>
-	{% else %}	
-            <script>google.load("jquery", "1.4.2");</script>
-	{% endif %}
+        <script>google.load("jquery", "1.4.2");</script>
 		<script type="text/javascript">
 			var i18nLang = '{{settings.LANGUAGE_CODE}}';
 		</script>
