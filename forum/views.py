@@ -1827,6 +1827,12 @@ def __generate_comments_json(obj, type, user):
         if user != None and auth.can_delete_comment(user, comment):
             #/posts/392845/comments/219852/delete
             delete_url = "/" + type + "s/%s/comments/%s/delete/" % (obj.id, comment.id)
+
+        if user != None:
+            user_has_voted = Vote.objects.get_user_votes_for_comment(user, comment)
+        else:
+            user_has_voted = 0
+
         json_comments.append({"id": comment.id,
                              "object_id": obj.id,
                              "add_date": comment.added_at.strftime('%b %d %Y %H:%M %p'),
@@ -1834,7 +1840,8 @@ def __generate_comments_json(obj, type, user):
                              "user_display_name": comment_user.username,
                              "score":comment.score,
                              "user_url": "/users/%s/%s" % (comment_user.id, comment_user.username),
-                             "delete_url": delete_url
+                             "delete_url": delete_url,
+                              "voted" : user_has_voted
                              })
     data = simplejson.dumps(json_comments)
     return HttpResponse(data, mimetype="application/json")

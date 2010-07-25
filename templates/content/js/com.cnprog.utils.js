@@ -1,13 +1,12 @@
 var showMessage = function(object, msg) {
-    var div = $('<div class="vote-notification"><h3>' + msg + '</h3>(' 
+    var div = $('<div class="vote-notification"><h3>' + msg + '</h3>('
 				+ $.i18n._('click to close') + ')</div>');
-
     div.click(function(event) {
         $(".vote-notification").fadeOut("fast", function() { $(this).remove(); });
     });
-
     object.parent().append(div);
     div.fadeIn("fast");
+  //div.fadeOut('slow');
 };
 
 var notify = function() {
@@ -16,11 +15,11 @@ var notify = function() {
         show: function(html) {
             if (html) {
                 $("body").css("margin-top", "2.2em");
-                $(".notify span").html(html);        
-            }          
+                $(".notify span").html(html);
+            }
             $(".notify").fadeIn("slow");
             visible = true;
-        },       
+        },
         close: function(doPostback) {
             if (doPostback) {
                $.post("/messages/markread/", { formdata: "required" });
@@ -28,8 +27,8 @@ var notify = function() {
             $(".notify").fadeOut("fast");
             $("body").css("margin-top", "0");
             visible = false;
-        },     
-        isVisible: function() { return visible; }     
+        },
+        isVisible: function() { return visible; }
     };
 } ();
 
@@ -62,7 +61,7 @@ function setupFormValidation(formSelector, validationRules, validationMessages, 
         },
         submitHandler: function(form) {
             disableSubmitButton(formSelector);
-            
+
             if (onSubmitCallback)
                 onSubmitCallback();
             else
@@ -77,8 +76,8 @@ function enableSubmitButton(formSelector) {
 function disableSubmitButton(formSelector) {
     setSubmitButtonDisabled(formSelector, true);
 }
-function setSubmitButtonDisabled(formSelector, isDisabled) { 
-    $(formSelector).find("input[type='submit']").attr("disabled", isDisabled ? "true" : "");    
+function setSubmitButtonDisabled(formSelector, isDisabled) {
+    $(formSelector).find("input[type='submit']").attr("disabled", isDisabled ? "true" : "");
 }
 
 var CPValidator = function(){
@@ -88,7 +87,7 @@ var CPValidator = function(){
                 tags: {
                     required: true,
                     maxlength: 105
-                },  
+                },
                 text: {
                     required: true,
                     minlength: 10

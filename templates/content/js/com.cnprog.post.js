@@ -373,7 +373,7 @@ var Vote = function(){
 
 
     var callback_rating = function(object, voteType, data){
-      //alert(data);
+      object = object.children();
       showMessage(object, "avg rating:"+data.average_rating);
     };
 
@@ -454,6 +454,7 @@ var Vote = function(){
 
             else if(voteType == VoteType.rating){
                 postId = object.attr("id").substring(ratingPrefix.length);
+			   // object = object.children('div');
 	        submit(object, voteType, callback_rating, rating);
 	        return false;
             }
@@ -612,7 +613,7 @@ function createComments(type) {
     // {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
     var renderComment = function(jDiv, json) {
 	var upvote = '<span id="upvote-' + json.id + '" class="clue-vote"><span class="score">'+ json.score +'</span>';
-	if(json.score == 1) {
+	if(json.voted == 1) {
     	    upvote += '<img src="/content/images/answer-upvote.png"></span>';
         } else {
     	    upvote += '<img src="/content/images/answer-downvote.png"></span>';

@@ -7,6 +7,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = ('127.0.0.1',)
 
+OFFLINE = 0
+
 #for OpenID auth
 ugettext = lambda s: s
 LOGIN_URL = '/%s%s' % (ugettext('account/'), ugettext('signin/'))
