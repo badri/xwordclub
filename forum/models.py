@@ -715,8 +715,11 @@ def record_comment_event(instance, created, **kwargs):
         from django.contrib.contenttypes.models import ContentType
         question_type = ContentType.objects.get_for_model(Question)
         question_type_id = question_type.id
-        type = TYPE_ACTIVITY_COMMENT_QUESTION if instance.content_type_id == question_type_id else TYPE_ACTIVITY_COMMENT_ANSWER
-        activity = Activity(user=instance.user, active_at=instance.added_at, content_object=instance, activity_type=type)
+        if instance.content_type_id == question_type_id:
+            type = TYPE_ACTIVITY_COMMENT_QUESTION
+        else:
+            type = TYPE_ACTIVITY_COMMENT_ANSWER
+        activity = Activity(user=instance.author, active_at=instance.added_at, content_object=instance, activity_type=type)
         activity.save()
 
 def record_revision_question_event(instance, created, **kwargs):
