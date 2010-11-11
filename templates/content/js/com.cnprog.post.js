@@ -34,6 +34,7 @@ var Vote = function(){
     var answerContainerIdPrefix = 'answer-container-';
     var voteContainerId = 'vote-buttons';
     var imgIdPrefixAccept = 'answer-img-accept-';
+    var clueIdPrefix = 'comments-clue-comments-clue-';
     var imgClassPrefixFavorite = 'question-img-favorite';
     var imgIdPrefixQuestionVoteup = 'question-img-upvote-';
     var imgIdPrefixQuestionVotedown = 'question-img-downvote-';
@@ -354,7 +355,7 @@ var Vote = function(){
             setVoteNumber(object, data.count);
         }
         else if(data.success == "1"){
-	  if(data.count == 0) {
+	  if(data.upvote_cancel == "1") {
 	    setVoteImage(voteType, true, object);
 	  } else {
 	   setVoteImage(voteType, false, object);
@@ -565,7 +566,7 @@ function createComments(type) {
 
     var renderRatingWidget = function(id, jDiv) {
         var slider = '<div id="rating-' + id + '" class="slider-vertical" style="width:100px;"></div>';
-        slider += '<input type="text" disabled="true" id="amount-'+ id + '" class="amount" style="background-color:#EEEEEE;border:0; color:#f6931f; font-weight:bold;" />';
+        slider += '<input type="text" disabled="true" id="amount-'+ id + '" class="amount"/>';
         jDiv.append(slider);
     };
 
@@ -610,7 +611,6 @@ function createComments(type) {
         }
     };
 
-    // {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}
     var renderComment = function(jDiv, json) {
 	var upvote = '<span id="upvote-' + json.id + '" class="clue-vote"><span class="score">'+ json.score +'</span>';
 	if(json.voted == 1) {
@@ -668,19 +668,70 @@ function createComments(type) {
             $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length)); });
         },
 
-        show: function(id) {
+        show: function(id, clueClick) {
+	    clueClick = typeof(clueClick) == 'undefined' ? false : true;
             var jDiv = jDivInit(id);
-            getComments(id, jDiv);
-            renderRatingWidget(id,jDiv);
+	    if(clueClick == true) {
+                getComments(id, jDiv);
+	    }
+	    setAnnoUpvote();
+	    if(clueClick == true) {
+          	// $("#rating-"+id).slider({ value : $("#rating-val-"+id).text() });
+	        // $("#amount-"+id).show();
+                renderRatingWidget(id,jDiv);
+	    }
             renderForm(id, jDiv);
             jDiv.show();
+	    jDiv.children("div.comments").children().show();
 	    var yui = $("#form-comments-clue-" + id + "> div.comment-div > div.yui-editor-container");
 
 	    var myEditor = new YAHOO.widget.SimpleEditor('comment-'+id, {
 		height: '200px',
 		width: '622px',
 		titlebar: 'Post annotation',
-		dompath: true //Turns on the bar at the bottom
+		dompath: false,
+                toolbar: {
+			draggable: false,
+			buttons: [
+			    { group: 'fontstyle', label: 'Font Name and Size',
+				buttons: [
+				    { type: 'select', label: 'Arial', value: 'fontname', disabled: true,
+					menu: [
+					    { text: 'Arial', checked: true },
+					    { text: 'Times New Roman' },
+					    { text: 'Verdana' }
+					]
+				    },
+				    { type: 'spin', label: '13', value: 'fontsize', range: [ 9, 30 ], disabled: true }
+				]
+			    },
+			    { type: 'separator' },
+			    { group: 'textstyle', label: 'Font Style',
+				buttons: [
+				    { type: 'push', label: 'Bold CTRL + SHIFT + B', value: 'bold' },
+				    { type: 'push', label: 'Italic CTRL + SHIFT + I', value: 'italic' },
+				    { type: 'push', label: 'Underline CTRL + SHIFT + U', value: 'underline' },
+				    { type: 'separator' },
+				    { type: 'color', label: 'Font Color', value: 'forecolor', disabled: true },
+				    { type: 'color', label: 'Background Color', value: 'backcolor', disabled: true }
+				]
+			    },
+			    { type: 'separator' },
+			    { group: 'indentlist', label: 'Lists',
+				buttons: [
+				    { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' },
+				    { type: 'push', label: 'Create an Ordered List', value: 'insertorderedlist' }
+				]
+			    },
+			    { type: 'separator' },
+			    { group: 'insertitem', label: 'Insert Item',
+				buttons: [
+				    { type: 'push', label: 'HTML Link CTRL + SHIFT + L', value: 'createlink', disabled: true },
+				    { type: 'push', label: 'Insert Image', value: 'insertimage' }
+				]
+			    }
+			]
+	           }
 	    });
 
 	    if(yui.length == 0) {
@@ -692,7 +743,6 @@ function createComments(type) {
 		myEditor.setEditorHTML(matches[2]);
 		myEditor.focus();
 	    });
-
 
 	    var done = $("#form-comments-clue-" + id + "> div.comment-div > input");
 
@@ -725,17 +775,19 @@ function createComments(type) {
             });
 
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
+	        jDiv.children("div.comments").children().remove();
+	        jDiv.children("div.slider-vertical").remove();
+	        jDiv.children("input.amount").remove();
 		commentsFactory[objectType].hide(id);
 	    });
 
 		$("#rating-"+id).slider({
-			/*orientation: "vertical",*/
 			range: "min",
 			min: 0,
 			max: 100,
-			value: 65,
+			value: $("#rating-val-"+id).text(),
 			stop: function(event, ui) {
-                                Vote.vote($(this), /*VoteType.rating*/ 20, ui.value/20);
+                                Vote.vote($(this), 20, ui.value/20);
 			},
 			slide: function(event, ui) {
 	                    $("#amount-"+id).show();
@@ -745,30 +797,26 @@ function createComments(type) {
 	                    }
 	                    else if(rating > 0.0 && rating <= 2.0) {
 	                        $("#amount-"+id).val("Piece of cake");
-	                        //$("#amount-"+id).css("color","brown1");
 	                    }
 	                    else if(rating > 2.0 && rating <= 3.0) {
 	                        $("#amount-"+id).val("hmmm...");
-	                       // $("#amount-"+id).css("color","brown2");
 	                    }
 	                    else if(rating > 3.0 && rating <= 4.5) {
 	                        $("#amount-"+id).val("Toughie");
-	                        //$("#amount-"+id).css("color","brown3");
 		           }
 	                    else {
 	                      $("#amount-"+id).val("Ouch!");
-	                      //$("#amount-"+id).css("color","red");
 	                    }
 			}
 		});
 
-                if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
-	            $("#rating-"+id).slider("option", "value", 0);
-	            $("#amount-"+id).hide();
-                } else {
-	            $.getJSON("/clues/" + id + "/ratings/", function(json) {
+	        if(clueClick == true) {
+		    if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
+			$("#rating-"+id).slider("option", "value", 0);
+			$("#amount-"+id).hide();
+		    } else {
+			$.getJSON("/clues/" + id + "/ratings/", function(json) {
 	            $("#rating-"+id).slider("option", "value", json.rating * 20);
-	            // alert(json.rating);
 	            if(json.rating == 0) {
 	                $("#amount-"+id).hide();
 	            }
@@ -788,8 +836,10 @@ function createComments(type) {
 	              $("#amount-"+id).val("Ouch!");
 	                        //$("#amount-"+id).css("color","red");
 	            }
+
 	           });
-                }
+		  }
+	        }
 
         },
 
@@ -804,7 +854,7 @@ function createComments(type) {
             var anchorText = len == 0 ? $.i18n._('add a comment') : $.i18n._('comments') + ' (<b>' + len + "</b>)";
             jDiv.hide();
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
-		commentsFactory[objectType].show(id);
+		commentsFactory[objectType].show(id,false);
 	    });
             jDiv.children("div.comments").children().hide();
         },

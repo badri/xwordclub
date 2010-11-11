@@ -60,6 +60,41 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
+class Karma(models.Model):
+    """Revamp of reputation table"""
+    user     = models.ForeignKey(User)
+    which_comment     = models.ForeignKey('Comment')
+    delta    = models.SmallIntegerField(default=0)
+    changed_at = models.DateTimeField(default=datetime.datetime.now)
+    object_id      = models.PositiveIntegerField()
+    content_type   = models.ForeignKey(ContentType)
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    def __unicode__(self):
+        # more verbosity possible
+        datestr = self.changed_at.strftime('%d-%m-%Y %I:%M:%S %p')
+        
+        return u'%s\'s reputation changed at %s by %d because of %s' % (self.user.username,
+                                                                        self.changed_at, self.delta, self.content_type)
+
+    def save(self, *args, **kwargs):
+        print "repute before save:" + str(self.user.reputation)
+        self.user.reputation = self.user.reputation + self.delta
+        self.user.save()
+        super(Karma, self).save(*args, **kwargs)
+        print "repute after save:" + str(self.user.reputation)
+
+    def delete(self):
+        print "repute before delete:" + str(self.user.reputation)
+        self.user.reputation = self.user.reputation - self.delta
+        self.user.save()
+        super(Karma, self).delete()
+        print "repute after delete:" + str(self.user.reputation)
+        
+
+    class Meta:
+        db_table = u'karma'
+
 class Vote(models.Model):
     VOTE_UP = +1
     VOTE_DOWN = -1
@@ -67,13 +102,13 @@ class Vote(models.Model):
         (VOTE_UP,   u'Up'),
         (VOTE_DOWN, u'Down'),
     )
-
-    content_type   = models.ForeignKey(ContentType)
     object_id      = models.PositiveIntegerField()
+    content_type   = models.ForeignKey(ContentType)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     user           = models.ForeignKey(User, related_name='votes')
     vote           = models.SmallIntegerField(choices=VOTE_CHOICES)
     voted_at       = models.DateTimeField(default=datetime.datetime.now)
+    karma          = generic.GenericRelation(Karma)
 
     objects = VoteManager()
 
@@ -166,13 +201,23 @@ class Question(models.Model):
 
     def create_clues(self,question=None,html=None):
         '''creates clues if it is a daily crossword question'''
-        crossword_clue = re.compile('^<p>(\d{1,2})([\w,\'\?:;" -_]+\([\d,-]+\))</p>$')
+        from django.utils.encoding import smart_unicode
+        html = smart_unicode(html)
+        html = html.replace(u"\u2019","'")
+        html = html.replace(u"\u2014","-")
+        crossword_clue = re.compile('(\d{1,2})([\w,\'\?:;" -_]+\([\d,-]+\))')
+        ac = re.compile('across[:]?', re.IGNORECASE)
+        dn = re.compile('down[:]?', re.IGNORECASE)
         modified_html = []
+        print html
         for each_line in html.split('\n'):
             match = crossword_clue.match(each_line)
             if match:
                 grid_no=match.group(1).strip()
-                clue_text=match.group(2).strip()
+                ct = match.group(2)
+                if ct[0] == '.':
+                    ct = ct[1:]
+                clue_text = ct.strip()
                 clue = Clue(gridno=int(grid_no), clue=clue_text, crossword=question)
                 clue.save()
                 each_line = '''
@@ -198,7 +243,7 @@ class Question(models.Model):
         """
         initial_addition = (self.id is None)
         super(Question, self).save(**kwargs)
-        if 'HT' in self.tagnames:
+        if 'HT' in self.tagnames or 'MINT' in self.tagnames:
             self.html = self.create_clues(self, self.html)
         super(Question, self).save(**kwargs)
         if initial_addition:
@@ -319,7 +364,7 @@ class Clue(models.Model):
     crossword      = models.ForeignKey(Question, related_name='clues')
     comments       = generic.GenericRelation(Comment)
     comment_count  = models.PositiveIntegerField(default=0)
-    avg_rating = models.FloatField()
+    avg_rating = models.FloatField(default=0.0)
 
     class Meta:
         db_table = u'clue'
@@ -329,6 +374,7 @@ class Rating(models.Model):
     user        = models.ForeignKey(User, related_name='rated')
     rating      = models.FloatField()
     rated_at    = models.DateTimeField(default=datetime.datetime.now)
+    karma       = generic.GenericRelation(Karma)
 
     class Meta:
         db_table = u'rating'
@@ -560,6 +606,20 @@ class Repute(models.Model):
 
     class Meta:
         db_table = u'repute'
+
+
+class Peep(models.Model):
+    '''keeping track of users who peep at answers before threshold time'''
+    user     = models.ForeignKey(User)
+    clue     = models.ForeignKey(Clue)
+    peeped_at    = models.DateTimeField(default=datetime.datetime.now)
+    karma    = generic.GenericRelation(Karma)
+
+    def __unicode__(self):
+        return u'[%s]\' peeped clue <blah blah> at %s' % (self.user.username, self.reputed_at)
+
+    class Meta:
+        db_table = u'peep'
 
 class Activity(models.Model):
     """

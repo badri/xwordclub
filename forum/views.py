@@ -33,6 +33,9 @@ from forum.models import *
 from forum.user import *
 from utils.html import sanitize_html
 
+from BeautifulSoup import BeautifulSoup 
+from BeautifulSoup import Tag as BSTag
+
 # used in index page
 INDEX_PAGE_SIZE = 20
 INDEX_AWARD_SIZE = 15
@@ -375,6 +378,106 @@ def question(request, id):
             render_replies = False
     else:
         render_replies = True
+
+    if render_replies:
+        clue_details = {}
+        clues = Clue.objects.filter(crossword=id)
+        for clue in clues:
+            clue_details[clue.id] = {'comments': Comment.objects.filter(clue=clue),
+                                  'rating': Rating.objects.filter(clue=clue)
+                                 }
+        soup = BeautifulSoup(question.html)
+        for clue_detail in clue_details.keys():
+            clue_div = soup.find('div', id='comments-clue-'+str(clue_detail))
+            for each_comment in clue_details[clue_detail]['comments']:
+                vote = BSTag(soup, "span", [("class","clue-vote"),("id","upvote-"+str(each_comment.id))])
+
+                score = BSTag(soup, "span", [("class","score")])
+                score.insert(0, str(each_comment.score))
+
+                
+                if request.user:
+                    user_has_voted = Vote.objects.get_user_votes_for_comment(request.user, each_comment)
+                else:
+                    user_has_voted = 0
+
+                if user_has_voted:
+                    vote.insert(0, str(score)+'<img src="/content/images/answer-upvote.png" />')
+                else:
+                    vote.insert(0, str(score)+'<img src="/content/images/answer-downvote.png" />')
+
+                date_added = BSTag(soup, "span", [("class","comment-date")])
+                date_added.insert(0, each_comment.added_at.strftime('(%b %d %Y %H:%M %p)'))
+
+                if request.user.is_authenticated():
+                    del_comment = "clueComments.deleteComment($(this), %d, '/clues/%d/comments/%d/delete/')" \
+                                % (clue_detail, clue_detail, each_comment.id)
+
+                    img_delete = BSTag(soup, "img", [
+                                                     ("title","delete this comment"),
+                                                     ("onmouseout","$(this).attr('src', '/content/images/close-small.png')"),
+                                                     ("onmouseover","$(this).attr('src', '/content/images/close-small-hover.png')"),
+                                                     ("src","/content/images/close-small.png"),
+                                                     ("onclick", del_comment)])
+
+                author_url = "/users/%d/%s" % (each_comment.author.id, each_comment.author.username)
+
+                user_info = BSTag(soup, "a", [("class","comment-user"),("href",author_url)])
+                user_info.insert(0,each_comment.author.username)
+                
+                clue_div.contents[1] = ''
+                comments_div = BSTag(soup, "div", [("class","comments")])
+                comments_div.insert(0,vote)
+                comments_div.insert(1, each_comment.comment)
+                comments_div.insert(2, user_info)
+                comments_div.insert(3,date_added)
+                if request.user.is_authenticated():
+                    comments_div.insert(4, img_delete)
+                clue_div.insert(0, comments_div)
+
+
+            rating_div = BSTag(soup, "div", [("id","rating-"+str(clue_detail)),
+                                             ("class","slider-vertical"),
+                                             ("style","width:100px; float:right;")])
+
+            try:
+                rating = clue_details[clue_detail]['rating'][0].rating
+            except IndexError:
+                rating = 0.0
+
+            if rating==0.0:
+                val = 0
+            elif rating < 2.0:
+                val = "Piece of cake"
+            elif rating < 3.0:
+                val = "hmmm..."
+            elif rating < 4.0:
+                val = "Toughie"
+            else:
+                val = "Ouch!"
+
+            rating_val_div = BSTag(soup, "span", [("id","rating-val-"+str(clue_detail)),("style","display:none;")])
+            rating_val_div.insert(0,str(rating*20))
+
+            if val:
+                rating_input = BSTag(soup, "input", [("type","text"),
+                                                     ("disabled","true"),
+                                                     ("value",val),
+                                                     ("id","amount-"+str(clue_detail)),
+                                                     ("class","amount")])
+            else:
+                rating_input = BSTag(soup, "input", [("type","text"),
+                                                     ("disabled","true"),
+                                                     ("value",""),
+                                                     ("id","amount-"+str(clue_detail)),
+                                                     ("class","amount")])
+
+            clue_div.parent.insert(1,rating_div)
+            clue_div.parent.insert(2,rating_val_div)
+            clue_div.insert(0, rating_input)
+            
+        question.html = soup.prettify()
+
     return render_to_response('question.html', {
                               "question": question,
                               "question_vote": question_vote,
@@ -874,17 +977,42 @@ def vote(request, id):
                     already_rated = Rating.objects.filter(clue=rated_clue,user=request.user)[0]
                     already_rated.rating = clue_rating
                     already_rated.save()
+                    rating_obj = already_rated
                 else:
                     rating = Rating(clue=rated_clue, user=request.user, rating=clue_rating)
                     rating.save()
-
-                #get average rating
+                    rating_obj = rating
+                # if avg rating changes, get all karma objs corresponding to previous rating and change repute
+                # update the karma for all users who have answered to the clue
+                # recalculate avg rating
+                # multiply all answers vote with rating and change the karma
+                # get average rating
                 all_ratings = [x.rating for x in Rating.objects.filter(clue=rated_clue)]
                 rated_clue.avg_rating = sum(all_ratings)/float(Rating.objects.filter(clue=rated_clue).count())
-                rated_clue.save()
-                response_data['average_rating'] = rated_clue.avg_rating                
+                rated_clue.save()                
+                response_data['average_rating'] = rated_clue.avg_rating
+                all_comments = [x for x in Comment.objects.filter(clue=rated_clue)]
+                for x in all_comments:
+                    vote_count = Vote.objects.filter(object_id=x.id).count()
+                    previous_karma = Karma.objects.filter(user=x.author, which_comment=x,
+                                                          object_id=rating_obj.id).order_by('-changed_at')
+                    print previous_karma
+                    try:
+                        last_entry = previous_karma[0]
+                        x.author.reputation = x.author.reputation - last_entry.delta
+                        x.author.save()
+                        print "reputation updated: " + str(x.author.reputation)
+                    except IndexError:
+                        pass
+
+                    karma = Karma(user=x.author, which_comment=x,
+                          delta=1*int(rated_clue.avg_rating)*vote_count,content_object=rating_obj)
+                    karma.save()
+                    print karma
+
 
             elif vote_type in ['1', '2', '5', '6', '21']:
+                print request.POST
                 post_id = id
                 post = question
                 vote_score = 1
@@ -916,7 +1044,31 @@ def vote(request, id):
                     voted = vote.vote
                     if voted > 0:
                         # cancel upvote
+                        # find the delta in last upvote, karma-=delta
+                        comment = post
+                        previous_karma = Karma.objects.filter(user=comment.author, which_comment=comment,
+                                                              object_id=vote.id).order_by('-changed_at')
+                        print previous_karma
+                        try:
+                            last_entry = previous_karma[0]
+                            print last_entry
+                            comment.author.reputation = comment.author.reputation - last_entry.delta
+                            comment.author.save()
+                            print "reputation updated: " + str(comment.author.reputation)
+                        except IndexError:
+                            pass
+                        '''
+                        multiplier = comment.content_object.avg_rating
+                        if int(multiplier) == 0:
+                            multiplier = 1
+                        karma = Karma(user=comment.author, which_comment=comment,
+                              delta=1*int(multiplier),content_object=vote)
+                        karma.save()
+                        print karma
+                        '''
                         onUpVotedCanceled(vote, post, request.user)
+                        response_data['count'] = post.score
+                        response_data['upvote_cancel'] = 1
 
                     else:
                         # cancel downvote
@@ -931,13 +1083,20 @@ def vote(request, id):
                     if vote_score > 0:
                         # upvote
                         onUpVoted(vote, post, request.user)
+                        multiplier = post.content_object.avg_rating
+                        if int(multiplier) == 0:
+                            multiplier = 1
+                        karma = Karma(user=post.author, which_comment=post,
+                              delta=1*int(multiplier),content_object=vote)
+                        karma.save()
+                        print karma
                     else:
-                        # downvote
                         onDownVoted(vote, post, request.user)
+                        
 
-                    votes_left = VOTE_RULES['scope_votes_per_user_per_day'] - Vote.objects.get_votes_count_today_from_user(request.user)
-                    if votes_left <= VOTE_RULES['scope_warn_votes_left']:
-                        response_data['message'] = u'%s votes left' % votes_left
+                    #votes_left = VOTE_RULES['scope_votes_per_user_per_day'] - Vote.objects.get_votes_count_today_from_user(request.user)
+                    #if votes_left <= VOTE_RULES['scope_warn_votes_left']:
+                        #response_data['message'] = u'%s votes left' % votes_left
                     response_data['count'] = post.score
             elif vote_type in ['7', '8']:
                 post = question

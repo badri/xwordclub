@@ -6,4 +6,5 @@ log
 *.log
 .DS_Store
 *~
+.emacs.desktop
 

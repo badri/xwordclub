@@ -1,14 +1,25 @@
 import os.path
 from django.conf.urls.defaults import *
+from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from django.contrib import admin
 from forum.views import index
 from forum import views as app
 from forum.feed import RssLastestQuestionsFeed
+from forum.models import Question
 
 admin.autodiscover()
 feeds = {
     'rss': RssLastestQuestionsFeed
 }
+
+
+question_info = { 
+  'queryset': Question.objects.all(), 
+} 
+
+sitemaps = { 
+  'questions' : GenericSitemap(question_info, priority=0.8, changefreq='daily'), 
+} 
 
 APP_PATH = os.path.dirname(__file__)
 urlpatterns = patterns('',
@@ -69,4 +80,5 @@ urlpatterns = patterns('',
     url(r'^books/(?P<short_name>[^/]+)/$', app.book, name='book'),
     url(r'^search/$', app.search, name='search'),
     (r'^i18n/', include('django.conf.urls.i18n')),
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )

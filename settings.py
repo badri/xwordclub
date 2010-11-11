@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'forum',
     'django_authopenid',
+    'django.contrib.sitemaps',
     #'debug_toolbar' ,
 )
 import django

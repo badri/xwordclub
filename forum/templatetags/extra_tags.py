@@ -216,7 +216,7 @@ def diff_date(date, limen=2):
     diff = current_time - date
     diff_days = diff.days
     if diff_days > limen:
-        return date.strftime("%d %b %Y %H:%M:%S")
+        return date.strftime("%b %d %Y %I:%M %p")
     else:
         return timesince(date) + _(' ago')
         

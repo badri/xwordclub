@@ -4,7 +4,7 @@
 {% load i18n %}
 {% load humanize %}
 {% load extra_filters %}
-{% block title %}{% spaceless %}{% trans "Questions" %}{% endspaceless %}{% endblock %}
+{% block title %}{% spaceless %}{% trans "All crosswords" %}{% endspaceless %}{% endblock %}
 {% block forejs %}
        <script type="text/javascript">
         $().ready(function(){
@@ -20,7 +20,7 @@
 {% endblock %}
 {% block content %}
 <div class="tabBar">
-    <div class="headQuestions">{% if searchtag %}{% trans "Found by tags" %}{% else %}{% if searchtitle %}{% trans "Found by title" %}{% else %}{% trans "All questions" %}{% endif %}{% endif %}</div>
+    <div class="headQuestions">{% if searchtag %}{% trans "Found by tags" %}{% else %}{% if searchtitle %}{% trans "Found by title" %}{% else %}{% trans "All Crosswords" %}{% endif %}{% endif %}</div>
     <div class="tabsA">
         <a id="latest" href="?sort=latest" class="off" title="{% trans "most recently asked questions" %}">{% trans "newest" %}</a>
         <a id="active" href="?sort=active" class="off" title="{% trans "most recently updated questions" %}">{% trans "active" %}</a>

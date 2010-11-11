@@ -11,9 +11,6 @@
 					{% else %}
 						<a href="/account/signin">{% trans "login" %}</a>
 					{% endif %}
-					<a href="/about">{% trans "about" %}</a>
-					<a href="/help">{% trans "posting help" %}</a>
-					<a href="/faq">{% trans "faq" %}</a>
 				<!--</div>-->
 			</div>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -27,12 +24,10 @@
             	</td>
 				<td width="77%" valign="bottom">
                 <div class="nav">
-                    <a id="nav_questions" href="/questions/" >{% trans "topics" %}</a>
-                    <a id="nav_tags" href="/tags/">{% trans "tags" %}</a>
-                    <a id="nav_users" href="/users/">{% trans "users" %}</a>
-                    <!--<a id="nav_books" href="/books/">{% trans "books" %}</a>-->
-                    <a id="nav_badges" href="/badges/">{% trans "badges" %}</a>
-                    <a id="nav_unanswered" href="/questions/unanswered/">{% trans "unanswered questions" %}</a>
+                    <a id="nav_questions" href="/questions/" >{% trans "crosswords" %}</a>
+                    <a id="nav_tags" href="/about/">{% trans "about" %}</a>
+                    <a id="nav_tags" href="/faq/">{% trans "FAQ" %}</a>
+                    <a id="nav_tags" href="/help">{% trans "Posting help" %}</a>
                     
 					{% comment %}<!-- i think this needs to be removed -e.f. -->
                     {% if request.user.is_authenticated %}
@@ -40,7 +35,7 @@
                     {% endif %}
 					{% endcomment %}
                     <div class="focus">
-                    <a id="nav_ask" href="/questions/ask/" class="special">{% trans "post a topic" %}</a>
+                    <a id="nav_ask" href="/questions/ask/" class="special">{% trans "post a crossword" %}</a>
                     </div>
                 </div>
 
@@ -48,24 +43,24 @@
 			  </tr>
 			</table>
 		</div>
-		<div id="searchBar">
-			<table width="100%" height="60" border="0" cellpadding="0" cellspacing="0" class="content">
-            <tr>
-                <td align="center" valign="middle">
-                    <form action="/search/" method="GET">
-                        <div>
-                            <input type="text" class="searchInput" value="{{ keywords }}" name="q" id="keywords" >
-                            <input type="submit" name="Submit" value="{% trans "search" %}" class="searchBtn" >
-                        </div>
-                        <div class="options">
-                            <input id="type-question" type="radio" class="" value="question" name="t" checked >{% trans "topics" %}
-                            <input id="type-tag" type="radio" class="" value="tag" name="t" >{% trans "tags" %}
-                            <input id="type-user" type="radio" class="" value="user" name="t" >{% trans "users" %}
-                        </div>
-                    </form>
-                </td>
-            </tr>
-			</table>
-		</div>
-	</div>
+	<!-- 	<div id="searchBar"> -->
+	<!-- 		<table width="100%" height="60" border="0" cellpadding="0" cellspacing="0" class="content"> -->
+        <!--     <tr> -->
+        <!--         <td align="center" valign="middle"> -->
+        <!--             <form action="/search/" method="GET"> -->
+        <!--                 <div> -->
+        <!--                     <input type="text" class="searchInput" value="{{ keywords }}" name="q" id="keywords" > -->
+        <!--                     <input type="submit" name="Submit" value="{% trans "search" %}" class="searchBtn" > -->
+        <!--                 </div> -->
+        <!--                 <div class="options"> -->
+        <!--                     <input id="type-question" type="radio" class="" value="question" name="t" checked >{% trans "topics" %} -->
+        <!--                     <input id="type-tag" type="radio" class="" value="tag" name="t" >{% trans "tags" %} -->
+        <!--                     <input id="type-user" type="radio" class="" value="user" name="t" >{% trans "users" %} -->
+        <!--                 </div> -->
+        <!--             </form> -->
+        <!--         </td> -->
+        <!--     </tr> -->
+	<!-- 		</table> -->
+	<!-- 	</div> -->
+	<!-- </div> -->
 <!-- end template header.html -->

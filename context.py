@@ -10,6 +10,7 @@ def application_settings(context):
         'LANGUAGE_CODE': settings.LANGUAGE_CODE,
         'GOOGLE_SITEMAP_CODE':settings.GOOGLE_SITEMAP_CODE,
         'GOOGLE_ANALYTICS_KEY':settings.GOOGLE_ANALYTICS_KEY,
+        'OFFLINE': settings.OFFLINE,
         }
     return {'settings':my_settings}
 
