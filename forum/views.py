@@ -380,6 +380,7 @@ def question(request, id):
         render_replies = True
 
     if render_replies:
+        click_clues = "false";
         clue_details = {}
         clues = Clue.objects.filter(crossword=id)
         for clue in clues:
@@ -478,6 +479,9 @@ def question(request, id):
             
         question.html = soup.prettify()
 
+    else:
+        click_clues = "true"
+
     return render_to_response('question.html', {
                               "question": question,
                               "question_vote": question_vote,
@@ -490,6 +494,7 @@ def question(request, id):
                               "favorited": favorited,
                               "similar_questions": Question.objects.get_similar_questions(question),
                               "render_replies": render_replies,
+                              "click_clues": click_clues,
                               "context": {
                               'is_paginated': True,
                               'pages': objects_list.num_pages,
@@ -1927,6 +1932,17 @@ def user_preferences(request, user_id, user_view):
                               "view_user": user,
                               }, context_instance=RequestContext(request))
 
+def peep_answers(request, clue_id, user_id):
+    if request.is_ajax():
+        c = Clue.objects.get(id=clue_id)
+        p = Peep(user=request.user, clue=c)
+        p.save()
+        response_data = {}
+        response_data['message'] = "success"
+        data = simplejson.dumps(response_data)
+        return HttpResponse(data, mimetype="application/json")
+
+
 def clue_comments(request, id):
     clue = get_object_or_404(Clue, id=id)
     user = request.user
@@ -1934,11 +1950,14 @@ def clue_comments(request, id):
 
 def clue_ratings(request, id):
     clue = get_object_or_404(Clue, id=id)
-    user = request.user
-    try:
-        rating = Rating.objects.filter(clue=clue, user=user)[0]
-        rating = rating.rating
-    except IndexError:
+    if request.user.is_authenticated():
+        user = request.user
+        try:
+            rating = Rating.objects.filter(clue=clue, user=user)[0]
+            rating = rating.rating
+        except IndexError:
+            rating = 0.0
+    else:
         rating = 0.0
     json_rating = {}
     json_rating["rating"] = str(rating)
@@ -1972,10 +1991,20 @@ def __generate_comments_json(obj, type, user):
     if type == 'clue':
         now = datetime.datetime.now()
         thatday8pm = obj.crossword.added_at.replace(hour=20, minute=0, second=0, microsecond=0)
+        auth_user = user.is_authenticated()
         if now > thatday8pm:
             comments = obj.comments.all().order_by('added_at')
         else:
-            comments = obj.comments.filter(author=user).order_by('added_at')
+            if not auth_user:
+                comments = []
+            else:
+                peeped = Peep.objects.filter(clue=obj, user=user)
+                if peeped:
+                    comments = obj.comments.all().order_by('added_at')
+                else:
+                    comments = obj.comments.filter(author=user).order_by('added_at')
+                
+                
     else:
         comments = obj.comments.filter(author=user).order_by('added_at')
     # {"Id":6,"PostId":38589,"CreationDate":"an hour ago","Text":"hello there!","UserDisplayName":"Jarrod Dixon","UserUrl":"/users/3/jarrod-dixon","DeleteUrl":null}

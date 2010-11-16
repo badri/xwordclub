@@ -440,7 +440,7 @@ var Vote = function(){
       vote: function(object, voteType, rating){
             if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
 	      if(rating != 0 && voteType == VoteType.rating) {
-                showMessage(object, rateAnonymousMessage.replace("{{QuestionID}}", questionId));
+                showMessage(object.children(), rateAnonymousMessage.replace("{{QuestionID}}", questionId));
                 return false;
 	      }
                 showMessage(object, voteAnonymousMessage.replace("{{QuestionID}}", questionId));
@@ -547,6 +547,7 @@ function createComments(type) {
                     form += '<input class="submit" type="submit" value="'
 						+ $.i18n._('Done!') + '" /><br><span class="text-counter"></span>';
                     form+='<a class="copy-clue">copy clue to textbox</a>';
+                    form+='<a class="peep-answers">Peep</a>';
                 }
                 form += '</div></form>';
 
@@ -566,7 +567,6 @@ function createComments(type) {
 
     var renderRatingWidget = function(id, jDiv) {
         var slider = '<div id="rating-' + id + '" class="slider-vertical" style="width:100px;"></div>';
-        slider += '<input type="text" disabled="true" id="amount-'+ id + '" class="amount"/>';
         jDiv.append(slider);
     };
 
@@ -660,24 +660,23 @@ function createComments(type) {
     // public methods..
     return {
 
-        init: function(qId, uId, username) {
+        init: function(qId, uId, username, clueClick) {
+	    clueClick = typeof(clueClick) == 'undefined' ? false : clueClick;
 	    questionId = qId;
             currentUserId = uId;
 	    userName = username;
             // Setup "show comments" clicks..
-            $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length)); });
+            $("a[id^='comments-link-" + objectType + "-" + "']").unbind("click").click(function() { commentsFactory[objectType].show($(this).attr("id").substr(("comments-link-" + objectType + "-").length), clueClick); });
         },
 
         show: function(id, clueClick) {
-	    clueClick = typeof(clueClick) == 'undefined' ? false : true;
+	    clueClick = typeof(clueClick) == 'undefined' ? false : clueClick;
             var jDiv = jDivInit(id);
 	    if(clueClick == true) {
                 getComments(id, jDiv);
 	    }
 	    setAnnoUpvote();
 	    if(clueClick == true) {
-          	// $("#rating-"+id).slider({ value : $("#rating-val-"+id).text() });
-	        // $("#amount-"+id).show();
                 renderRatingWidget(id,jDiv);
 	    }
             renderForm(id, jDiv);
@@ -739,9 +738,25 @@ function createComments(type) {
             }
 
 	    $("a.copy-clue").click(function(){
-	        var matches = $("#comments-link-" + objectType + '-' + id).text().match(clue_regex);
+	        var justClue = $.trim($("#comments-link-clue-" + id).text());
+	        var matches = justClue.match(clue_regex);
 		myEditor.setEditorHTML(matches[2]);
 		myEditor.focus();
+	    });
+
+	    $("a.peep-answers").click(function(){
+		$.ajax({
+		    type: "POST",
+		    url: "/peep/" + id + "/" + currentUserId + "/",
+		    dataType: "json",
+		    success: function(json) {
+	                alert(id);
+		    },
+		    error: function(res, textStatus, errorThrown) {
+	                alert(currentUserId);
+		    }
+		});
+
 	    });
 
 	    var done = $("#form-comments-clue-" + id + "> div.comment-div > input");
@@ -775,10 +790,8 @@ function createComments(type) {
             });
 
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
-	        jDiv.children("div.comments").children().remove();
-	        jDiv.children("div.slider-vertical").remove();
-	        jDiv.children("input.amount").remove();
-		commentsFactory[objectType].hide(id);
+	        jDiv.children("div.comments").html("");
+		commentsFactory[objectType].hide(id, clueClick);
 	    });
 
 		$("#rating-"+id).slider({
@@ -811,11 +824,11 @@ function createComments(type) {
 		});
 
 	        if(clueClick == true) {
-		    if(!currentUserId || currentUserId.toUpperCase() == "NONE"){
+		    if(0/*currentUserId || currentUserId.toUpperCase() == "NONE"*/){
 			$("#rating-"+id).slider("option", "value", 0);
 			$("#amount-"+id).hide();
 		    } else {
-			$.getJSON("/clues/" + id + "/ratings/", function(json) {
+		    $.getJSON("/clues/" + id + "/ratings/", function(json) {
 	            $("#rating-"+id).slider("option", "value", json.rating * 20);
 	            if(json.rating == 0) {
 	                $("#amount-"+id).hide();
@@ -826,7 +839,7 @@ function createComments(type) {
 	            }
 	            else if(json.rating > 2.0 && json.rating <= 3.0) {
 	                $("#amount-"+id).val("hmmm...");
-	                        //$("#amount-"+id).css("color","brown2");
+	                // $("#amount-"+id).css("color","brown2");
 	            }
 	            else if(json.rating > 3.0 && json.rating <= 4.5) {
 	                $("#amount-"+id).val("Toughie");
@@ -848,15 +861,14 @@ function createComments(type) {
             $.getJSON("/clues/" + id + "/comments/", function(json) { changeClueColor(id, userurl, json); });
         },
 
-        hide: function(id) {
+        hide: function(id, clueClick) {
+	    clueClick = typeof(clueClick) == 'undefined' ? false : clueClick;
             var jDiv = jDivInit(id);
-            var len = jDiv.children("div.comments").children().length;
-            var anchorText = len == 0 ? $.i18n._('add a comment') : $.i18n._('comments') + ' (<b>' + len + "</b>)";
             jDiv.hide();
             $("#comments-link-" + objectType + '-' + id).unbind("click").click(function(){
-		commentsFactory[objectType].show(id,false);
+		commentsFactory[objectType].show(id, true);
 	    });
-            jDiv.children("div.comments").children().hide();
+            jDiv.children("div.comments").children().remove();
         },
 
         deleteComment: function(jImg, id, deleteUrl) {
@@ -878,9 +890,6 @@ function createComments(type) {
             var length = textarea.value ? textarea.value.length : 0;
             var color = length > 270 ? "#f00" : length > 200 ? "#f60" : "#999";
             var jSpan = $(textarea).siblings("span.text-counter");
-            /* jSpan.html($.i18n._('can write')
-					+ (300 - length) + ' '
-					+ $.i18n._('characters')).css("color", color); */
         }
     };
 }

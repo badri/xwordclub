@@ -610,10 +610,10 @@ class Repute(models.Model):
 
 class Peep(models.Model):
     '''keeping track of users who peep at answers before threshold time'''
-    user     = models.ForeignKey(User)
-    clue     = models.ForeignKey(Clue)
+    user         = models.ForeignKey(User)
+    clue         = models.ForeignKey(Clue)
     peeped_at    = models.DateTimeField(default=datetime.datetime.now)
-    karma    = generic.GenericRelation(Karma)
+    karma        = generic.GenericRelation(Karma)
 
     def __unicode__(self):
         return u'[%s]\' peeped clue <blah blah> at %s' % (self.user.username, self.reputed_at)

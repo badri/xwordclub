@@ -49,7 +49,7 @@
             $("#nav_questions").attr('className',"on");
             var answer_sort_tab = "{{ tab_id }}";
             $("#" + answer_sort_tab).attr('className',"on");
-            clueComments.init({{ question.id }},'{{ request.user.id }}', '{{ request.user.username }}');
+            clueComments.init({{ question.id }},'{{ request.user.id }}', '{{ request.user.username }}', {{ click_clues }});
             questionComments.init({{ question.id }},'{{ request.user.id }}', '{{ request.user.username }}');
             answerComments.init({{ question.id }},'{{ request.user.id }}', '{{ request.user.username }}');	    
             Vote.init({{ question.id }}, '{{ question.author.id }}','{{ request.user.id }}');
