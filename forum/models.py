@@ -63,7 +63,7 @@ class Tag(models.Model):
 class Karma(models.Model):
     """Revamp of reputation table"""
     user     = models.ForeignKey(User)
-    which_comment     = models.ForeignKey('Comment')
+    which_comment     = models.ForeignKey('Comment', blank=True, null=True)
     delta    = models.SmallIntegerField(default=0)
     changed_at = models.DateTimeField(default=datetime.datetime.now)
     object_id      = models.PositiveIntegerField()
@@ -616,7 +616,7 @@ class Peep(models.Model):
     karma        = generic.GenericRelation(Karma)
 
     def __unicode__(self):
-        return u'[%s]\' peeped clue <blah blah> at %s' % (self.user.username, self.reputed_at)
+        return u'%s peeped for clue "%s" at %s' % (self.user.username, self.clue.clue, self.peeped_at)
 
     class Meta:
         db_table = u'peep'

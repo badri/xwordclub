@@ -1934,11 +1934,30 @@ def user_preferences(request, user_id, user_view):
 
 def peep_answers(request, clue_id, user_id):
     if request.is_ajax():
-        c = Clue.objects.get(id=clue_id)
-        p = Peep(user=request.user, clue=c)
-        p.save()
-        response_data = {}
-        response_data['message'] = "success"
+        if request.method == "POST":
+            c = Clue.objects.get(id=clue_id)
+            p = Peep(user=request.user, clue=c)
+            p.save()
+
+            karma = Karma(user=request.user,
+                  delta=-6,content_object=p)
+            karma.save()
+            print karma
+
+            response_data = {}
+            response_data['message'] = "success"
+
+        if request.method == "GET":
+            response_data = {}
+            response_data['message'] = "fail"
+            c = Clue.objects.get(id=clue_id)
+            p = Peep.objects.filter(user=request.user, clue=c)
+            if p:
+                print p[0]
+                msg = "You peeped the answer at %s" % p[0].peeped_at.strftime('%b %d %Y %H:%M %p')
+                response_data['message'] = msg
+
+            
         data = simplejson.dumps(response_data)
         return HttpResponse(data, mimetype="application/json")
 

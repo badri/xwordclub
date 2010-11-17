@@ -744,21 +744,36 @@ function createComments(type) {
 		myEditor.focus();
 	    });
 
-	    $("a.peep-answers").click(function(){
-		$.ajax({
-		    type: "POST",
-		    url: "/peep/" + id + "/" + currentUserId + "/",
-		    dataType: "json",
-		    success: function(json) {
-	                alert(id);
-		    },
-		    error: function(res, textStatus, errorThrown) {
-	                alert(currentUserId);
-		    }
+            var render_peep_answers = true;
+	    if(clueClick == true) {
+	        $.getJSON("/peep/" + id + "/" + currentUserId + "/",
+		            function(json) {
+	                        if(json.message != "fail") {
+				    $("a.peep-answers").remove();
+				    render_peep_answers = false;
+	                        }
+	                    });
+	    }
+
+	    if(render_peep_answers == true) {
+		$("a.peep-answers").click(function(){
+		    $.ajax({
+			type: "POST",
+			url: "/peep/" + id + "/" + currentUserId + "/",
+			dataType: "json",
+			success: function(json) {
+			    jDiv.children("div.comments").html("");
+			    appendLoaderImg(id);
+			    $.getJSON("/" + objectType + "s/" + id + "/comments/", function(json) { showComments(id, json); });
+	                    $("a.peep-answers").remove();
+			},
+			error: function(res, textStatus, errorThrown) {
+			    alert("Something went wrong.");
+			}
+		    });
+
 		});
-
-	    });
-
+            }
 	    var done = $("#form-comments-clue-" + id + "> div.comment-div > input");
 
 	    $("#form-comments-clue-" + id).submit(function() {
