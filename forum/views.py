@@ -481,8 +481,6 @@ def question(request, id):
             
         question.html = soup.prettify()
 
-        print question.html
-
     else:
         click_clues = "true"
 
@@ -1986,7 +1984,7 @@ def clue_ratings(request, id):
         except IndexError:
             rating = 0.0
     else:
-        rating = 0.0
+        rating = clue.avg_rating
     json_rating = {}
     json_rating["rating"] = str(rating)
     data = simplejson.dumps(json_rating)
