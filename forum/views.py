@@ -380,7 +380,7 @@ def question(request, id):
         render_replies = True
 
     if render_replies:
-        click_clues = "false";
+        click_clues = "false"
         clue_details = {}
         clues = Clue.objects.filter(crossword=id)
         for clue in clues:
@@ -390,6 +390,7 @@ def question(request, id):
         soup = BeautifulSoup(question.html)
         for clue_detail in clue_details.keys():
             clue_div = soup.find('div', id='comments-clue-'+str(clue_detail))
+            comments_div = BSTag(soup, "div", [("class","comments")])
             for each_comment in clue_details[clue_detail]['comments']:
                 vote = BSTag(soup, "span", [("class","clue-vote"),("id","upvote-"+str(each_comment.id))])
 
@@ -427,14 +428,15 @@ def question(request, id):
                 user_info.insert(0,each_comment.author.username)
                 
                 clue_div.contents[1] = ''
-                comments_div = BSTag(soup, "div", [("class","comments")])
-                comments_div.insert(0,vote)
-                comments_div.insert(1, each_comment.comment)
-                comments_div.insert(2, user_info)
-                comments_div.insert(3,date_added)
+                clue_comments_div = BSTag(soup, "div", [("id","comment-clue-"+str(each_comment.id))])
+                clue_comments_div.insert(0,vote)
+                clue_comments_div.insert(1, each_comment.comment)
+                clue_comments_div.insert(2, user_info)
+                clue_comments_div.insert(3,date_added)
                 if request.user.is_authenticated():
-                    comments_div.insert(4, img_delete)
-                clue_div.insert(0, comments_div)
+                    clue_comments_div.insert(4, img_delete)
+                comments_div.insert(0, clue_comments_div)
+            clue_div.insert(0, comments_div)
 
 
             rating_div = BSTag(soup, "div", [("id","rating-"+str(clue_detail)),
@@ -478,6 +480,8 @@ def question(request, id):
             clue_div.insert(0, rating_input)
             
         question.html = soup.prettify()
+
+        print question.html
 
     else:
         click_clues = "true"
@@ -1935,17 +1939,22 @@ def user_preferences(request, user_id, user_view):
 def peep_answers(request, clue_id, user_id):
     if request.is_ajax():
         if request.method == "POST":
-            c = Clue.objects.get(id=clue_id)
-            p = Peep(user=request.user, clue=c)
-            p.save()
+            if request.user.reputation < 6:
+                print request.user.reputation
+                response_data = {}
+                response_data['message'] = "no sufficient reputation"
+            else:
+                c = Clue.objects.get(id=clue_id)
+                p = Peep(user=request.user, clue=c)
+                p.save()
 
-            karma = Karma(user=request.user,
-                  delta=-6,content_object=p)
-            karma.save()
-            print karma
+                karma = Karma(user=request.user,
+                      delta=-6,content_object=p)
+                karma.save()
+                print karma
 
-            response_data = {}
-            response_data['message'] = "success"
+                response_data = {}
+                response_data['message'] = "success"
 
         if request.method == "GET":
             response_data = {}
@@ -2004,6 +2013,9 @@ def __comments(request, obj, type, user):
             comment.save()
             obj.comment_count = obj.comment_count + 1
             obj.save()
+            karma = Karma(user=user, which_comment=comment,
+                          delta=1,content_object=comment)
+            karma.save()
             return __generate_comments_json(obj, type, user)
 
 def __generate_comments_json(obj, type, user):

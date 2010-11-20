@@ -762,6 +762,10 @@ function createComments(type) {
 			url: "/peep/" + id + "/" + currentUserId + "/",
 			dataType: "json",
 			success: function(json) {
+	                    if(json.message == "no sufficient reputation") {
+	                        alert("You don't have enough reputation.");
+	                        return;
+	                    }
 			    jDiv.children("div.comments").html("");
 			    appendLoaderImg(id);
 			    $.getJSON("/" + objectType + "s/" + id + "/comments/", function(json) { showComments(id, json); });
