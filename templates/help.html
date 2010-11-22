@@ -5,12 +5,6 @@
 {% load humanize %}
 {% block title %}{% spaceless %}{% trans "Posting help" %}{% endspaceless %}{% endblock %}
 {% block forejs %}
-       <script type="text/javascript">
-        $().ready(function(){
-            $("#nav_posting_help").attr('className',"on");
-        });
-
-        </script>
 {% endblock %}
 {% block content %}
 <div class="headNormal">
@@ -21,20 +15,21 @@
         <p> This howto deals with posting answers to the daily crossword.
 	</p>
 
-        <p>1.Clicking on the clue for a forum topic labelled "HT" opens a new window.
+        <p>1.Clicking on the clue for a forum topic labelled "HT" or "MINT" opens a new window.
 	  <img src="/content/images/click-clue.png" alt="click-clue"/>
         </p>
 
-        <p>2.Post your answer, preferably with annotations in the text box.
-	  <a href="http://en.wikipedia.org/wiki/Markdown"> Markdown</a> syntax is accepted here.
+        <p>2.Post your answer, preferably with annotations in the text box. If for some reason you want the clue text in answer, 
+            click on the "copy clue to textbox" in bottom left.
 	  <img src="/content/images/post-answer.png" alt="post-answer"/>
         </p>
 
         <p>3.You can delete your answer anytime by clicking the (x) next to your answer. Note that this operation has NO "undo".
+          Apart from that, you can rate how tough the clue is(2), or rate others' answers(3). The karma points is a multipilicative factor of clue toughness and the number of upvotes the answer got.
 	  <img src="/content/images/delete-answer.png" alt="delete-answer"/>
         </p>
 
-        <p>4. By 8 PM everyday, all the answers entered for that clue will appear.
+        <p>4. By 8 p.m. IST everyday, all the answers entered for that clue will appear.
         </p>
 
         <p><strong>more.</strong></p>
