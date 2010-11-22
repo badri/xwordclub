@@ -1,17 +1,17 @@
 @import url(/content/style/jquery.autocomplete.css);
 @import url(/content/style/openid.css);
 @import url(/content/style/prettify.css);
-/* 公用 */
+
 body{background:#FFF; font-size:15px; line-height:150%; margin:0; padding:0; color:#000; font-family: sans-serif; 
 }
 div{margin:0 auto; padding:0;}
 h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,form,img,p{margin:0; padding:0; border:none; }
 input, select {font-family:Trebuchet MS,"segoe ui",Helvetica,"Microsoft YaHei",宋体,Tahoma,Verdana,MingLiu,PMingLiu,Arial,sans-serif;}
 p{margin-bottom:13px; font-size:15px; line-height:140%;}
-a {/* color:#333333; */ text-decoration:none;}
+a {text-decoration:none;}
 
 .badges a {color:#763333;text-decoration:underline;}
-a:hover {text-decoration:underline;}
+a:hover {text-decoration:none;}
 .block{width:960px; height:auto;}
 .fleft{float:left;}
 .fright{float:right;}
@@ -83,7 +83,7 @@ blockquote
     margin-top:0px;
     background:#FFF;
 }
-#room {padding:10px 0 10px 0;background-color:#FFF;border-bottom:1px solid #777;}
+#room {padding:10px 0 10px 0;background-color:#FFF;}
 #CALeft{width:710px; float:left; position:relative;}
 #CARight{width:240px; float:right;}
 #CAFull{float:left;padding:0 5px 0 5px;width:950px;}
@@ -137,17 +137,17 @@ blockquote
 #searchBar .options INPUT:hover {cursor:pointer}
 
 #listA {float:left; background-color:#FFF;padding:0 0px 0 0px; width:100%;}
-#listA .qstA {padding:3px 5px 0 5px; margin:0 0px 10px 0px; background:url(/content/images/quest-bg.gif) repeat-x top;}
+#listA .qstA {padding:3px 5px 0 5px; margin:0 0px 10px 0px; border-bottom: 4px dotted gray; padding-bottom: 3px;}
 #listA .qstA thumb {float:left; }
-#listA .qstA H2 {font-size:15px; font-weight:800; margin:8px auto;padding:0px;}
-#listA .qstA H2 a {color:#663333; }
+#listA .qstA H2 {font-size:15px; font-weight:800; padding:0px;}
+#listA .qstA H2 a {color:#663333; text-decoration: none;}
+#listA .qstA H2 a:visited {color:#603333; text-decoration: none;}
 #listA .qstA .stat {font-size:13px;letter-spacing:1px;float:right;}
 #listA .qstA .stat span {margin-right:5px;}
 #listA .qstA .stat td {min-width:40px;text-align:center;}
 #listA .qstA .stat .num {font-family:arial;color:#905213; font-size:20px; font-weight:800;}
 #listA .qstA .stat .unit {color:#777;}
 #listA .qstA .from {margin-top:5px; font-size:13px;}
-#listA .qstA .from .score {font-family:arial;}
 #listA .qstA .date {margin-left:20px; color:#777;}
 #listA .qstA .wiki {color:#663333;font-size:12px;}
 #listA .qstA .from a {}
@@ -160,7 +160,7 @@ blockquote
 .questions-count{font-size:32px;font-family:sans-serif;font-weight:600;padding:0 0 5px 7px;color:#a40000;}
 
 
-.boxA {background:#777; padding:6px; margin-bottom:8px;}
+.boxA {margin-top: 10px; font-family: 'Neucha', arial, serif; background:#777; padding:6px; margin-bottom:8px;}
 .boxA H3 {font-size:13px; font-weight:800; color:#FFF; margin:0; padding:0; margin-bottom:4px;}
 .boxA .body {border:1px solid #999; padding:8px; background:#FFF; font-size:13px;}
 .boxA .more {padding:2px; text-align:right; font-weight:800;}
@@ -248,7 +248,7 @@ blockquote
 
 
 .tag {font-size:13px; font-weight:normal; color:#333; text-decoration:none;background-color:#EEE; border-left:3px solid #777; border-top:1px solid #EEE; border-bottom:1px solid #CCC; border-right:1px solid #CCC; padding:1px 8px 1px 8px;}
-.tags {font-family:sans-serif; line-height:200%; display:block; margin-top:5px;}
+.tags {font-family:sans-serif; line-height:200%; margin-top:5px; margin-left: 10px;}
 .tags a {font-size:13px; font-weight:normal; color:#333; text-decoration:none;background-color:#EEE; border-left:3px solid #777; border-top:1px solid #EEE; border-bottom:1px solid #CCC; border-right:1px solid #CCC; padding:1px 8px 1px 8px;}
 .tags a:hover {background-color:#fFF;color:#333;}
 .tagsbox {line-height:200%;}
@@ -525,10 +525,6 @@ a.comment-user, a.comment-user:hover {
     background-color:inherit;
     color:#0077CC;
     padding:0;
-}
-
-a.comment-user:hover {
-    text-decoration:underline;
 }
 
 #answers {}
@@ -1135,12 +1131,14 @@ ul.bulleta li {background:url(/content/images/bullet_green.gif) no-repeat 0px 2p
 .about p {
     margin-bottom:10px;
 }
-.about a {color:#d64000;text-decoration:underline;}
+.about a {color:#d64000;text-decoration:none; font-weight: bold;}
+div.sidebar > a {color:#d64000;text-decoration:none; font-weight: bold;}
 .about h3{
     line-height:30px;
     font-size:15px; 
     font-weight:700;
     padding-top: 0px;
+    color: #B02B2C;
 }
 .highlight {
     background-color:#FFF8C6;
@@ -1170,4 +1168,24 @@ input.amount {
     border:0;
     color:#f6931f;
     font-weight:bold;
+}
+.summary-link {
+text-decoration: none;
+}
+
+div.sidebar {
+    padding-top: 20px;
+    padding-left: 20px;
+    font-family: 'Lobster', arial, serif;
+    font-size: 30px;
+    text-shadow: 2px 1px 1px black;
+}
+
+div.headNormal > a {
+    font-family: 'Neucha', arial, serif;
+    font-size: 20px;
+}
+
+.boxC > p {
+    font-family: 'Neucha', arial, serif;
 }

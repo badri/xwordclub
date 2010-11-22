@@ -5,6 +5,12 @@
 {% load humanize %}
 {% block title %}{% spaceless %}{% trans "About" %}{% endspaceless %}{% endblock %}
 {% block forejs %}
+       <script type="text/javascript">
+        $().ready(function(){
+            $("#nav_about").attr('className',"on");
+        });
+
+        </script>
 {% endblock %}
 {% block content %}
 <div class="headNormal">

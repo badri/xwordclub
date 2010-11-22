@@ -37,7 +37,7 @@ from BeautifulSoup import BeautifulSoup
 from BeautifulSoup import Tag as BSTag
 
 # used in index page
-INDEX_PAGE_SIZE = 20
+INDEX_PAGE_SIZE = 4
 INDEX_AWARD_SIZE = 15
 INDEX_TAGS_SIZE = 100
 # used in tags list

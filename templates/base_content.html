@@ -8,8 +8,17 @@
         <meta name="verify-v1" content="{{ settings.GOOGLE_SITEMAP_CODE }}" />
         <link rel="shortcut icon" href="/content/images/favicon.ico" >
         <link href="/content/style/style.css" rel="stylesheet" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Neucha&subset=latin' rel='stylesheet' type='text/css'>
 		 {% spaceless %}
-        {% block forestyle %}{% endblock %}
+        {% block forestyle %}
+	<style type="text/css">
+	div#room {
+	    font-family: 'Neucha', arial, serif;
+	}
+	p {margin-bottom:13px; font-size:25px; line-height:140%;}
+	#room a {color:#d64000;text-decoration:none; font-weight: bold;}
+	</style>
+        {% endblock %}
         {% endspaceless %}
         <script src="http://www.google.com/jsapi"></script>
         <script>google.load("jquery", "1.2.6");</script>
@@ -20,24 +29,6 @@
 	    <script type='text/javascript' src='/content/js/jquery.i18n.js'></script>
         <script type='text/javascript' src='/content/js/com.cnprog.utils.js'></script>
 
-       <!-- <script type="text/javascript">
-        var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
-        document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
-        </script>
-        <script type="text/javascript">
-        UserVoice.Tab.show({ 
-			//EDIT!!!
-            key: 'uservoicekey',
-            host: 'where.uservoice.com', 
-            forum: 'general', 
-            alignment: 'left', /* 'left', 'right' */
-            background_color:'#777', 
-            text_color: 'white', /* 'white', 'black' */
-            hover_color: '#06C',
-            lang: 'en' /* 'en', 'de', 'nl', 'es', 'fr' */
-        })
-        </script>-->
-		<!-- todo move this to settings-->
 
         {% if messages %}
         <style type="text/css">
@@ -84,30 +75,6 @@
         {% include "footer.html" %}
         {% block endjs %}
         {% endblock %}
-<script type="text/javascript">
-var uservoiceOptions = {
-  /* required */
-  key: 'xwordclub',
-  host: 'xwordclub.uservoice.com', 
-  forum: '43869',
-  showTab: true,  
-  /* optional */
-  alignment: 'left',
-  background_color:'#f00', 
-  text_color: 'white',
-  hover_color: '#06C',
-  lang: 'en'
-};
-
-function _loadUserVoice() {
-  var s = document.createElement('script');
-  s.setAttribute('type', 'text/javascript');
-  s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
-  document.getElementsByTagName('head')[0].appendChild(s);
-}
-_loadSuper = window.onload;
-window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-</script>	
     </body>
 </html>
 <!-- end template base_content.html -->

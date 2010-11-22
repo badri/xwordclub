@@ -2,28 +2,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 15:57+0000\n"
+"POT-Creation-Date: 2010-11-22 00:19+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: settings.py:12
+#: settings.py:15
 #, fuzzy
 msgid "account/"
 msgstr "新帐号"
 
-#: settings.py:12 django_authopenid/urls.py:9 django_authopenid/urls.py:11
+#: settings.py:15 django_authopenid/urls.py:9 django_authopenid/urls.py:10
+#: django_authopenid/urls.py:11 django_authopenid/urls.py:13
+#: forum/views.py:317
 msgid "signin/"
 msgstr ""
 
-#: django_authopenid/forms.py:67 django_authopenid/views.py:93
+#: django_authopenid/forms.py:67 django_authopenid/views.py:102
 #, fuzzy
 msgid "i-names are not supported"
 msgstr "基本的HTML标签也是支持的"
 
-#: django_authopenid/forms.py:102 django_authopenid/forms.py:207
+#: django_authopenid/forms.py:102
 msgid ""
 "Usernames can only contain                     letters, numbers and "
 "underscores"
@@ -35,18 +37,18 @@ msgid ""
 "choose another."
 msgstr ""
 
-#: django_authopenid/forms.py:126 django_authopenid/forms.py:231
+#: django_authopenid/forms.py:126 django_authopenid/forms.py:233
 msgid ""
 "Please enter a valid                     username and password. Note that "
 "both fields are                     case-sensitive."
 msgstr ""
 
-#: django_authopenid/forms.py:130 django_authopenid/forms.py:235
+#: django_authopenid/forms.py:130 django_authopenid/forms.py:237
 msgid "This account is inactive."
 msgstr ""
 
 # translation and user name validation are language-specific
-#: django_authopenid/forms.py:158
+#: django_authopenid/forms.py:158 django_authopenid/forms.py:210
 msgid "invalid user name"
 msgstr "用户名只能包含英文字母、数字和下划线"
 
@@ -63,144 +65,155 @@ msgstr "用户名太短，请使用三个或三个以上字符"
 msgid "this name is already in use - please try anoter"
 msgstr "该用户名已被注册，请换一个试试"
 
-#: django_authopenid/forms.py:184
+#: django_authopenid/forms.py:185
+#, fuzzy
 msgid ""
-"This email is already                 registered in our database. Please "
-"choose another."
+"This email is already                         registered in our database. "
+"Please choose another."
 msgstr "该电子邮件已被注册，请选择另一个再试。"
 
-#: django_authopenid/forms.py:214
+#: django_authopenid/forms.py:216
 msgid ""
 "This username don't exist.                         Please choose another."
 msgstr ""
 
-#: django_authopenid/forms.py:253
+#: django_authopenid/forms.py:255
 msgid "choose a username"
 msgstr "选择一个用户名"
 
-#: django_authopenid/forms.py:255 templates/authopenid/signup.html:36
+#: django_authopenid/forms.py:257 templates/authopenid/signup.html:38
 msgid "your email address"
 msgstr "您的电子邮件地址"
 
-#: django_authopenid/forms.py:257 templates/authopenid/signup.html:37
+#: django_authopenid/forms.py:259 templates/authopenid/signup.html:39
 msgid "choose password"
 msgstr "密码"
 
-#: django_authopenid/forms.py:259 templates/authopenid/signup.html:38
+#: django_authopenid/forms.py:261 templates/authopenid/signup.html:40
 msgid "retype password"
 msgstr "确认密码"
 
-#: django_authopenid/forms.py:330
+#: django_authopenid/forms.py:335
 msgid ""
 "Old password is incorrect.                     Please enter the correct "
 "password."
 msgstr ""
 
-#: django_authopenid/forms.py:342
+#: django_authopenid/forms.py:347
 msgid "new passwords do not match"
 msgstr ""
 
-#: django_authopenid/forms.py:434
+#: django_authopenid/forms.py:442
 msgid "Incorrect username."
 msgstr "选择一个用户名"
 
 #: django_authopenid/urls.py:10
+#, fuzzy
+msgid "newquestion/"
+msgstr "提问"
+
+#: django_authopenid/urls.py:11
+#, fuzzy
+msgid "newanswer/"
+msgstr "回答"
+
+#: django_authopenid/urls.py:12
 msgid "signout/"
 msgstr ""
 
-#: django_authopenid/urls.py:11
+#: django_authopenid/urls.py:13
 msgid "complete/"
 msgstr ""
 
-#: django_authopenid/urls.py:13
+#: django_authopenid/urls.py:15
 #, fuzzy
 msgid "register/"
 msgstr "确认"
 
-#: django_authopenid/urls.py:14
+#: django_authopenid/urls.py:16
 #, fuzzy
 msgid "signup/"
 msgstr "注册帐号"
 
-#: django_authopenid/urls.py:16
+#: django_authopenid/urls.py:18
 msgid "sendpw/"
 msgstr ""
 
-#: django_authopenid/urls.py:26
+#: django_authopenid/urls.py:29
 msgid "delete/"
 msgstr "删除"
 
-#: django_authopenid/views.py:99
+#: django_authopenid/views.py:108
 #, python-format
-msgid "非法OpenID地址： %s"
+msgid "OpenID %(openid_url)s is invalid"
 msgstr ""
 
-#: django_authopenid/views.py:366
+#: django_authopenid/views.py:417 django_authopenid/views.py:544
 msgid "Welcome"
 msgstr ""
 
-#: django_authopenid/views.py:456
+#: django_authopenid/views.py:507
 #, fuzzy
 msgid "Password changed."
 msgstr "密码"
 
-#: django_authopenid/views.py:488
-msgid "Email changed."
+#: django_authopenid/views.py:519 django_authopenid/views.py:524
+msgid "your email needs to be validated"
 msgstr ""
 
-#: django_authopenid/views.py:519 django_authopenid/views.py:671
+#: django_authopenid/views.py:681 django_authopenid/views.py:833
 #, python-format
 msgid "No OpenID %s found associated in our database"
 msgstr ""
 
-#: django_authopenid/views.py:523 django_authopenid/views.py:678
+#: django_authopenid/views.py:685 django_authopenid/views.py:840
 #, python-format
 msgid "The OpenID %s isn't associated to current user logged in"
 msgstr ""
 
-#: django_authopenid/views.py:531
+#: django_authopenid/views.py:693
 msgid "Email Changed."
 msgstr ""
 
-#: django_authopenid/views.py:606
+#: django_authopenid/views.py:768
 msgid "This OpenID is already associated with another account."
 msgstr ""
 
-#: django_authopenid/views.py:611
+#: django_authopenid/views.py:773
 #, python-format
 msgid "OpenID %s is now associated with your account."
 msgstr ""
 
 # todo please check this in chinese
-#: django_authopenid/views.py:681
+#: django_authopenid/views.py:843
 #, fuzzy
 msgid "Account deleted."
 msgstr "取消"
 
-#: django_authopenid/views.py:721
+#: django_authopenid/views.py:883
 #, fuzzy
 msgid "Request for new password"
 msgstr "重设密码"
 
-#: django_authopenid/views.py:734
+#: django_authopenid/views.py:896
 #, fuzzy
 msgid "A new password has been sent to your email address."
 msgstr "和您的邮件地址是绑定的"
 
-#: django_authopenid/views.py:764
+#: django_authopenid/views.py:926
 #, python-format
 msgid ""
 "Could not change password. Confirmation key '%s'                is not "
 "registered."
 msgstr ""
 
-#: django_authopenid/views.py:773
+#: django_authopenid/views.py:935
 msgid ""
 "Can not change password. User don't exist anymore                 in our "
 "database."
 msgstr ""
 
-#: django_authopenid/views.py:782
+#: django_authopenid/views.py:944
 #, python-format
 msgid "Password changed for %s. You may now sign in."
 msgstr ""
@@ -323,37 +336,28 @@ msgstr "初始版本"
 msgid "retagged"
 msgstr "更新了标签"
 
-#: forum/feed.py:17
-msgid "site title"
-msgstr "CNProg.com"
-
-#: forum/feed.py:17
+#: forum/feed.py:18
 msgid " - "
 msgstr "-"
 
-#: forum/feed.py:17
-msgid "site slogan"
-msgstr "程序员问答社区"
-
-#: forum/feed.py:17
+#: forum/feed.py:18
 msgid "latest questions"
 msgstr "最新问题"
 
-#: forum/feed.py:20
-msgid "meta site content"
-msgstr "中国程序员的编程技术问答社区。我们做专业的、可协作编辑的技术问答社区。"
+#: forum/feed.py:19
+#, fuzzy
+msgid "questions/"
+msgstr "问题"
 
-#: forum/feed.py:22
-msgid "copyright message"
-msgstr "Copyright(c)2009.CNPROG.COM"
-
-#: forum/forms.py:14 templates/question_edit_tips.html:31
-#: templates/question_edit_tips.html:36
+#: forum/forms.py:14 templates/answer_edit_tips.html:34
+#: templates/answer_edit_tips.html.py:38 templates/question_edit_tips.html:33
+#: templates/question_edit_tips.html:38
 msgid "title"
 msgstr "标题"
 
 #: forum/forms.py:15
-msgid "please enter a descriptive title for your question"
+#, fuzzy
+msgid "please enter a descriptive title for your post"
 msgstr ""
 "请输入对问题具有描述性质的标题 - “帮忙！紧急求助！”不是建议的提问方式。"
 
@@ -369,50 +373,52 @@ msgstr "内容"
 msgid "question content must be > 10 characters"
 msgstr "内容至少要10个字符"
 
-#: forum/forms.py:45 templates/header.html:30 templates/header.html.py:61
+#: forum/forms.py:45 templates/header.html:57
 msgid "tags"
 msgstr "标签"
 
-#: forum/forms.py:46
-msgid "please use space to separate tags (this enables autocomplete feature)"
-msgstr "多个标签请用空格间隔-最多5个标签。（优先使用自动匹配的英文标签。）"
+#: forum/forms.py:47
+msgid ""
+"Tags are short keywords, with no spaces within. Up to five tags can be used."
+msgstr ""
 
-#: forum/forms.py:53
+#: forum/forms.py:54 templates/question_retag.html:38
 msgid "tags are required"
 msgstr " 标签不能为空。"
 
-#: forum/forms.py:57
+#: forum/forms.py:58
 msgid "please use 5 tags or less"
 msgstr "最多只能有5个标签"
 
-#: forum/forms.py:60
+#: forum/forms.py:61
 msgid "tags must be shorter than 20 characters"
 msgstr "每个标签的长度不超过20"
 
-#: forum/forms.py:64
+#: forum/forms.py:65
 msgid ""
 "please use following characters in tags: letters 'a-z', numbers, and "
 "characters '.-_#'"
 msgstr "标签请使用英文字母，中文或者数字字符串（. - _ # 也可以）"
 
 # index.html
-#: forum/forms.py:74 templates/index.html:56 templates/question.html:196
-#: templates/question.html.py:377 templates/unanswered.html:48
+#: forum/forms.py:75 templates/index.html:57 templates/question.html:202
+#: templates/question.html.py:345 templates/questions.html:52
+#: templates/questions.html.py:64 templates/unanswered.html:48
 #: templates/unanswered.html.py:60
 msgid "community wiki"
 msgstr "社区Wiki"
 
-#: forum/forms.py:75
+#: forum/forms.py:76
 msgid ""
 "if you choose community wiki option, the question and answer do not generate "
 "points and name of author will not be shown"
 msgstr "选择社区wiki模式，问答不计算积分，签名也不显示作者信息"
 
-#: forum/forms.py:84
+#: forum/forms.py:89
 msgid "update summary:"
 msgstr "更新概要："
 
-#: forum/forms.py:85
+#: forum/forms.py:90
 msgid ""
 "enter a brief summary of your revision (e.g. fixed spelling, grammar, "
 "improved style, this field is optional)"
@@ -420,161 +426,200 @@ msgstr ""
 "输入本次修改的简单概述（如：修改了别字，修正了语法，改进了样式等。非必填"
 "项。）"
 
-#: forum/forms.py:160
+#: forum/forms.py:175
 msgid "this email does not have to be linked to gravatar"
 msgstr "不会公开，用于头像显示服务"
 
-#: forum/forms.py:161
+#: forum/forms.py:176
 msgid "Real name"
 msgstr "真实姓名"
 
-#: forum/forms.py:162
+#: forum/forms.py:177
 msgid "Website"
 msgstr "个人网站"
 
-#: forum/forms.py:163
+#: forum/forms.py:178
 msgid "Location"
 msgstr "城市"
 
-#: forum/forms.py:164
+#: forum/forms.py:179
 msgid "Date of birth"
 msgstr "生日"
 
-#: forum/forms.py:164
+#: forum/forms.py:179
 msgid "will not be shown, used to calculate age, format: YYYY-MM-DD"
 msgstr "不会公开，只会显示您的年龄，格式为：YYYY-MM-DD"
 
-#: forum/forms.py:165 templates/authopenid/settings.html:20
+#: forum/forms.py:180 templates/authopenid/settings.html:21
 msgid "Profile"
 msgstr "个人简介"
 
-#: forum/forms.py:190 forum/forms.py:191
+#: forum/forms.py:207 forum/forms.py:208
 msgid "this email has already been registered, please use another one"
 msgstr "该电子邮件已被注册，请选择另一个再试。"
 
-#: forum/models.py:316 templates/badges.html:50
+#: forum/models.py:330
+#, fuzzy, python-format
+msgid "%(author)s modified the question"
+msgstr "由于以下原因，你要关闭这个问题"
+
+#: forum/models.py:334
+#, python-format
+msgid "%(people)s posted %(new_answer_count)s new answers"
+msgstr ""
+
+#: forum/models.py:339
+#, fuzzy, python-format
+msgid "%(people)s commented the question"
+msgstr "评论问题"
+
+#: forum/models.py:344
+#, fuzzy, python-format
+msgid "%(people)s commented answers"
+msgstr "修改回答"
+
+#: forum/models.py:346
+#, fuzzy, python-format
+msgid "%(people)s commented an answer"
+msgstr "修改回答"
+
+#: forum/models.py:547 templates/badges.html:52
 msgid "gold"
 msgstr "金牌"
 
-#: forum/models.py:317 templates/badges.html:58
+#: forum/models.py:548 templates/badges.html:60
 msgid "silver"
 msgstr "银牌"
 
-#: forum/models.py:318 templates/badges.html:65
+#: forum/models.py:549 templates/badges.html:67
 msgid "bronze"
 msgstr ""
 
-#: forum/user.py:17 templates/user_tabs.html:7
+#: forum/user.py:16 templates/user_tabs.html:7
 msgid "overview"
 msgstr "概览"
 
-#: forum/user.py:18
+#: forum/user.py:17
 #, fuzzy
 msgid "user profile"
 msgstr "用户概览"
 
-#: forum/user.py:19
+#: forum/user.py:18
 #, fuzzy
 msgid "user profile overview"
 msgstr "用户概览"
 
-#: forum/user.py:25 templates/user_tabs.html:9
+#: forum/user.py:24 templates/user_tabs.html:9
 msgid "recent activity"
 msgstr "最近活动"
 
-#: forum/user.py:26
+#: forum/user.py:25
 #, fuzzy
 msgid "recent user activity"
 msgstr "最近活动"
 
-#: forum/user.py:27
+#: forum/user.py:26
 #, fuzzy
 msgid "profile - recent activity"
 msgstr "最近活动"
 
-#: forum/user.py:34 templates/user_tabs.html:13
+#: forum/user.py:33 templates/user_tabs.html:13
 msgid "responses"
 msgstr "回应"
 
-#: forum/user.py:35 templates/user_tabs.html:12
+#: forum/user.py:34 templates/user_tabs.html:12
 msgid "comments and answers to others questions"
 msgstr "其他用户的回复和评论"
 
-#: forum/user.py:36
+#: forum/user.py:35
 msgid "profile - responses"
 msgstr "回应 - 用户资料"
 
-#: forum/user.py:43 templates/user_info.html:23 templates/users.html:25
+#: forum/user.py:42 templates/user_info.html:23 templates/users.html:26
 msgid "reputation"
 msgstr "积分"
 
-#: forum/user.py:44
+#: forum/user.py:43
 msgid "user reputation in the community"
 msgstr "用户社区积分"
 
-#: forum/user.py:45
+#: forum/user.py:44
 msgid "profile - user reputation"
 msgstr "积分 - 用户资料"
 
-#: forum/user.py:51
+#: forum/user.py:50
 #, fuzzy
 msgid "favorite questions"
 msgstr "收藏"
 
-#: forum/user.py:52
+#: forum/user.py:51
 msgid "users favorite questions"
 msgstr "用户收藏的问题"
 
-#: forum/user.py:53
+#: forum/user.py:52
 msgid "profile - favorite questions"
 msgstr "收藏 - 用户资料"
 
-#: forum/user.py:60 templates/user_tabs.html:20
+#: forum/user.py:59 templates/user_tabs.html:20
 msgid "casted votes"
 msgstr "投票"
 
-#: forum/user.py:61 templates/user_tabs.html:20
+#: forum/user.py:60 templates/user_tabs.html:20
 msgid "user vote record"
 msgstr "用户所有投票"
 
-#: forum/user.py:62
+#: forum/user.py:61
 msgid "profile - votes"
 msgstr "投票 - 用户资料"
 
-#: forum/user.py:69
+#: forum/user.py:68
 msgid "preferences"
 msgstr "设置"
 
-#: forum/user.py:70 templates/user_tabs.html:28
+#: forum/user.py:69 templates/user_tabs.html:27
 msgid "user preference settings"
 msgstr "用户参数的设置"
 
-#: forum/user.py:71
+#: forum/user.py:70
 msgid "profile - user preferences"
 msgstr "设置 - 用户资料"
 
-#: forum/views.py:1726
+#: forum/views.py:317
+#, fuzzy
+msgid "/account/"
+msgstr "新帐号"
+
+#: forum/views.py:1151
+#, python-format
+msgid "subscription saved, %(email)s needs validation"
+msgstr ""
+
+#: forum/views.py:2178
 msgid "uploading images is limited to users with >60 reputation points"
 msgstr "上传图片只限于积分+60以上注册用户!"
 
 # todo take these out of settings
-#: forum/views.py:1728
+#: forum/views.py:2180
 msgid "allowed file types are 'jpg', 'jpeg', 'gif', 'bmp', 'png', 'tiff'"
 msgstr "只允许上传'jpg', 'jpeg', 'gif', 'bmp', 'png', 'tiff'类型的文件！"
 
-#: forum/views.py:1730
+#: forum/views.py:2182
 #, python-format
 msgid "maximum upload file size is %sK"
 msgstr "只允许上传%sK大小的文件！"
 
-#: forum/views.py:1732
+#: forum/views.py:2184
 #, fuzzy, python-format
 msgid ""
 "Error uploading file. Please contact the site administrator. Thank you. %s"
 msgstr "在文件上传过程中产生了错误，请联系管理员，谢谢^_^"
 
+#: forum/management/commands/send_email_alerts.py:35
+#, fuzzy
+msgid "updates from website"
+msgstr "个人网站"
+
 #: forum/templatetags/extra_tags.py:139 forum/templatetags/extra_tags.py:168
-#: templates/header.html:33
 msgid "badges"
 msgstr "奖牌榜"
 
@@ -605,30 +650,28 @@ msgid "url has error - please check it;"
 msgstr "请求的地址有误 - 请核实原始URL地址；"
 
 #: templates/404.html:30
-msgid ""
-"the page you tried to visit is protected or you don't have sufficient "
-"points, see"
-msgstr "访问的页面被保护或你的积分不够，参见"
-
-#: templates/404.html:31
 msgid "if you believe this error 404 should not have occured, please"
 msgstr "如果你确信不该出现404错误，请"
 
-#: templates/404.html:32
+#: templates/404.html:31
 msgid "report this problem"
 msgstr "报告这个问题"
 
-#: templates/404.html:41 templates/500.html:27
+#: templates/404.html:40 templates/500.html:27
 msgid "back to previous page"
 msgstr "返回前页"
 
-#: templates/404.html:42
+#: templates/404.html:41
 msgid "see all questions"
 msgstr "查看最新问题"
 
-#: templates/404.html:43
+#: templates/404.html:42
 msgid "see all tags"
 msgstr "查看标签列表"
+
+#: templates/500.html:22
+msgid "sorry, system error"
+msgstr ""
 
 #: templates/500.html:24
 msgid "system error log is recorded, error will be fixed as soon as possible"
@@ -648,23 +691,67 @@ msgstr "最新问题"
 msgid "see tags"
 msgstr "标记垃圾帖"
 
+# footer.html
+#: templates/about.html:6 templates/about.html.py:11
+#, fuzzy
+msgid "About"
+msgstr "关于本站"
+
+#: templates/annotation.html:6
+#, fuzzy
+msgid "Annotation"
+msgstr "城市"
+
+#: templates/annotation.html:11
+msgid "Answers annotation guide"
+msgstr ""
+
+#: templates/annotation.html:19
+msgid "Anagrams"
+msgstr ""
+
+#: templates/annotation.html:27
+msgid "Homophones"
+msgstr ""
+
+#: templates/annotation.html:34
+msgid "Embedded constructions"
+msgstr ""
+
+#: templates/annotation.html:42
+msgid "Telescopic clues"
+msgstr ""
+
+#: templates/annotation.html:49
+msgid "Cryptic definitions"
+msgstr ""
+
+#: templates/annotation.html:56
+msgid "Double definitions"
+msgstr ""
+
+#: templates/annotation.html:63
+msgid "Additions, deletions, reverse etc"
+msgstr ""
+
 #: templates/answer_edit.html:4 templates/answer_edit.html.py:47
 msgid "Edit answer"
 msgstr "修改回答"
 
 #: templates/answer_edit.html:24 templates/answer_edit.html.py:27
-#: templates/ask.html:25 templates/ask.html.py:28 templates/question.html:37
-#: templates/question.html.py:40 templates/question_edit.html:27
+#: templates/ask.html:25 templates/ask.html.py:28 templates/question.html:87
+#: templates/question.html.py:90 templates/question_edit.html:27
 msgid "hide preview"
 msgstr "禁用预览"
 
 #: templates/answer_edit.html:27 templates/ask.html:28
-#: templates/question.html:40 templates/question_edit.html:27
+#: templates/question.html:90 templates/question_edit.html:27
 msgid "show preview"
 msgstr "启用预览"
 
 #: templates/answer_edit.html:47 templates/question_edit.html:65
-#: templates/revisions_answer.html:36 templates/revisions_question.html:36
+#: templates/question_retag.html:52 templates/revisions_answer.html:36
+#: templates/revisions_question.html:36
 msgid "back"
 msgstr "返回"
 
@@ -677,63 +764,122 @@ msgstr "版本"
 msgid "select revision"
 msgstr "选择版本"
 
-#: templates/answer_edit.html:62 templates/ask.html:81
-#: templates/question.html:447 templates/question_edit.html:91
+#: templates/answer_edit.html:62 templates/ask.html:94
+#: templates/question.html:404 templates/question_edit.html:91
 msgid "Toggle the real time Markdown editor preview"
 msgstr "打开或者关闭Markdown编辑器的实时预览"
 
-#: templates/answer_edit.html:62 templates/ask.html:81
-#: templates/question.html:447 templates/question_edit.html:91
+#: templates/answer_edit.html:62 templates/ask.html:94
+#: templates/question.html:404 templates/question_edit.html:91
 msgid "toggle preview"
 msgstr "预览开关"
 
 # synonym of above in Edit question
 #: templates/answer_edit.html:73 templates/question_edit.html:119
+#: templates/question_retag.html:75
 msgid "Save edit"
 msgstr "现在修改"
 
-msgid "Save"
-msgstr "保存"
-
 #: templates/answer_edit.html:74 templates/close.html:29
-#: templates/question_edit.html:120 templates/reopen.html:30
-#: templates/user_edit.html:83
+#: templates/question_edit.html:120 templates/question_retag.html:76
+#: templates/reopen.html:30 templates/user_edit.html:83
+#: templates/authopenid/changeemail.html:34
 msgid "Cancel"
 msgstr "取消"
 
-#: templates/ask.html:4 templates/ask.html.py:60
-msgid "Ask a question"
-msgstr "我要提问"
+#: templates/answer_edit_tips.html:4
+msgid "answer tips"
+msgstr "受欢迎的提问"
 
-#: templates/ask.html:106
-msgid "Use"
-msgstr "使用"
+#: templates/answer_edit_tips.html:7
+msgid "please make your answer relevant to this community"
+msgstr "您的问题与编程相关吗？"
 
-#: templates/ask.html:106
-msgid "learn more about OpenID"
-msgstr "了解更多有关OpenID的信息"
+#: templates/answer_edit_tips.html:10
+msgid "try to give an answer, rather than engage into a discussion"
+msgstr "建议您提的问题是可以被答复的，而不仅仅是可以讨论。"
 
-#: templates/ask.html:106 templates/authopenid/signin.html:35
-#: templates/authopenid/signin.html:61
-msgid "Login"
-msgstr "登录"
-
-#: templates/ask.html:109
+#: templates/answer_edit_tips.html:13
 #, fuzzy
-msgid "Get your own "
-msgstr "获取您自己的"
+msgid "please try to provide details"
+msgstr "请详细描述您的问题。"
 
-#: templates/ask.html:117 templates/authopenid/sendpw.html:27
-msgid "User name"
-msgstr "您的大名"
+#: templates/answer_edit_tips.html:16 templates/question_edit_tips.html:13
+msgid "be clear and concise"
+msgstr "我们推荐您使用中文描述问题，这样可以得到更多的答复机会。"
 
-#: templates/ask.html:120
-msgid "Email: (won't be shown to anyone)"
-msgstr "电子邮件:（不会公开显示）"
+#: templates/answer_edit_tips.html:19
+msgid "see frequently asked questions"
+msgstr "查看常见问题"
 
-#: templates/ask.html:127
-msgid "Ask your question"
-msgstr "现在提问"
+#: templates/answer_edit_tips.html:25 templates/question_edit_tips.html:24
+msgid "Markdown tips"
+msgstr "Markdown快速参考"
+
+#: templates/answer_edit_tips.html:28 templates/question_edit_tips.html:27
+#, fuzzy
+msgid "*italic* or __italic__"
+msgstr "*斜体* 或者 _斜体_"
+
+#: templates/answer_edit_tips.html:31 templates/question_edit_tips.html:30
+msgid "**bold** or __bold__"
+msgstr "**加粗** 或者 __加粗__ "
+
+#: templates/answer_edit_tips.html:34 templates/question_edit_tips.html:33
+msgid "link"
+msgstr "链接"
+
+#: templates/answer_edit_tips.html:34 templates/answer_edit_tips.html.py:38
+#: templates/question_edit_tips.html:33 templates/question_edit_tips.html:38
+msgid "text"
+msgstr "文本"
+
+#: templates/answer_edit_tips.html:38 templates/question_edit_tips.html:38
+msgid "image"
+msgstr "图片"
+
+#: templates/answer_edit_tips.html:42 templates/question_edit_tips.html:42
+msgid "numbered list:"
+msgstr "列表："
+
+#: templates/answer_edit_tips.html:47 templates/question_edit_tips.html:47
+msgid "basic HTML tags are also supported"
+msgstr "基本的HTML标签也是支持的"
+
+#: templates/answer_edit_tips.html:50 templates/question_edit_tips.html:50
+msgid "learn more about Markdown"
+msgstr "有关Markdown详细说明"
+
+#: templates/ask.html:4
+msgid "Post a topic"
+msgstr ""
+
+#: templates/ask.html:60
+msgid "Post a new topic"
+msgstr ""
+
+#: templates/ask.html:67
+#, fuzzy
+msgid "login to post"
+msgstr "登录并回答该问题"
+
+#: templates/ask.html:73
+#, python-format
+msgid "must have valid %(email)s to post"
+msgstr ""
+
+#: templates/ask.html:105
+msgid "(required)"
+msgstr ""
+
+#: templates/ask.html:112
+msgid "Login/signup to post your topic"
+msgstr ""
+
+#: templates/ask.html:114
+#, fuzzy
+msgid "Post"
+msgstr "最先加入"
 
 #: templates/badge.html:6 templates/badge.html.py:17
 msgid "Badge"
@@ -743,80 +889,48 @@ msgstr "奖牌"
 msgid "The users have been awarded with badges:"
 msgstr "用户已被授予该奖牌："
 
-#: templates/badges.html:5
+#: templates/badges.html:6
 #, fuzzy
 msgid "Badges summary"
 msgstr "奖牌列表"
 
-#: templates/badges.html:16 templates/user_stats.html:113
+#: templates/badges.html:17 templates/user_stats.html:113
 msgid "Badges"
 msgstr "枚奖牌"
 
-#: templates/badges.html:20
+#: templates/badges.html:21
+msgid "Community gives you awards for your questions, answers and votes."
+msgstr ""
+"提出问题，给予回答，投出你的票 - CNProg 会针对你在社区的表现，授予你各类奖"
+"牌。"
+
+#: templates/badges.html:22
 #, fuzzy
 msgid ""
-"Community gives you awards for your questions, answers and votes. Below is "
-"the list of available badges and number of times each type of badge has been "
-"awarded."
+"Below is the list of available badges and number of times each type of badge "
+"has been awarded."
 msgstr "这里列出社区所有的奖牌，以及到目前为此，每个奖牌被授予的用户人数。"
 
-#: templates/badges.html:47
+#: templates/badges.html:49
 msgid "Community badges"
 msgstr "社区奖牌"
 
-#: templates/badges.html:53
+#: templates/badges.html:55
 msgid "gold badge description"
-"Gold badge is very rare. To obtain it you have to show profound knowledge "
-"and ability in addition to actively participating in the community. Gold "
-"badge is the highest award in this community."
 msgstr ""
-"金牌是十分罕见的。你不仅要参与社区的提问、回答、投票等活动，而且需要有高深的知识和能力才能获"
-"得。"
 
-#: templates/badges.html:61
+#: templates/badges.html:63
 msgid "silver badge description"
-"Obtaining silver badge requires significant patience. If you got one, you've "
-"very significantly contributed to this community"
-msgstr "它是不同寻常的荣誉，只要你付出足够的努力就会得到。"
+msgstr ""
 
-#: templates/badges.html:64
+#: templates/badges.html:66
 msgid "bronze badge: often given as a special honor"
 msgstr "铜牌:时常授予之特殊荣誉"
 
-msgid "Connect with Twitter"
-msgstr "同步Twitter消息"
-
-msgid "Twitter account name:"
-msgstr "账号:"
-
-msgid "Twitter password:"
-msgstr "密码:"
-
-msgid "Send my Questions to Twitter"
-msgstr "发布我的提问到我的Twitter"
-
-msgid "Send my Answers to Twitter"
-msgstr "发布我的回答到我的Twitter"
-
-#: templates/badges.html:68
+#: templates/badges.html:70
 #, fuzzy
 msgid "bronze badge description"
-"If you are active in this community, you will get this medal - still it is a "
-"special honor."
-msgstr "铜牌会在你活跃于社区时产生，它相对容易获得，但也是一种特殊的荣誉。"
-
-# base_content.html
-#: templates/base.html:61 templates/base_content.html:60
-msgid "congratulations, community gave you a badge"
-msgstr "恭喜您，社区给您颁发了奖牌"
-
-#: templates/base.html:63 templates/base_content.html:62
-msgid "profile"
-msgstr "个人资料"
-
-#: templates/base_content.html:61
-msgid "see"
-msgstr "查看"
+msgstr "答读者问"
 
 # templates/book.html 78
 #: templates/book.html:7
@@ -885,7 +999,7 @@ msgstr "这个问题被"
 msgid "number of times"
 msgstr "位用户收藏"
 
-#: templates/book.html:105 templates/index.html:47
+#: templates/book.html:105 templates/index.html:48 templates/questions.html:40
 #: templates/unanswered.html:37 templates/users_questions.html:30
 msgid "votes"
 msgstr "票"
@@ -894,16 +1008,16 @@ msgstr "票"
 msgid "the answer has been accepted to be correct"
 msgstr "有答案已被接受为正确答案"
 
-#: templates/book.html:115 templates/index.html:48
+#: templates/book.html:115 templates/index.html:49 templates/questions.html:41
 #: templates/unanswered.html:38 templates/users_questions.html:40
 msgid "views"
 msgstr "浏览"
 
 # book.html line 123 must be empty in english
-#: templates/book.html:125 templates/index.html:68 templates/question.html:112
-#: templates/question.html.py:479 templates/tags.html:46
-#: templates/unanswered.html:75 templates/unanswered.html.py:109
-#: templates/users_questions.html:52
+#: templates/book.html:125 templates/index.html:69 templates/question.html:118
+#: templates/questions.html:78 templates/questions.html.py:150
+#: templates/tags.html:47 templates/unanswered.html:75
+#: templates/unanswered.html.py:109 templates/users_questions.html:52
 msgid "using tags"
 msgstr "的问题"
 
@@ -911,7 +1025,7 @@ msgstr "的问题"
 msgid "subscribe to book RSS feed"
 msgstr "RSS订阅该图书最新问题"
 
-#: templates/book.html:147 templates/index.html:115
+#: templates/book.html:147
 msgid "subscribe to the questions feed"
 msgstr "订阅最>新问题"
 
@@ -932,129 +1046,226 @@ msgstr "原因"
 msgid "OK to close"
 msgstr "确定关闭"
 
-#: templates/footer.html:5
-#, fuzzy
-msgid "About us"
-msgstr "关于本站"
-
-#: templates/footer.html:6 templates/header.html:13 templates/index.html:83
-msgid "faq"
+#: templates/faq.html:11
+msgid "Frequently Asked Questions "
 msgstr "常见问题"
 
-#: templates/footer.html:8
+#: templates/faq.html:16
+msgid "What's this site all about?"
+msgstr ""
+
+#: templates/faq.html:23
 #, fuzzy
-msgid "Contact"
-msgstr "联系我们"
+msgid "How does it work?"
+msgstr "什么是社区积分？"
 
-#: templates/footer.html:9
+#: templates/faq.html:30
 #, fuzzy
-msgid "Privacy"
-msgstr "隐私政策"
+msgid "Do I have to annotate my answers?"
+msgstr "什么样的回答是不受欢迎的？"
 
-#: templates/footer.html:10
+#: templates/faq.html:37
+msgid "I want to post the clues. How do I do it?"
+msgstr ""
+
+#: templates/faq.html:44
+msgid "how to validate email title"
+msgstr ""
+
+#: templates/faq.html:46
+msgid "how to validate email info"
+msgstr ""
+
+#: templates/faq.html:50
+msgid "what is gravatar"
+msgstr ""
+
+#: templates/faq.html:51
+msgid "gravatar faq info"
+msgstr ""
+
+#: templates/faq.html:54
+msgid "To register, do I need to create new password?"
+msgstr "我需要注册一个新用户吗？"
+
+#: templates/faq.html:55
+msgid ""
+"No, you don't have to. You can login through any service that supports "
+"OpenID, e.g. Google, Yahoo, AOL, etc."
+msgstr ""
+"不需要。社区提供了OpenID的登录支持，你要用Google、Yahoo等任何支持OpenID登录的"
+"帐号就可以使用系统。"
+
+#: templates/faq.html:56
+msgid "Login now!"
+msgstr "马上登录"
+
+#: templates/faq.html:61
+msgid "I don't understand how an answer came. Can I ask a question about that?"
+msgstr ""
+
+#: templates/faq.html:67
+msgid "I have a question which is not answered here."
+msgstr ""
+
+#: templates/faq.html:68
 #, fuzzy
-msgid "Feedback"
-msgstr "问题反馈"
+msgid "I think I found a bug."
+msgstr "没有找到相关数据。"
 
-#: templates/header.html:8
-msgid "logout"
-msgstr "退出登录"
+#: templates/faq.html:69
+msgid "Please send an e-mail to  admin@xwordclub.com."
+msgstr ""
 
-#: templates/header.html:10 templates/authopenid/signup.html:39
-msgid "login"
-msgstr "登录"
+#: templates/faq.html:71
+msgid "site title"
+msgstr "CNProg.com"
 
-# footer.html
-#: templates/header.html:12 templates/index.html:82
-msgid "about"
-msgstr "关于本站"
-
-#: templates/header.html:23
-msgid "back to home page"
-msgstr "回到首页"
-
-#: templates/header.html:29 templates/header.html.py:60
+#: templates/faq.html:71
 msgid "questions"
 msgstr "问题"
 
-#: templates/header.html:31 templates/header.html.py:62
-msgid "users"
-msgstr "用户"
+#: templates/faq.html:71 templates/index.html:124
+msgid "."
+msgstr "。"
 
-#: templates/header.html:32
-msgid "books"
-msgstr "读书"
+# footer.html
+#: templates/footer.html:7 templates/header.html:28
+msgid "about"
+msgstr "关于本站"
 
-#: templates/header.html:34 templates/index.html:120
-msgid "unanswered questions"
-msgstr "没有回答的问题"
+#: templates/footer.html:8
+msgid "faq"
+msgstr "常见问题"
 
-#: templates/header.html:38
+#: templates/footer.html:9
+#, fuzzy
+msgid "annotation"
+msgstr "城市"
+
+#: templates/footer.html:10
+msgid "blog"
+msgstr "Blog"
+
+#: templates/footer.html:11
+msgid "BUGS?"
+msgstr ""
+
+#: templates/footer.html:12
+msgid "legalese"
+msgstr ""
+
+#: templates/footer.html:18
+msgid "current revision"
+msgstr "当前版本"
+
+#: templates/header.html:10
+msgid "logout"
+msgstr "退出登录"
+
+#: templates/header.html:12 templates/authopenid/signup.html:41
+msgid "login"
+msgstr "登录"
+
+#: templates/header.html:21
+msgid "back to home page"
+msgstr "回到首页"
+
+#: templates/header.html:27
+#, fuzzy
+msgid "crosswords"
+msgstr "密码"
+
+#: templates/header.html:29
+msgid "FAQ"
+msgstr ""
+
+#: templates/header.html:30 templates/help.html:6
+msgid "Posting help"
+msgstr ""
+
+#: templates/header.html:34
 msgid "my profile"
 msgstr "我的资料"
 
-#: templates/header.html:42
-msgid "ask a question"
-msgstr "我要提问"
+#: templates/header.html:38
+#, fuzzy
+msgid "post a crossword"
+msgstr "密码"
 
-#: templates/header.html:57
+#: templates/header.html:53
 msgid "search"
 msgstr "搜索"
 
-#: templates/index.html:6
+#: templates/header.html:56
+msgid "topics"
+msgstr ""
+
+#: templates/header.html:58
+msgid "users"
+msgstr "用户"
+
+#: templates/help.html:11
+#, fuzzy
+msgid "Posting answers howto"
+msgstr "最先回答"
+
+#: templates/index.html:7
 msgid "Home"
 msgstr "首页"
 
-#: templates/index.html:21
-msgid "Questions"
-msgstr "问题列表"
+#: templates/index.html:22
+#, fuzzy
+msgid "Crosswords"
+msgstr "密码"
 
-#: templates/index.html:23
+#: templates/index.html:24
 msgid "last updated questions"
 msgstr "最新更新的问题"
 
-#: templates/index.html:23 templates/unanswered.html:20
+#: templates/index.html:24 templates/unanswered.html:20
 msgid "newest"
 msgstr "最新问题"
 
-#: templates/index.html:24
+#: templates/index.html:25
 msgid "hottest questions"
 msgstr "被回复最多的问题"
 
-#: templates/index.html:24
+#: templates/index.html:25
 msgid "hottest"
 msgstr "热门问题"
 
-#: templates/index.html:25
+#: templates/index.html:26
 msgid "most voted questions"
 msgstr "投票次数最多的问题"
 
-#: templates/index.html:25
-#"最有价值问题"
-#"最新问题"
+# "最有价值问题"
+# "最新问题"
+#: templates/index.html:26
 msgid "most voted"
 msgstr "最有价值的问题"
 
-#: templates/index.html:26
-msgid "all questions"
-msgstr "全部问题"
+#: templates/index.html:27
+#, fuzzy
+msgid "all crosswords"
+msgstr "所有奖牌"
 
-#: templates/index.html:46 templates/unanswered.html:36
-#: templates/users_questions.html:35
+#: templates/index.html:47 templates/questions.html:39
+#: templates/unanswered.html:36 templates/users_questions.html:35
 msgid "answers"
 msgstr "回答"
 
 # must have extra space after in english
-#: templates/index.html:68 templates/question.html:112
-#: templates/question.html.py:479 templates/tags.html:46
-#: templates/unanswered.html:75 templates/unanswered.html.py:109
-#: templates/users_questions.html:52
+#: templates/index.html:69 templates/question.html:118
+#: templates/questions.html:78 templates/questions.html.py:150
+#: templates/tags.html:47 templates/unanswered.html:75
+#: templates/unanswered.html.py:109 templates/users_questions.html:52
 msgid "see questions tagged"
 msgstr "查看有关"
 
-#: templates/index.html:79
-msgid "welcome to website"
-msgstr "CNProg欢迎您!"
+#: templates/index.html:80
+msgid "What is all this?"
+msgstr ""
 
 #: templates/index.html:88
 msgid "Recent tags"
@@ -1066,7 +1277,7 @@ msgstr "最新标签"
 msgid "see questions tagged '%(tagname)s'"
 msgstr "查看有关'%(tagname)s'的问题"
 
-#: templates/index.html:96 templates/index.html.py:120
+#: templates/index.html:96 templates/index.html.py:124
 msgid "popular tags"
 msgstr "受欢迎的标签"
 
@@ -1082,316 +1293,219 @@ msgstr "授予"
 msgid "all awards"
 msgstr "所有奖牌"
 
-#: templates/index.html:115
+#: templates/index.html:116
 msgid "subscribe to last 30 questions by RSS"
 msgstr "RSS订阅最新30个问题"
 
-#: templates/index.html:120
+#: templates/index.html:119
+#, fuzzy
+msgid "subscribe to HT crosswords"
+msgstr "RSS订阅该图书最新问题"
+
+#: templates/index.html:124
 msgid "Still looking for more? See"
 msgstr "在寻找更多问题吗？请查阅"
 
-#: templates/index.html:120
+#: templates/index.html:124
 #, fuzzy
-msgid "complete list of quesionts"
+msgid "complete list of questions"
 msgstr "全部问题列表"
 
-#: templates/index.html:120
+#: templates/index.html:124
 msgid "or"
 msgstr "或者"
 
-#: templates/index.html:120
-msgid "."
-msgstr "。"
-
-#: templates/pagesize.html:5
-msgid "posts per page"
-msgstr "每页显示："
-
-#: templates/paginator.html:5
-msgid "previous"
-msgstr "上一页"
-
-#: templates/questions.html:22
-msgid "Found by tags"
-msgstr "标签问题"
-
-#: templates/questions.html:25
-msgid "Active"
-msgstr "活跃问题"
-
-#: templates/authopenid/changeemail.html:10
-msgid "Account: change email"
-msgstr "修改电子邮件"
-
-#: templates/index.html:120
+#: templates/index.html:124
 msgid "Please help us answer"
 msgstr "请帮助我们回答"
+
+#: templates/index.html:124
+#, fuzzy
+msgid "list of unanswered questions"
+msgstr "没有回答的问题"
 
 #: templates/logout.html:6 templates/logout.html.py:17
 msgid "Logout"
 msgstr "退出登录"
 
 #: templates/logout.html:20
-msgid ""
-"As a registered user you can login with your OpenID, log out of the site or "
-"permanently remove your account."
+msgid "Are you sure?"
 msgstr ""
-"您是系统的<strong class=\"darkred\">注册</strong>用户，可以随时使用OpenID帐号"
-"登录系统或者注销登录。"
 
 #: templates/logout.html:21
-msgid "Logout now"
+#, fuzzy
+msgid "Yes, logout now"
 msgstr "点击退出登录"
 
-#: templates/pagesize.html:5
-#, fuzzy
-msgid "Size per page:"
-msgstr "每页显示"
+#: templates/pagesize.html:6
+msgid "posts per page"
+msgstr "每页显示："
 
-#: templates/privacy.html:6 templates/privacy.html.py:11
-msgid "Privacy policy"
-msgstr "隐私政策"
+#: templates/paginator.html:6 templates/paginator.html.py:7
+msgid "previous"
+msgstr "上一页"
 
-#: templates/privacy.html:15
-msgid "general message about privacy"
+#: templates/paginator.html:19
+msgid "current page"
+msgstr "当前页"
+
+#: templates/paginator.html:22 templates/paginator.html.py:29
+msgid "page number "
+msgstr "第"
+
+#: templates/paginator.html:22 templates/paginator.html.py:29
+msgid "number - make blank in english"
+msgstr "页"
+
+#: templates/paginator.html:33
+msgid "next page"
+msgstr "下一页"
+
+#: templates/privacy.html:6
+msgid "Legalese"
 msgstr ""
-"CNProg承认用户隐私的重要性。本文件概述在您浏览CNProg过程中所接收和收集的个人"
-"信息的种类，以及CNProg所采取的保护信息的一些措施。CNProg希望这将有助于您在知"
-"情的情况下，就和我们 共享个人信息的问题作出决定。"
 
-#: templates/privacy.html:18
-msgid "Site Visitors"
-msgstr "网站访问者"
-
-#: templates/privacy.html:20
-msgid "what technical information is collected about visitors"
+#: templates/privacy.html:11
+msgid "About the crosswords that appear in xwordclub.com"
 msgstr ""
-"当您访问本网站或使用我们的某些在线服务时，服务器会自动记录信息，包括但不限于"
-"URL、IP地址、浏览器的类型、屏幕分辨率、系统类型和使用的语言以及访问日期和时"
-"间。我们的目的是为了向您>提供更好的用户服务，包括可能为您提供定制的在线服务。"
 
-#: templates/privacy.html:23
-msgid "Personal Information"
-msgstr "个人身份信息"
-
-#: templates/privacy.html:25
-msgid "details on personal information policies"
-msgstr ""
-"在登录使用CNProg的提问和回答功能时，我们要求使用者提供用户名、密码、电子邮件"
-"等信息。CNProg收集这类关于个人身份的信息只是为了登录系统获得使用功能的目的。"
-"我们不会向任何其他社区用 户、个人或第三方透露您的密码或者电子邮件信息。用户可"
-"以选择性地填写用户资料、个人网站、年龄、城市等信息，我们收集这些内容为了使用"
-"户能够更容易和更满意地使用CNProg提供的网页和服务。"
-
-#: templates/privacy.html:28
-msgid "Other Services"
-msgstr "其他服务"
-
-#: templates/privacy.html:30
-msgid "details on sharing data with third parties"
-msgstr ""
-"CNProg可能会收集和统计用户访问本站的概况数据。例如，CNProg可能会检测网站最流"
-"行的部分功能。CNProg可能会公开显示或者提供给第三方使用该数据。但是，CNProg不"
-"会公开您的身份信息。"
-
-#: templates/privacy.html:35
-msgid "cookie policy details"
-msgstr ""
-"访问CNProg时，我们会向您的计算机发送一个或多个专门用于识别您的浏览器的Cookie"
-"（包含一个字符串的小文件）。 使用 Cookie 的目的是通过储存用户偏好、跟踪用户倾"
-"向（例如搜索方法）来提高我们的服务质量。大多数浏览器的初始设置均为接受 "
-"Cookie，但也可以将其重置为拒绝所有 Cookie 或在收到 Cookie 时提示。不过，如果"
-"禁用 Cookie，某些功能和服务可能无法正常运行。"
-
-#: templates/privacy.html:37
-msgid "Policy Changes"
-msgstr "政策更改"
-
-#: templates/privacy.html:38
-#, fuzzy
-msgid "how privacy policies can be changed"
-msgstr ""
-"我们可能在事先通知或不通知的情况下随时更改此'隐私政策'，我们建议用户时常查看"
-"CNProg隐私政策的改动，在任何改动生效后您的继续访问和使用本站，我们假设您已同"
-"意了CNProg以上的所有条款。"
-
-#: templates/question.html:66 templates/question.html.py:78
-msgid "i like this post (click again to cancel)"
-msgstr "这篇帖子有价值（再次点击取消操作）"
-
-#: templates/question.html:68 templates/question.html.py:80
-#: templates/question.html:273
-msgid "current number of votes"
-msgstr "当前总票数"
-
-#: templates/question.html:73 templates/question.html.py:84
-msgid "i dont like this post (click again to cancel)"
-msgstr "这篇帖子没有价值（再次点击取消操作）"
-
-#: templates/question.html:90
-msgid "mark this question as favorite (click again to cancel)"
-msgstr "我要收藏这个问题（再次点击取消操作）"
-
-#: templates/question.html:96
-msgid "remove favorite mark from this question (click again to restore mark)"
-msgstr "我要收藏这个问题（再次点击取消操作）"
-
-#: templates/question.html:121 templates/question.html.py:304
+#: templates/question.html:127 templates/question.html.py:272
 #: templates/revisions_answer.html:53 templates/revisions_question.html:53
 msgid "edit"
 msgstr "编辑"
 
-#: templates/question.html:125 templates/question.html.py:314
+#: templates/question.html:131 templates/question.html.py:282
 msgid "delete"
 msgstr "删除"
 
-#: templates/question.html:130
+#: templates/question.html:136
 msgid "reopen"
 msgstr "打开"
 
-#: templates/question.html:135
+#: templates/question.html:141
 msgid "close"
 msgstr "关闭"
 
-#: templates/question.html:141 templates/question.html.py:327
+#: templates/question.html:147 templates/question.html.py:295
 msgid ""
 "report as offensive (i.e containing spam, advertising, malicious text, etc.)"
 msgstr "检举该帖为垃“水帖”（含广告、人身攻击、恶意言论等）"
 
-#: templates/question.html:142 templates/question.html.py:328
+#: templates/question.html:148 templates/question.html.py:296
 msgid "flag offensive"
 msgstr "垃圾帖？"
 
-#: templates/question.html:154 templates/question.html.py:337
+#: templates/question.html:160 templates/question.html.py:305
 #: templates/revisions_answer.html:65 templates/revisions_question.html:65
 msgid "updated"
 msgstr "更新于"
 
-#: templates/question.html:203 templates/question.html.py:384
-#: templates/revisions_answer.html:63 templates/revisions_question.html:63
-msgid "asked"
-msgstr "提问于"
-
-#: templates/question.html:233 templates/question.html.py:411
-msgid "comments"
-msgstr "评论"
-
-#: templates/question.html:234 templates/question.html.py:412
-msgid "add comment"
-msgstr "添加评论"
-
-#: templates/question.html:247
+#: templates/question.html:240
 #, fuzzy, python-format
 msgid ""
 "The question has been closed for the following reason \"%(question."
 "get_close_reason_display)s\" by"
 msgstr "问题以“%s”的原因已被"
 
-#: templates/question.html:249
+#: templates/question.html:242
 #, fuzzy, python-format
 msgid "close date %(question.closed_at)s"
 msgstr "由于以下原因，你要关闭这个问题"
 
-#: templates/question.html:256 templates/questions.html:44
-#: templates/user_stats.html:28
-msgid "Answers"
-msgstr "个回答"
+#: templates/question.html:248
+#, fuzzy
+msgid "Comments"
+msgstr "评论"
 
-#: templates/question.html:258
-msgid "oldest answers will be shown first"
+#: templates/question.html:250
+#, fuzzy
+msgid "oldest posts will be shown first"
 msgstr "最先回答显示在最前面"
 
-#: templates/question.html:258
-msgid "oldest answers"
+#: templates/question.html:250
+#, fuzzy
+msgid "oldest posts"
 msgstr "最先回答"
 
-#: templates/question.html:259
-msgid "newest answers will be shown first"
+#: templates/question.html:251
+#, fuzzy
+msgid "newest posts will be shown first"
 msgstr "最晚回答显示在最前面"
 
-#: templates/question.html:259
-msgid "newest answers"
+#: templates/question.html:251
+#, fuzzy
+msgid "newest posts"
 msgstr "最近回答"
 
-#: templates/question.html:260
-msgid "most voted answers will be shown first"
+#: templates/question.html:252
+#, fuzzy
+msgid "most voted posts will be shown first"
 msgstr "投票次数最多的显示在最前面"
 
-#: templates/question.html:260
+#: templates/question.html:252
 msgid "popular answers"
 msgstr "投票最多"
 
-#: templates/question.html:272
-msgid "i like this answer (click again to cancel)"
-msgstr "这篇帖子有价值（再次点击取消操作）"
-
-#: templates/question.html:278
-msgid "i dont like this answer (click again to cancel)"
-msgstr "这篇帖子没有价值（再次点击取消操作）"
-
-#: templates/question.html:284
-msgid "mark this answer as favorite (click again to undo)"
-msgstr "最佳答案（再次点击取消操作）"
-
-#: templates/question.html:289
-msgid "the author of the question has selected this answer as correct"
-msgstr "这个答案已经被提问作者标记为最佳答案"
-
 # todo please check this in chinese
-#: templates/question.html:311
+#: templates/question.html:279
 msgid "undelete"
 msgstr "取消"
 
-#: templates/question.html:321
+#: templates/question.html:289
 msgid "answer permanent link"
 msgstr "该回答的链接地址"
 
-#: templates/question.html:322
+#: templates/question.html:290
 msgid "permanent link"
 msgstr "永久链接"
 
-#: templates/question.html:436
-msgid "Your answer"
-msgstr "您的回答"
+#: templates/question.html:390
+msgid "Your reply"
+msgstr ""
 
-#: templates/question.html:460
-msgid "Answer the question"
-msgstr "回答该问题"
+#: templates/question.html:393
+msgid "you can reply anonymously and then login"
+msgstr ""
 
-#: templates/question.html:462
-msgid "Login to answer"
-msgstr "登录并回答该问题"
+#: templates/question.html:417
+msgid "Submit"
+msgstr ""
 
-#: templates/question.html:474
-msgid "Question tags"
-msgstr "您正在浏览的问题含有以下标签"
+#: templates/question.html:419
+msgid "Notify me daily if there are any new replies."
+msgstr ""
 
-#: templates/question.html:484
+#: templates/question.html:421
+msgid "once you sign in you will be able to subscribe for any updates here"
+msgstr ""
+
+#: templates/question.html:433
 #, fuzzy
-msgid "question asked"
-msgstr "提问时间"
+msgid "Stats"
+msgstr "标签"
 
-#: templates/question.html:484 templates/question.html.py:490
+#: templates/question.html:436
+#, fuzzy
+msgid "posted"
+msgstr "投赞成票"
+
+#: templates/question.html:436 templates/question.html.py:442
 #: templates/user_info.html:51
 msgid "ago"
 msgstr "前"
 
-#: templates/question.html:487
-msgid "question was seen"
-msgstr "目前浏览数量"
+#: templates/question.html:439
+#, fuzzy
+msgid "seen"
+msgstr "查看"
 
-#: templates/question.html:487
+#: templates/question.html:439
 msgid "times"
 msgstr "次"
 
-#: templates/question.html:490
+#: templates/question.html:442
 msgid "last updated"
 msgstr "最后更新时间"
-
-#: templates/question.html:495
-#, fuzzy
-msgid "Related questions"
-msgstr "相似的问题"
 
 # page title
 #: templates/question_edit.html:4 templates/question_edit.html.py:65
@@ -1404,7 +1518,7 @@ msgstr "受欢迎的提问"
 
 #: templates/question_edit_tips.html:7
 #, fuzzy
-msgid "please ask a relevant question"
+msgid "please ask a relevant questions"
 msgstr "我要提问"
 
 #: templates/question_edit_tips.html:10
@@ -1412,76 +1526,132 @@ msgstr "我要提问"
 msgid "please try provide enough details"
 msgstr "请详细描述您的问题。"
 
-#: templates/question_edit_tips.html:13
-msgid "be clear and concise"
-msgstr "我们推荐您使用中文描述问题，这样可以得到更多的答复机会。"
-
 #: templates/question_edit_tips.html:16
-msgid "see frequently asked questions"
-msgstr "查看常见问题"
-
-#: templates/question_edit_tips.html:22
-msgid "Markdown tips"
-msgstr "Markdown快速参考"
-
-#: templates/question_edit_tips.html:25
-#, fuzzy
-msgid "*italic* or __italic__"
-msgstr "*斜体* 或者 _斜体_"
-
-#: templates/question_edit_tips.html:28
-msgid "**bold** or __bold__"
-msgstr "**加粗** 或者 __加粗__ "
-
-#: templates/question_edit_tips.html:31
-msgid "link"
-msgstr "链接"
-
-#: templates/question_edit_tips.html:31 templates/question_edit_tips.html:36
-msgid "text"
-msgstr "文本"
-
-#: templates/question_edit_tips.html:36
-msgid "image"
-msgstr "图片"
-
-#: templates/question_edit_tips.html:40
-msgid "numbered list:"
-msgstr "列表："
-
-#: templates/question_edit_tips.html:45
-msgid "basic HTML tags are also supported"
-msgstr "基本的HTML标签也是支持的"
-
-#: templates/question_edit_tips.html:48
-msgid "learn more about Markdown"
-msgstr "有关Markdown详细说明"
-
-#: templates/questions.html:22
-msgid "All questions"
-msgstr "所有问题"
-
-#: templates/questions.html:26
-#, fuzzy
-msgid "Questions with most answers"
-msgstr "您正在浏览的问题含有以下标签"
-
-#: templates/questions.html:27
-msgid "Questions with most votes"
+msgid "see annotation"
 msgstr ""
 
-# index.html
-#: templates/questions.html:57 templates/questions.html.py:69
-msgid "Community wiki"
-msgstr "社区Wiki"
+#: templates/question_retag.html:3 templates/question_retag.html.py:52
+msgid "Change tags"
+msgstr "修改问题标签"
 
-# must have extra space after in english
-#: templates/questions.html:83
+# todo: remove magic numbers from this file
+#: templates/question_retag.html:39
+msgid "up to 5 tags, less than 20 characters each"
+msgstr "最多5个标签，每个标签长度小于20个字符。"
+
+#: templates/question_retag.html:86
+msgid "Why use and modify tags?"
+msgstr "为什么我只能修改问题标签？"
+
+#: templates/question_retag.html:89
 #, fuzzy
-msgid "Browse questions with tag of "
-msgstr "查看有关"
+msgid "tags help us keep Questions organized"
+msgstr "CNProg用标签来分类系统的信息"
 
-#: templates/questions.html:125 templates/unanswered.html:105
+#: templates/question_retag.html:95
+msgid "tag editors receive special awards from the community"
+msgstr "修改标签的用户将授予特殊的社区奖牌"
+
+#: templates/questions.html:7
+msgid "All crosswords"
+msgstr ""
+
+#: templates/questions.html:23
+msgid "Found by tags"
+msgstr "标签问题"
+
+#: templates/questions.html:23
+msgid "Found by title"
+msgstr "查询结果"
+
+#: templates/questions.html:23
+msgid "All Crosswords"
+msgstr ""
+
+#: templates/questions.html:103
+#, python-format
+msgid ""
+"\n"
+"\t\t\thave total %(q_num)s questions tagged %(tagname)s\n"
+"\t\t\t"
+msgid_plural ""
+"\n"
+"\t\t\thave total %(q_num)s questions tagged %(tagname)s\n"
+"\t\t\t"
+msgstr[0] ""
+"\n"
+"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标记为<span "
+"class=\"tag\">%(tagname)s</span></p>"
+msgstr[1] ""
+"\n"
+"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标记为<span "
+"class=\"tag\">%(tagname)s</span></p>"
+
+#: templates/questions.html:110
+#, fuzzy, python-format
+msgid ""
+"\n"
+"\t\t\t\thave total %(q_num)s questions containing %(searchtitle)s\n"
+"\t\t\t\t"
+msgid_plural ""
+"\n"
+"\t\t\t\thave total %(q_num)s questions containing %(searchtitle)s\n"
+"\t\t\t\t"
+msgstr[0] ""
+"\n"
+"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标题含有<span "
+"class=\"tag\">%(searchtitle)s</span></p>"
+msgstr[1] ""
+"\n"
+"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标题含有<span "
+"class=\"tag\">%(searchtitle)s</span></p>"
+
+#: templates/questions.html:116
+#, fuzzy, python-format
+msgid ""
+"\n"
+"\t\t\t\thave total %(q_num)s questions\n"
+"\t\t\t\t"
+msgid_plural ""
+"\n"
+"\t\t\t\thave total %(q_num)s questions\n"
+"\t\t\t\t"
+msgstr[0] ""
+"\n"
+"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标记为<span "
+"class=\"tag\">%(tagname)s</span></p>"
+msgstr[1] ""
+"\n"
+"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标记为<span "
+"class=\"tag\">%(tagname)s</span></p>"
+
+#: templates/questions.html:129
+msgid "Questions are sorted by the <strong>time of last update</strong>."
+msgstr "问题按<strong>最后更新时间</strong>显示排序。"
+
+#: templates/questions.html:130
+msgid "Most recently answered ones are shown first."
+msgstr "最后被回答或者>更新的问题将显示在最前面。"
+
+#: templates/questions.html:134
+msgid "Questions sorted by <strong>number of responses</strong>."
+msgstr "问题按<strong>回复数量</strong>显示排序。"
+
+#: templates/questions.html:135
+#, fuzzy
+msgid "Most answered questions are shown first."
+msgstr "回复最多的问题将显示在最前面。"
+
+#: templates/questions.html:139
+msgid "Questions are sorted by the <strong>number of votes</strong>."
+msgstr "问题按<strong>投票数量</strong>显示排序。"
+
+#: templates/questions.html:140
+#, fuzzy
+msgid "Most voted questions are shown first."
+msgstr "投票最多的问题将显示在最前面。"
+
+#: templates/questions.html:147 templates/unanswered.html:105
 msgid "Related tags"
 msgstr "相关标签"
 
@@ -1522,36 +1692,40 @@ msgstr "确定打开这个问题"
 msgid "Revision history"
 msgstr "版本历史"
 
-#: templates/tags.html:5 templates/tags.html.py:28
+#: templates/revisions_answer.html:63 templates/revisions_question.html:63
+msgid "asked"
+msgstr "提问于"
+
+#: templates/tags.html:6 templates/tags.html.py:29
 msgid "Tag list"
 msgstr "标签列表"
 
-#: templates/tags.html:30
+#: templates/tags.html:31
 msgid "sorted alphabetically"
 msgstr "按名称的字母先后顺序排序"
 
-#: templates/tags.html:30
+#: templates/tags.html:31
 msgid "by name"
 msgstr "按名称排序"
 
-#: templates/tags.html:31
+#: templates/tags.html:32
 msgid "sorted by frequency of tag use"
 msgstr "按标签被使用的次数排序"
 
-#: templates/tags.html:31
+#: templates/tags.html:32
 #, fuzzy
 msgid "by popularity"
 msgstr "按流行程度排序"
 
-#: templates/tags.html:37
+#: templates/tags.html:38
 msgid "All tags matching query"
 msgstr "匹配查询"
 
-#: templates/tags.html:37
+#: templates/tags.html:38
 msgid "all tags - make this empty in english"
 msgstr "的所有标签"
 
-#: templates/tags.html:40
+#: templates/tags.html:41
 #, fuzzy
 msgid "Nothing found"
 msgstr "没有找到相关数据。"
@@ -1624,26 +1798,45 @@ msgstr "个人网站"
 msgid "location"
 msgstr "城市"
 
-# user_info.html 
 #: templates/user_info.html:69
-msgid "age"
-msgstr "年龄"
-
-#: templates/user_info.html:70
-msgid "age unit"
-msgstr "岁"
-
-#: templates/user_info.html:75
 msgid "todays unused votes"
 msgstr "今日剩余投票数"
 
-#: templates/user_info.html:76
+#: templates/user_info.html:70
 msgid "votes left"
 msgstr "票"
+
+#: templates/user_preferences.html:10
+msgid "Connect with Twitter"
+msgstr "同步Twitter消息"
+
+#: templates/user_preferences.html:12
+msgid "Twitter account name:"
+msgstr "账号:"
+
+#: templates/user_preferences.html:14
+msgid "Twitter password:"
+msgstr "密码:"
+
+#: templates/user_preferences.html:16
+msgid "Send my Questions to Twitter"
+msgstr "发布我的提问到我的Twitter"
+
+#: templates/user_preferences.html:17
+msgid "Send my Answers to Twitter"
+msgstr "发布我的回答到我的Twitter"
+
+#: templates/user_preferences.html:18
+msgid "Save"
+msgstr "保存"
 
 #: templates/user_stats.html:15
 msgid "User questions"
 msgstr "个问题"
+
+#: templates/user_stats.html:28
+msgid "Answers"
+msgstr "个回答"
 
 #: templates/user_stats.html:37
 #, fuzzy, python-format
@@ -1656,8 +1849,8 @@ msgstr "该回答已被设为最佳答案"
 
 #: templates/user_stats.html:43
 #, fuzzy, python-format
-msgid "the answer has been commented %(answered_question.comment_count)s times"
-msgstr "该回答有%d条评论"
+msgid "the answer has been commented %(count)s times"
+msgstr "该回答总共有%d个投票"
 
 #: templates/user_stats.html:56
 msgid "votes total"
@@ -1675,9 +1868,6 @@ msgstr "用户投的反对票总数"
 #: templates/user_stats.html:84
 msgid "Tags"
 msgstr "个标签"
-
-msgid "Tags help us keep Questions organized"
-msgstr "CNProg用标签来分类系统的信息"
 
 #: templates/user_stats.html:94
 #, fuzzy, python-format
@@ -1700,7 +1890,7 @@ msgstr "积分"
 msgid "favorites"
 msgstr "收藏"
 
-#: templates/user_tabs.html:29
+#: templates/user_tabs.html:28
 msgid "settings"
 msgstr "设置"
 
@@ -1712,29 +1902,29 @@ msgstr "投赞成票"
 msgid "downvote"
 msgstr "投反对票"
 
-#: templates/users.html:5 templates/users.html.py:23
+#: templates/users.html:6 templates/users.html.py:24
 msgid "Users"
 msgstr "用户列表"
 
-#: templates/users.html:26
+#: templates/users.html:27
 msgid "recent"
 msgstr "最新加入"
 
-#: templates/users.html:27
+#: templates/users.html:28
 msgid "oldest"
 msgstr "最先加入"
 
-#: templates/users.html:28
+#: templates/users.html:29
 msgid "by username"
 msgstr "用户名"
 
-#: templates/users.html:34
+#: templates/users.html:35
 #, fuzzy, python-format
 msgid "users matching query %(suser)s:"
 msgstr ""
 "匹配查询 '<span class=\"darkred\"><strong>%s</strong></span>' 的所有用户名："
 
-#: templates/users.html:38
+#: templates/users.html:39
 msgid "Nothing found."
 msgstr "没有找到相关数据。"
 
@@ -1748,115 +1938,157 @@ msgstr "这个问题被"
 msgid "this answer has been accepted to be correct"
 msgstr "有答案已被接受为正确答案"
 
-#: templates/authopenid/changeemail.html:9
-msgid ""
-"This is where you can change the email address associated with your account. "
-"Please keep this email address up to date so we can send you a password-"
-"reset email if you request one."
-msgstr ""
-
-#: templates/authopenid/changeemail.html:11
-#: templates/authopenid/changeopenid.html:13
-#: templates/authopenid/changepw.html:18 templates/authopenid/delete.html:14
-#: templates/authopenid/delete.html:24
-msgid "Please correct errors below:"
-msgstr ""
-
-#: templates/authopenid/changeemail.html:28
-msgid "Email"
-msgstr ""
-
-#: templates/authopenid/changeemail.html:29
-#: templates/authopenid/signin.html:60
-msgid "Password"
-msgstr "密码"
-
-#: templates/authopenid/changeemail.html:31
+#: templates/authopenid/changeemail.html:7
+#: templates/authopenid/changeemail.html:33
 msgid "Change email"
 msgstr "更换电子邮件"
 
-#: templates/authopenid/changeopenid.html:7
+#: templates/authopenid/changeemail.html:10
+#, fuzzy, python-format
+msgid "change %(email)s info"
+msgstr "更换电子邮件"
+
+#: templates/authopenid/changeemail.html:13
+#: templates/authopenid/changeopenid.html:14
+#: templates/authopenid/changepw.html:19 templates/authopenid/delete.html:15
+#: templates/authopenid/delete.html:25
+msgid "Please correct errors below:"
+msgstr ""
+
+#: templates/authopenid/changeemail.html:30
+msgid "Your new Email"
+msgstr ""
+
+#: templates/authopenid/changeemail.html:31
+#: templates/authopenid/signin.html:138
+msgid "Password"
+msgstr "密码"
+
+#: templates/authopenid/changeemail.html:42
+#, fuzzy
+msgid "Validate email"
+msgstr "更换电子邮件"
+
+#: templates/authopenid/changeemail.html:45
+#, python-format
+msgid "validate %(email)s info"
+msgstr ""
+
+#: templates/authopenid/changeemail.html:50
+msgid "Email not changed"
+msgstr ""
+
+#: templates/authopenid/changeemail.html:53
+#, python-format
+msgid "old %(email)s kept"
+msgstr ""
+
+#: templates/authopenid/changeemail.html:58
+#, fuzzy
+msgid "Email changed"
+msgstr "密码"
+
+#: templates/authopenid/changeemail.html:61
+#, python-format
+msgid "your current %(email)s can be used for this"
+msgstr ""
+
+#: templates/authopenid/changeemail.html:66
+msgid "Email verified"
+msgstr ""
+
+#: templates/authopenid/changeemail.html:69
+msgid "thanks for verifying email"
+msgstr ""
+
+#: templates/authopenid/changeemail.html:74
+msgid "email key not sent"
+msgstr ""
+
+#: templates/authopenid/changeemail.html:77
+#, python-format
+msgid "email key not sent %(email)s change email here %(change_link)s"
+msgstr ""
+
+#: templates/authopenid/changeopenid.html:8
 #, fuzzy
 msgid "Account: change OpenID URL"
 msgstr "更换OpenID地址"
 
-#: templates/authopenid/changeopenid.html:11
+#: templates/authopenid/changeopenid.html:12
 msgid ""
 "This is where you can change your OpenID URL. Make sure you remember it!"
 msgstr ""
 
-#: templates/authopenid/changeopenid.html:28
+#: templates/authopenid/changeopenid.html:29
 msgid "OpenID URL:"
 msgstr ""
 
-#: templates/authopenid/changeopenid.html:29
+#: templates/authopenid/changeopenid.html:30
 msgid "Change OpenID"
 msgstr "更换OpenID地址"
 
-#: templates/authopenid/changepw.html:13
+#: templates/authopenid/changepw.html:14
 #, fuzzy
 msgid "Account: change password"
 msgstr "修改密码"
 
-#: templates/authopenid/changepw.html:16
+#: templates/authopenid/changepw.html:17
 msgid "This is where you can change your password. Make sure you remember it!"
 msgstr ""
 
-#: templates/authopenid/changepw.html:26
+#: templates/authopenid/changepw.html:27
 #, fuzzy
 msgid "Current password"
 msgstr "确认密码"
 
-#: templates/authopenid/changepw.html:27
+#: templates/authopenid/changepw.html:28
 #, fuzzy
 msgid "New password"
 msgstr "密码"
 
-#: templates/authopenid/changepw.html:28
+#: templates/authopenid/changepw.html:29
 #, fuzzy
 msgid "New password again"
 msgstr "发送新密码"
 
-#: templates/authopenid/changepw.html:29 templates/authopenid/settings.html:28
+#: templates/authopenid/changepw.html:30 templates/authopenid/settings.html:29
 msgid "Change password"
 msgstr "修改密码"
 
-#: templates/authopenid/complete.html:4
+#: templates/authopenid/complete.html:5
 msgid "Connect your OpenID with this site"
 msgstr "绑定OpenID"
 
-#: templates/authopenid/complete.html:7
+#: templates/authopenid/complete.html:8
 msgid "Connect your OpenID with your account on this site"
 msgstr "绑定OpenID帐号"
 
-#: templates/authopenid/complete.html:10
-#, fuzzy
-msgid "Your OpenID is accepted. Please complete this to finish registration."
-msgstr "您的OpenID帐号已经验证通过! 请完成最后一步 - 绑定OpenID到您的帐号。"
+#: templates/authopenid/complete.html:12
+#, python-format
+msgid "register new %(provider)s account info"
+msgstr ""
 
 # todo: review this message may be confusing user
-#: templates/authopenid/complete.html:11
+#: templates/authopenid/complete.html:14
 msgid "This account already exists, please use another."
 msgstr "输入您的新帐号或者指定已经存在的帐号。"
 
-#: templates/authopenid/complete.html:16 templates/authopenid/complete.html:29
-#: templates/authopenid/signin.html:43
+#: templates/authopenid/complete.html:19 templates/authopenid/complete.html:32
+#: templates/authopenid/signin.html:121
 msgid "Sorry, looks like we have some errors:"
 msgstr "请注意以下错误："
 
-#: templates/authopenid/complete.html:45
-msgid "New account"
-msgstr "新帐号"
-
-#: templates/authopenid/complete.html:46
-msgid "User name (<i>will be shown to others, cannot be modified</i>)"
-msgstr "用户名（<i>在社区显示友好名称，不可更改</i>）"
-
 #: templates/authopenid/complete.html:47
-msgid "Email (<i>not shared with anyone</i>)"
-msgstr "电子邮件（<i>用于头像显示服务</i>）"
+msgid "Screen name label"
+msgstr ""
 
 #: templates/authopenid/complete.html:48
+#, fuzzy
+msgid "Email address label"
+msgstr "您的电子邮件地址"
+
+#: templates/authopenid/complete.html:49
 msgid "create account"
 msgstr "创建帐号"
 
@@ -1876,543 +2108,721 @@ msgstr "密码"
 msgid "Register"
 msgstr "确认"
 
-#: templates/authopenid/complete.html:62 templates/authopenid/signin.html:62
+#: templates/authopenid/complete.html:62 templates/authopenid/signin.html:140
 msgid "Forgot your password?"
 msgstr "忘记密码？"
 
-#: templates/authopenid/delete.html:8
+#: templates/authopenid/delete.html:9
 #, fuzzy
 msgid "Account: delete account"
 msgstr "删除帐号"
 
-#: templates/authopenid/delete.html:12
+#: templates/authopenid/delete.html:13
 msgid ""
 "Note: After deleting your account, anyone will be able to register this "
 "username."
 msgstr ""
 
-#: templates/authopenid/delete.html:16
+#: templates/authopenid/delete.html:17
 msgid "Check confirm box, if you want delete your account."
 msgstr ""
 
-#: templates/authopenid/delete.html:19
+#: templates/authopenid/delete.html:20
 #, fuzzy
 msgid "Password:"
 msgstr "密码"
 
-#: templates/authopenid/delete.html:31
+#: templates/authopenid/delete.html:32
 msgid "I am sure I want to delete my account."
 msgstr ""
 
-#: templates/authopenid/delete.html:32
+#: templates/authopenid/delete.html:33
 msgid "Password/OpenID URL"
 msgstr ""
 
-#: templates/authopenid/delete.html:32
+#: templates/authopenid/delete.html:33
 msgid "(required for your security)"
 msgstr ""
 
-#: templates/authopenid/delete.html:34
+#: templates/authopenid/delete.html:35
 #, fuzzy
 msgid "Delete account permanently"
 msgstr "删除帐号"
 
-#: templates/authopenid/sendpw.html:3 templates/authopenid/sendpw.html.py:7
+#: templates/authopenid/sendpw.html:4 templates/authopenid/sendpw.html.py:8
 msgid "Send new password"
 msgstr "发送新密码"
 
-#: templates/authopenid/sendpw.html:11
+#: templates/authopenid/sendpw.html:12
 msgid "Lost your password? No problem - here you can reset it."
 msgstr "丢失了您的密码？ 你可以在这里重设密码。"
 
-#: templates/authopenid/sendpw.html:12
+#: templates/authopenid/sendpw.html:13
 msgid ""
 "Please enter your username below and new password will be sent to your "
 "registered e-mail"
 msgstr "请输入用户名，新的密码会发送到你注册时候填写的电子邮件。"
 
-#: templates/authopenid/sendpw.html:29
+#: templates/authopenid/sendpw.html:28
+msgid "User name"
+msgstr "您的大名"
+
+#: templates/authopenid/sendpw.html:30
 msgid "Reset password"
 msgstr "重设密码"
 
-#: templates/authopenid/sendpw.html:29
+#: templates/authopenid/sendpw.html:30
 msgid "return to login"
 msgstr "返回登录"
 
 # todo - check translation or see if it's indeed true
-#: templates/authopenid/sendpw.html:32
+#: templates/authopenid/sendpw.html:33
 msgid ""
 "Note: your new password will be activated only after you click the "
 "activation link in the email message"
 msgstr "注意: 新的密码只有您在激活邮件中的链接后才会被激活。"
 
-#: templates/authopenid/settings.html:29
+#: templates/authopenid/settings.html:30
 msgid "Give your  account a new password."
 msgstr ""
 
-#: templates/authopenid/settings.html:30
+#: templates/authopenid/settings.html:31
 msgid "Change email "
 msgstr "更换电子邮件"
 
-#: templates/authopenid/settings.html:31
+#: templates/authopenid/settings.html:32
 msgid "Add or update the email address associated with your account."
 msgstr ""
 
-#: templates/authopenid/settings.html:34
+#: templates/authopenid/settings.html:35
 msgid "Change openid associated to your account"
 msgstr ""
 
-#: templates/authopenid/settings.html:37
+#: templates/authopenid/settings.html:38
 msgid "Delete account"
 msgstr "删除帐号"
 
-#: templates/authopenid/settings.html:38
+#: templates/authopenid/settings.html:39
 msgid "Erase your username and all your data from website"
 msgstr ""
 
-#: templates/authopenid/signin.html:3 templates/authopenid/signin.html:16
+#: templates/authopenid/signin.html:4 templates/authopenid/signin.html:21
 msgid "User login"
 msgstr "用户登录"
 
-#: templates/authopenid/signin.html:21
+#: templates/authopenid/signin.html:28
+#, python-format
+msgid ""
+"\n"
+"                Your answer to %(title)s %(summary)s will be posted once you "
+"log in\n"
+"                "
+msgstr ""
+
+#: templates/authopenid/signin.html:35
+#, python-format
+msgid ""
+"Your question \n"
+"                %(title)s %(summary)s will be posted once you log in\n"
+"                "
+msgstr ""
+
+#: templates/authopenid/signin.html:40
+msgid "Click to sign in through any of these services."
+msgstr ""
+
+#: templates/authopenid/signin.html:103
+msgid "Enter your <span id=\"enter_your_what\">Provider user name</span>"
+msgstr ""
+
+#: templates/authopenid/signin.html:110
+msgid ""
+"Enter your <a class=\"openid_logo\" href=\"http://openid.net\">OpenID</a> "
+"web address"
+msgstr ""
+
+#: templates/authopenid/signin.html:112 templates/authopenid/signin.html:139
+msgid "Login"
+msgstr "登录"
+
+#: templates/authopenid/signin.html:116
 msgid "we support two login modes"
 msgstr ""
 "CNProg支持<b>两种</b>登录模式。您可以使用帐号、密码登录，或者使用OpenID登录。"
 
-#: templates/authopenid/signin.html:26 templates/authopenid/signup.html:49
-msgid "Login with your OpenID"
-msgstr "使用OpenID登录"
-
-#: templates/authopenid/signin.html:28
-msgid "select openid provider"
-msgstr "1)请选择您的帐号类："
-
-#: templates/authopenid/signin.html:32
-msgid "verify openid link and login"
-msgstr "2)型并完成正确的OpenID地址（如：替换“{username}”为您的对应帐号）："
-
-#: templates/authopenid/signin.html:58
+#: templates/authopenid/signin.html:136
 msgid "Use login name and password"
 msgstr "使用帐号密码登录"
 
-#: templates/authopenid/signin.html:59
+#: templates/authopenid/signin.html:137
 msgid "Login name"
 msgstr "用户名"
 
-#: templates/authopenid/signin.html:63
+#: templates/authopenid/signin.html:141
 #, fuzzy
-msgid "Create new acccount"
+msgid "Create new account"
 msgstr "注册新帐号"
 
-#: templates/authopenid/signin.html:72
+#: templates/authopenid/signin.html:150
 msgid "Why use OpenID?"
 msgstr "为什么需要OpenID登录？"
 
-#: templates/authopenid/signin.html:76
+#: templates/authopenid/signin.html:154
 msgid "with openid it is easier"
 msgstr ""
 "构建在OpenID网络认证上的本系统，不需要你注册新的帐号，即可使用我们系统的所有"
 "功能"
 
-#: templates/authopenid/signin.html:79
+#: templates/authopenid/signin.html:157
 msgid "reuse openid"
 msgstr "用同一个帐号可登录互联网所有激活OpenID的网站"
 
-#: templates/authopenid/signin.html:82
+#: templates/authopenid/signin.html:160
 msgid "openid is widely adopted"
 msgstr "全世界有1.6亿OpenID帐号，和10,000个支持OpenID的站点"
 
-#: templates/authopenid/signin.html:85
+#: templates/authopenid/signin.html:163
 msgid "openid is supported open standard"
 msgstr "OpenID是有开放标准，并且有相关的基金组织提供支持"
 
-#: templates/authopenid/signin.html:89
+#: templates/authopenid/signin.html:167
 msgid "Find out more"
 msgstr "查看更多"
 
-#: templates/authopenid/signin.html:90
+#: templates/authopenid/signin.html:168
 msgid "Get OpenID"
 msgstr "获取OpenID"
 
-#: templates/authopenid/signup.html:2 templates/authopenid/signup.html.py:6
+#: templates/authopenid/signup.html:4 templates/authopenid/signup.html.py:8
 msgid "Signup"
 msgstr "注册帐号"
 
-#: templates/authopenid/signup.html:10
+#: templates/authopenid/signup.html:12
 msgid ""
 "We support two types of user registration: conventional username/password, "
 "and"
 msgstr "我们支持两种注册方式，你可以使用常规的用户名、密码方式注册，或者"
 
-#: templates/authopenid/signup.html:10
+#: templates/authopenid/signup.html:12
 msgid "the OpenID method"
 msgstr "使用OpenID帐号注册"
 
-#: templates/authopenid/signup.html:15
+#: templates/authopenid/signup.html:17
 #, fuzzy
 msgid "Sorry, looks like we have some errors"
 msgstr "请注意以下错误："
 
-#: templates/authopenid/signup.html:33
+#: templates/authopenid/signup.html:35
 msgid "Conventional registration"
 msgstr "请注意以下错误："
 
-#: templates/authopenid/signup.html:34
+#: templates/authopenid/signup.html:36
 msgid "choose a user name"
 msgstr "选择一个用户名"
 
-#: templates/authopenid/signup.html:40
+#: templates/authopenid/signup.html:42
 msgid "back to login"
 msgstr "返回登录"
 
-#: templates/authopenid/signup.html:46
+#: templates/authopenid/signup.html:48
 msgid "Register with your OpenID"
 msgstr "使用OpenID注册"
 
-msgid "meta site keywords, comma separated"
-msgstr ""
-"技术问答社区，中国程序员，编程技术社区，程序员社区，程序员论坛，程序员"
-"wiki，程序员博客"
+#: templates/authopenid/signup.html:51
+msgid "Login with your OpenID"
+msgstr "使用OpenID登录"
 
-msgid "what is this website"
-msgstr ""
-"CNProg是一个<strong>面向程序员</strong>的可协作编辑的<strong>开放源代码问"
-"答社区</strong>。"
+#~ msgid "site slogan"
+#~ msgstr "程序员问答社区"
 
-msgid "what can one do on this website"
-msgstr ""
-"您可以在这里提问各类<strong>程序技术问题</strong> - 问题不分语言和平台。 "
-"同时也希望您对力所能及的问题，给予您的宝贵答案。"
+#~ msgid "meta site content"
+#~ msgstr ""
+#~ "中国程序员的编程技术问答社区。我们做专业的、可协作编辑的技术问答社区。"
 
-msgid "Goal of this site is..."
-msgstr "CNProg 是为了帮助程序员解决更多问题，更加方便的解决问题。"
+#~ msgid "copyright message"
+#~ msgstr "Copyright(c)2009.CNPROG.COM"
 
-msgid "Community gives you awards for your questions, answers and votes."
-msgstr ""
-"提出问题，给予回答，投出你的票 - CNProg 会针对你在社区的表现，授予你各类奖"
-"牌。"
+#~ msgid ""
+#~ "please use space to separate tags (this enables autocomplete feature)"
+#~ msgstr "多个标签请用空格间隔-最多5个标签。（优先使用自动匹配的英文标签。）"
 
-msgid "please make your answer relevant to this community"
-msgstr "您的问题与编程相关吗？"
+#~ msgid ""
+#~ "the page you tried to visit is protected or you don't have sufficient "
+#~ "points, see"
+#~ msgstr "访问的页面被保护或你的积分不够，参见"
 
-msgid "book technical Q&A"
-msgstr "图书相关的技术答疑"
+#~ msgid "Ask a question"
+#~ msgstr "我要提问"
 
-msgid "blog"
-msgstr "Blog"
+#~ msgid "Use"
+#~ msgstr "使用"
 
-msgid "privacy policy"
-msgstr "隐私政策"
+#~ msgid "learn more about OpenID"
+#~ msgstr "了解更多有关OpenID的信息"
 
-msgid "current revision"
-msgstr "当前版本"
+#, fuzzy
+#~ msgid "Get your own "
+#~ msgstr "获取您自己的"
 
-msgid "number of votes"
-msgstr "票数"
+#~ msgid "Email: (won't be shown to anyone)"
+#~ msgstr "电子邮件:（不会公开显示）"
 
-msgid "current page"
-msgstr "当前页"
+#~ msgid "Ask your question"
+#~ msgstr "现在提问"
 
-msgid "next page"
-msgstr "下一页"
+#~ msgid ""
+#~ "gold badge descriptionGold badge is very rare. To obtain it you have to "
+#~ "show profound knowledge and ability in addition to actively participating "
+#~ "in the community. Gold badge is the highest award in this community."
+#~ msgstr ""
+#~ "金牌是十分罕见的。你不仅要参与社区的提问、回答、投票等活动，而且需要有高深"
+#~ "的知识和能力才能获得。"
 
-msgid "page number "
-msgstr "第"
+#~ msgid ""
+#~ "silver badge descriptionObtaining silver badge requires significant "
+#~ "patience. If you got one, you've very significantly contributed to this "
+#~ "community"
+#~ msgstr "它是不同寻常的荣誉，只要你付出足够的努力就会得到。"
 
-msgid "number - make blank in english"
-msgstr "页"
+#, fuzzy
+#~ msgid ""
+#~ "bronze badge descriptionIf you are active in this community, you will get "
+#~ "this medal - still it is a special honor."
+#~ msgstr "铜牌会在你活跃于社区时产生，它相对容易获得，但也是一种特殊的荣誉。"
 
-msgid "Change tags"
-msgstr "修改问题标签"
+# base_content.html
+#~ msgid "congratulations, community gave you a badge"
+#~ msgstr "恭喜您，社区给您颁发了奖牌"
 
-# todo: remove magic numbers from this file
-msgid "up to 5 tags, less than 20 characters each"
-msgstr "最多5个标签，每个标签长度小于20个字符。"
+#~ msgid "profile"
+#~ msgstr "个人资料"
 
-msgid "Change now"
-msgstr "现在修改"
+#, fuzzy
+#~ msgid "About us"
+#~ msgstr "关于本站"
 
-msgid "uses tags for the classification of questions"
-msgstr "用标签来分类系统的信息"
+#, fuzzy
+#~ msgid "Contact"
+#~ msgstr "联系我们"
 
-msgid "tag editors receive special awards from the community"
-msgstr "修改标签的用户将授予特殊的社区奖牌"
+#, fuzzy
+#~ msgid "Privacy"
+#~ msgstr "隐私政策"
 
-msgid "Why use and modify tags?"
-msgstr "为什么我只能修改问题标签？"
+#, fuzzy
+#~ msgid "Feedback"
+#~ msgstr "问题反馈"
 
-msgid "Found by tag"
-msgstr "标签问题"
+#~ msgid "books"
+#~ msgstr "读书"
 
-msgid "Found by title"
-msgstr "查询结果"
+#~ msgid "ask a question"
+#~ msgstr "我要提问"
 
-msgid "most recently updated questions"
-msgstr "最近被更新的问题"
+#~ msgid "Questions"
+#~ msgstr "问题列表"
 
-msgid "latest questions info"
-msgstr ""
-"问题按<strong>提问时间</strong>显示排序。新加入的问题将显示在最前面。"
+#~ msgid "all questions"
+#~ msgstr "全部问题"
 
-msgid ""
-"\n"
-"\t\t\thave total %(q_num)s questions tagged %(tagname)s\n"
-"\t\t\t"
-msgid_plural ""
-"\n"
-"\t\t\thave total %(q_num)s questions tagged %(tagname)s\n"
-"\t\t\t"
-msgstr[0] ""
-"\n"
-"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标记为<span "
-"class=\"tag\">%(tagname)s</span></p>"
-msgstr[1] ""
-"\n"
-"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标记为<span "
-"class=\"tag\">%(tagname)s</span></p>"
+#~ msgid "welcome to website"
+#~ msgstr "CNProg欢迎您!"
 
-msgid ""
-"\n"
-"\t\t\thave total %(q_num)s questions containing %(searchtitle)s\n"
-"\t\t\t"
-msgid_plural ""
-"\n"
-"\t\t\thave total %(q_num)s questions containing %(searchtitle)s\n"
-"\t\t\t"
-msgstr[0] ""
-"\n"
-"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标题含有"
-"<span class=\"tag\">%(searchtitle)s</span></p>"
-msgstr[1] ""
-"\n"
-"您正在浏览所有<div class=\"questions-count\">%(q_num)s</div>个标题含有"
-"<span class=\"tag\">%(searchtitle)s</span></p>"
+#~ msgid "Active"
+#~ msgstr "活跃问题"
 
-msgid "number of questions"
-msgstr "个"
+#~ msgid "Account: change email"
+#~ msgstr "修改电子邮件"
 
-msgid "number of <strong>unanswered</strong> questions"
-msgstr ""
-"个 <span class=\"darkred\"><strong>没有回答的</strong></span> 问题。"
+#~ msgid ""
+#~ "As a registered user you can login with your OpenID, log out of the site "
+#~ "or permanently remove your account."
+#~ msgstr ""
+#~ "您是系统的<strong class=\"darkred\">注册</strong>用户，可以随时使用OpenID"
+#~ "帐号登录系统或者注销登录。"
 
-msgid "tagged with"
-msgstr "标记为"
+#, fuzzy
+#~ msgid "Size per page:"
+#~ msgstr "每页显示"
 
-msgid "whose title contains"
-msgstr "标题含有"
+#~ msgid "Privacy policy"
+#~ msgstr "隐私政策"
 
-msgid "number of questions end of sentence"
-msgstr "的问题。"
+#~ msgid "general message about privacy"
+#~ msgstr ""
+#~ "CNProg承认用户隐私的重要性。本文件概述在您浏览CNProg过程中所接收和收集的个"
+#~ "人信息的种类，以及CNProg所采取的保护信息的一些措施。CNProg希望这将有助于您"
+#~ "在知情的情况下，就和我们 共享个人信息的问题作出决定。"
 
-msgid "Questions are sorted by the <strong>time of last update</strong>."
-msgstr "问题按<strong>最后更新时间</strong>显示排序。"
+#~ msgid "Site Visitors"
+#~ msgstr "网站访问者"
 
-msgid "Most recently answered ones are shown first."
-msgstr "最后被回答或者>更新的问题将显示在最前面。"
+#~ msgid "what technical information is collected about visitors"
+#~ msgstr ""
+#~ "当您访问本网站或使用我们的某些在线服务时，服务器会自动记录信息，包括但不限"
+#~ "于URL、IP地址、浏览器的类型、屏幕分辨率、系统类型和使用的语言以及访问日期"
+#~ "和时间。我们的目的是为了向您>提供更好的用户服务，包括可能为您提供定制的在"
+#~ "线服务。"
 
-msgid "Questions sorted by <strong>number of responses</strong>."
-msgstr "问题按<strong>回复数量</strong>显示排序。"
+#~ msgid "Personal Information"
+#~ msgstr "个人身份信息"
 
-msgid "Most answered questions are shown first"
-msgstr "回复最多的问题将显示在最前面。"
+#~ msgid "details on personal information policies"
+#~ msgstr ""
+#~ "在登录使用CNProg的提问和回答功能时，我们要求使用者提供用户名、密码、电子邮"
+#~ "件等信息。CNProg收集这类关于个人身份的信息只是为了登录系统获得使用功能的目"
+#~ "的。我们不会向任何其他社区用 户、个人或第三方透露您的密码或者电子邮件信"
+#~ "息。用户可以选择性地填写用户资料、个人网站、年龄、城市等信息，我们收集这些"
+#~ "内容为了使用户能够更容易和更满意地使用CNProg提供的网页和服务。"
 
-msgid "Questions are sorted by the <strong>number of votes</strong>."
-msgstr "问题按<strong>投票数量</strong>显示排序。"
+#~ msgid "Other Services"
+#~ msgstr "其他服务"
 
-msgid "Most voted questions are shown first"
-msgstr "投票最多的问题将显示在最前面。"
+#~ msgid "details on sharing data with third parties"
+#~ msgstr ""
+#~ "CNProg可能会收集和统计用户访问本站的概况数据。例如，CNProg可能会检测网站最"
+#~ "流行的部分功能。CNProg可能会公开显示或者提供给第三方使用该数据。但是，"
+#~ "CNProg不会公开您的身份信息。"
 
-msgid "questions that user selected as his/her favorite"
-msgstr "用户收藏的问题"
+#~ msgid "cookie policy details"
+#~ msgstr ""
+#~ "访问CNProg时，我们会向您的计算机发送一个或多个专门用于识别您的浏览器的"
+#~ "Cookie（包含一个字符串的小文件）。 使用 Cookie 的目的是通过储存用户偏好、"
+#~ "跟踪用户倾向（例如搜索方法）来提高我们的服务质量。大多数浏览器的初始设置均"
+#~ "为接受 Cookie，但也可以将其重置为拒绝所有 Cookie 或在收到 Cookie 时提示。"
+#~ "不过，如果禁用 Cookie，某些功能和服务可能无法正常运行。"
 
-msgid "Frequently Asked Questions "
-msgstr "常见问题"
+#~ msgid "Policy Changes"
+#~ msgstr "政策更改"
 
-msgid "What kinds of questions can I ask here?"
-msgstr "我可以在这里提问什么样的问题？"
+#, fuzzy
+#~ msgid "how privacy policies can be changed"
+#~ msgstr ""
+#~ "我们可能在事先通知或不通知的情况下随时更改此'隐私政策'，我们建议用户时常查"
+#~ "看CNProg隐私政策的改动，在任何改动生效后您的继续访问和使用本站，我们假设您"
+#~ "已同意了CNProg以上的所有条款。"
 
-msgid "What questions should I avoid asking?"
-msgstr "什么样的问题我不该在这里提问？"
+#~ msgid "i like this post (click again to cancel)"
+#~ msgstr "这篇帖子有价值（再次点击取消操作）"
 
-msgid ""
-"Most importanly - questions should be <strong>relevant</strong> to this "
-"community."
-msgstr "毫无疑问，首先必须是<span class=\"yellowbg\">技术编程问题！</span>"
+#~ msgid "current number of votes"
+#~ msgstr "当前总票数"
 
-msgid ""
-"Before asking the question - please make sure to use search to see "
-"whether your question has alredy been answered."
-msgstr ""
-"提问之前，充分利用系统的自动查找、标签和搜索，看看是否已经有一样的问题并有"
-"了答案。"
+#~ msgid "i dont like this post (click again to cancel)"
+#~ msgstr "这篇帖子没有价值（再次点击取消操作）"
 
-msgid "What should I avoid in my answers?"
-msgstr "什么样的回答是不受欢迎的？"
+#~ msgid "mark this question as favorite (click again to cancel)"
+#~ msgstr "我要收藏这个问题（再次点击取消操作）"
 
-msgid "Who moderates this community?"
-msgstr "谁是社区的管理员？"
+#~ msgid ""
+#~ "remove favorite mark from this question (click again to restore mark)"
+#~ msgstr "我要收藏这个问题（再次点击取消操作）"
 
-msgid ""
-"Please avoid asking questions that are not relevant to this community, "
-"too subjective and argumentative."
-msgstr ""
-"<span class=\"yellowbg\">与程序员或技术无关的，引起争吵或太过于主观性等违"
-"背社区宗旨的内容。</span>本站建立是为了帮助大众程序员解决实际技术问题，我"
-"们需要实际的问题！"
+#~ msgid "add comment"
+#~ msgstr "添加评论"
 
-msgid ""
-"is a Q&A site, not a discussion group. Therefore - please avoid having "
-"discussions in your answers, comment facility allows some space for brief "
-"discussions."
-msgstr ""
-"希望用户提供针对提问的技术回答，可以是进一步了解问题实质，给予参考方案，或"
-"完全解决问题的回答。我们希望通过问答的形式解决用户的实际问题。因此，<span "
-"class=\"yellowbg\">我们不>欢迎在回答中出现不是回答问题的内容，包括针对他人"
-"回答的讨论，和其他无意义的浪费网络资源行为</span>。CNProg建议您使用<span "
-"class=\"yellowbg\">评论</span>功能来讨论你的意见和想法。"
+#~ msgid "i like this answer (click again to cancel)"
+#~ msgstr "这篇帖子有价值（再次点击取消操作）"
 
-msgid "The short answer is: <strong>you</strong>."
-msgstr "答案是：<span class=\"yellowbg\">每个用户。</span>"
+#~ msgid "i dont like this answer (click again to cancel)"
+#~ msgstr "这篇帖子没有价值（再次点击取消操作）"
 
-msgid ""
-"The reputation system allows users earn the authorization to perform a "
-"variety of moderation tasks."
-msgstr ""
-"通过积分运作，<span class=\"yellowbg\">每个用户都有权限创建标签，进行对所"
-"有问题、回答的投票、编辑、关闭等操作。</span>"
+#~ msgid "mark this answer as favorite (click again to undo)"
+#~ msgstr "最佳答案（再次点击取消操作）"
 
-msgid "This website is moderated by the users."
-msgstr "社区没有严格意义上的管理员身份"
+#~ msgid "the author of the question has selected this answer as correct"
+#~ msgstr "这个答案已经被提问作者标记为最佳答案"
 
-msgid "How does reputation system work?"
-msgstr "什么是社区积分？"
+#~ msgid "Your answer"
+#~ msgstr "您的回答"
 
-msgid ""
-"Anyone can ask questions and give answers, points are not necessary for "
-"that."
-msgstr "对于正常使用社区进行提问、回答而言，积分不是必须的。"
+#~ msgid "Answer the question"
+#~ msgstr "回答该问题"
 
-msgid ""
-"As we've said before, users help running this site. Point system helps "
-"select users who can administer this community."
-msgstr ""
-"我们一再声明，CNProg由你来运行和维护。如果你想帮助我们来运作CNProg，你需要"
-"一定的积分等级。"
+#~ msgid "Question tags"
+#~ msgstr "您正在浏览的问题含有以下标签"
 
-msgid ""
-"Reputation points roughly measure how community trusts you. These points "
-"are given to you directly by other members of the community."
-msgstr ""
-"<span class=\"yellowbg\">积分是一种用来粗略衡量社区对你有多信任的数据。</"
-"span>积分不是有谁来支付或直接给予你的，而是你通过获得其他用户的支持和信"
-"任“赚得”的。"
+#, fuzzy
+#~ msgid "question asked"
+#~ msgstr "提问时间"
 
-msgid ""
-"For example, if you ask an interesting question or give a helpful answer, "
-"your input will be upvoted and you will gain more trust in the community."
-msgstr ""
-"举例来说，如果你提了一个非常有帮助的问题或者做了很有用的回答，你将会被其他"
-"用户投赞成票。"
+#~ msgid "question was seen"
+#~ msgstr "目前浏览数量"
 
-msgid ""
-"If on the other hand someone gives a misleading answer, the answer will "
-"be voted down and he/she loses some points."
-msgstr ""
-"相反，你提了不受欢迎的问题，或者误导用户的回答，你将可能被其他用户投反对"
-"票。每个赞成"
+#, fuzzy
+#~ msgid "Related questions"
+#~ msgstr "相似的问题"
 
-msgid ""
-"Each vote in favor will generate <strong>10</strong> points, each vote "
-"against will subtract <strong>2</strong> points."
-msgstr ""
-"票会帮你产生<strong>10</strong>个社区积分，每个反对票会相应扣除你"
-"<strong>2</strong>个积分。"
+#~ msgid "All questions"
+#~ msgstr "所有问题"
 
-msgid ""
-"Through the votes of other people you can accumulate a maximum of "
-"<strong>200</strong> points."
-msgstr ""
-"每天通过别人投赞成票，你最多只能产生<strong>200</strong>个积分，这是上限。"
+#, fuzzy
+#~ msgid "Questions with most answers"
+#~ msgstr "您正在浏览的问题含有以下标签"
 
-msgid "After accumulating certain number of points, you can do more:"
-msgstr "当你累计到一定>积分，你可以在社区做更多的事情："
+# index.html
+#~ msgid "Community wiki"
+#~ msgstr "社区Wiki"
+
+# must have extra space after in english
+#, fuzzy
+#~ msgid "Browse questions with tag of "
+#~ msgstr "查看有关"
+
+# user_info.html 
+#~ msgid "age"
+#~ msgstr "年龄"
+
+#~ msgid "age unit"
+#~ msgstr "岁"
+
+#, fuzzy
+#~ msgid ""
+#~ "the answer has been commented %(answered_question.comment_count)s times"
+#~ msgstr "该回答有%d条评论"
+
+#, fuzzy
+#~ msgid ""
+#~ "Your OpenID is accepted. Please complete this to finish registration."
+#~ msgstr "您的OpenID帐号已经验证通过! 请完成最后一步 - 绑定OpenID到您的帐号。"
+
+#~ msgid "New account"
+#~ msgstr "新帐号"
+
+#~ msgid "User name (<i>will be shown to others, cannot be modified</i>)"
+#~ msgstr "用户名（<i>在社区显示友好名称，不可更改</i>）"
+
+#~ msgid "Email (<i>not shared with anyone</i>)"
+#~ msgstr "电子邮件（<i>用于头像显示服务</i>）"
+
+#~ msgid "select openid provider"
+#~ msgstr "1)请选择您的帐号类："
+
+#~ msgid "verify openid link and login"
+#~ msgstr "2)型并完成正确的OpenID地址（如：替换“{username}”为您的对应帐号）："
+
+#~ msgid "meta site keywords, comma separated"
+#~ msgstr ""
+#~ "技术问答社区，中国程序员，编程技术社区，程序员社区，程序员论坛，程序员"
+#~ "wiki，程序员博客"
+
+#~ msgid "what is this website"
+#~ msgstr ""
+#~ "CNProg是一个<strong>面向程序员</strong>的可协作编辑的<strong>开放源代码问"
+#~ "答社区</strong>。"
+
+#~ msgid "what can one do on this website"
+#~ msgstr ""
+#~ "您可以在这里提问各类<strong>程序技术问题</strong> - 问题不分语言和平台。 "
+#~ "同时也希望您对力所能及的问题，给予您的宝贵答案。"
+
+#~ msgid "Goal of this site is..."
+#~ msgstr "CNProg 是为了帮助程序员解决更多问题，更加方便的解决问题。"
+
+#~ msgid "book technical Q&A"
+#~ msgstr "图书相关的技术答疑"
+
+#~ msgid "privacy policy"
+#~ msgstr "隐私政策"
+
+#~ msgid "number of votes"
+#~ msgstr "票数"
+
+#~ msgid "Change now"
+#~ msgstr "现在修改"
+
+#~ msgid "uses tags for the classification of questions"
+#~ msgstr "用标签来分类系统的信息"
+
+#~ msgid "Found by tag"
+#~ msgstr "标签问题"
+
+#~ msgid "most recently updated questions"
+#~ msgstr "最近被更新的问题"
+
+#~ msgid "latest questions info"
+#~ msgstr ""
+#~ "问题按<strong>提问时间</strong>显示排序。新加入的问题将显示在最前面。"
+
+#~ msgid "number of questions"
+#~ msgstr "个"
+
+#~ msgid "number of <strong>unanswered</strong> questions"
+#~ msgstr ""
+#~ "个 <span class=\"darkred\"><strong>没有回答的</strong></span> 问题。"
+
+#~ msgid "tagged with"
+#~ msgstr "标记为"
+
+#~ msgid "whose title contains"
+#~ msgstr "标题含有"
+
+#~ msgid "number of questions end of sentence"
+#~ msgstr "的问题。"
+
+#~ msgid "questions that user selected as his/her favorite"
+#~ msgstr "用户收藏的问题"
+
+#~ msgid "What kinds of questions can I ask here?"
+#~ msgstr "我可以在这里提问什么样的问题？"
+
+#~ msgid "What questions should I avoid asking?"
+#~ msgstr "什么样的问题我不该在这里提问？"
+
+#~ msgid ""
+#~ "Most importanly - questions should be <strong>relevant</strong> to this "
+#~ "community."
+#~ msgstr "毫无疑问，首先必须是<span class=\"yellowbg\">技术编程问题！</span>"
+
+#~ msgid ""
+#~ "Before asking the question - please make sure to use search to see "
+#~ "whether your question has alredy been answered."
+#~ msgstr ""
+#~ "提问之前，充分利用系统的自动查找、标签和搜索，看看是否已经有一样的问题并有"
+#~ "了答案。"
+
+#~ msgid "Who moderates this community?"
+#~ msgstr "谁是社区的管理员？"
+
+#~ msgid ""
+#~ "Please avoid asking questions that are not relevant to this community, "
+#~ "too subjective and argumentative."
+#~ msgstr ""
+#~ "<span class=\"yellowbg\">与程序员或技术无关的，引起争吵或太过于主观性等违"
+#~ "背社区宗旨的内容。</span>本站建立是为了帮助大众程序员解决实际技术问题，我"
+#~ "们需要实际的问题！"
+
+#~ msgid ""
+#~ "is a Q&A site, not a discussion group. Therefore - please avoid having "
+#~ "discussions in your answers, comment facility allows some space for brief "
+#~ "discussions."
+#~ msgstr ""
+#~ "希望用户提供针对提问的技术回答，可以是进一步了解问题实质，给予参考方案，或"
+#~ "完全解决问题的回答。我们希望通过问答的形式解决用户的实际问题。因此，<span "
+#~ "class=\"yellowbg\">我们不>欢迎在回答中出现不是回答问题的内容，包括针对他人"
+#~ "回答的讨论，和其他无意义的浪费网络资源行为</span>。CNProg建议您使用<span "
+#~ "class=\"yellowbg\">评论</span>功能来讨论你的意见和想法。"
+
+#~ msgid "The short answer is: <strong>you</strong>."
+#~ msgstr "答案是：<span class=\"yellowbg\">每个用户。</span>"
+
+#~ msgid ""
+#~ "The reputation system allows users earn the authorization to perform a "
+#~ "variety of moderation tasks."
+#~ msgstr ""
+#~ "通过积分运作，<span class=\"yellowbg\">每个用户都有权限创建标签，进行对所"
+#~ "有问题、回答的投票、编辑、关闭等操作。</span>"
+
+#~ msgid "This website is moderated by the users."
+#~ msgstr "社区没有严格意义上的管理员身份"
+
+#~ msgid ""
+#~ "Anyone can ask questions and give answers, points are not necessary for "
+#~ "that."
+#~ msgstr "对于正常使用社区进行提问、回答而言，积分不是必须的。"
+
+#~ msgid ""
+#~ "As we've said before, users help running this site. Point system helps "
+#~ "select users who can administer this community."
+#~ msgstr ""
+#~ "我们一再声明，CNProg由你来运行和维护。如果你想帮助我们来运作CNProg，你需要"
+#~ "一定的积分等级。"
+
+#~ msgid ""
+#~ "Reputation points roughly measure how community trusts you. These points "
+#~ "are given to you directly by other members of the community."
+#~ msgstr ""
+#~ "<span class=\"yellowbg\">积分是一种用来粗略衡量社区对你有多信任的数据。</"
+#~ "span>积分不是有谁来支付或直接给予你的，而是你通过获得其他用户的支持和信"
+#~ "任“赚得”的。"
+
+#~ msgid ""
+#~ "For example, if you ask an interesting question or give a helpful answer, "
+#~ "your input will be upvoted and you will gain more trust in the community."
+#~ msgstr ""
+#~ "举例来说，如果你提了一个非常有帮助的问题或者做了很有用的回答，你将会被其他"
+#~ "用户投赞成票。"
+
+#~ msgid ""
+#~ "If on the other hand someone gives a misleading answer, the answer will "
+#~ "be voted down and he/she loses some points."
+#~ msgstr ""
+#~ "相反，你提了不受欢迎的问题，或者误导用户的回答，你将可能被其他用户投反对"
+#~ "票。每个赞成"
+
+#~ msgid ""
+#~ "Each vote in favor will generate <strong>10</strong> points, each vote "
+#~ "against will subtract <strong>2</strong> points."
+#~ msgstr ""
+#~ "票会帮你产生<strong>10</strong>个社区积分，每个反对票会相应扣除你"
+#~ "<strong>2</strong>个积分。"
+
+#~ msgid ""
+#~ "Through the votes of other people you can accumulate a maximum of "
+#~ "<strong>200</strong> points."
+#~ msgstr ""
+#~ "每天通过别人投赞成票，你最多只能产生<strong>200</strong>个积分，这是上限。"
+
+#~ msgid "After accumulating certain number of points, you can do more:"
+#~ msgstr "当你累计到一定>积分，你可以在社区做更多的事情："
 
 # todo - check if it's indeed plural
-msgid "add comments"
-msgstr "添加评论"
+#~ msgid "add comments"
+#~ msgstr "添加评论"
 
-msgid "retag questions"
-msgstr "给任何问题整理标签"
+#~ msgid "retag questions"
+#~ msgstr "给任何问题整理标签"
 
-msgid "edit community wiki questions"
-msgstr "编辑wiki类问题"
+#~ msgid "edit community wiki questions"
+#~ msgstr "编辑wiki类问题"
 
-msgid "edit any answer"
-msgstr "编辑任何问题或答案"
+#~ msgid "edit any answer"
+#~ msgstr "编辑任何问题或答案"
 
-msgid "reopen any closed questions"
-msgstr "打开关闭任何人的问题"
+#~ msgid "reopen any closed questions"
+#~ msgstr "打开关闭任何人的问题"
 
-msgid "delete any comment"
-msgstr "删除任何一个评论"
+#~ msgid "delete any comment"
+#~ msgstr "删除任何一个评论"
 
-msgid "delete any questions and answers and perform other moderation tasks"
-msgstr "删除任何一个问题或答案，及其他管理功能"
+#~ msgid "delete any questions and answers and perform other moderation tasks"
+#~ msgstr "删除任何一个问题或答案，及其他管理功能"
 
-msgid "To register, do I need to create new password?"
-msgstr "我需要注册一个新用户吗？"
+#~ msgid "Why other people can edit my questions/answers?"
+#~ msgstr "为什么其他人可以修改我的问题/回答？"
 
-msgid "Why other people can edit my questions/answers?"
-msgstr "为什么其他人可以修改我的问题/回答？"
+#~ msgid "Still have questions?"
+#~ msgstr "还有其他问题？"
 
-msgid "Still have questions?"
-msgstr "还有其他问题？"
+#~ msgid "Please ask your question, help make our community better!"
+#~ msgstr "如果您对社区还有其他疑问，请一起来完善我们的"
 
-msgid "Please ask your question, help make our community better!"
-msgstr "如果您对社区还有其他疑问，请一起来完善我们的"
+#~ msgid ""
+#~ "So questions and answers can be edited like wiki pages by experienced "
+#~ "users of this site and this improves the overall quality of the knowledge "
+#~ "base content."
+#~ msgstr ""
+#~ "所以问题和答案都是如Wiki一样可编辑的，我们希望社区能帮助用户沉淀、积累更多"
+#~ "有用的知识和经验。"
 
-msgid ""
-"No, you don't have to. You can login through any service that supports "
-"OpenID, e.g. Google, Yahoo, AOL, etc."
-msgstr ""
-"不需要。社区提供了OpenID的登录支持，你要用Google、Yahoo等任何支持OpenID登"
-"录的帐号就可以使用系统。"
+#~ msgid "If this approach is not for you, we respect your choice."
+#~ msgstr "如果您不喜欢这种方式，我们尊重你的选择。"
 
-msgid "Login now!"
-msgstr "马上登录"
+#~ msgid "gold badge: the highest honor and is very rare"
+#~ msgstr "金牌:十分罕见之最高荣耀"
 
-msgid ""
-"So questions and answers can be edited like wiki pages by experienced "
-"users of this site and this improves the overall quality of the knowledge "
-"base content."
-msgstr ""
-"所以问题和答案都是如Wiki一样可编辑的，我们希望社区能帮助用户沉淀、积累更多"
-"有用的知识和经验。"
+#~ msgid ""
+#~ "silver badge: occasionally awarded for the very high quality contributions"
+#~ msgstr "银牌:偶尔颁发之优质奖章"
 
-msgid "If this approach is not for you, we respect your choice."
-msgstr "如果您不喜欢这种方式，我们尊重你的选择。"
+#~ msgid "Gold badge is very rare."
+#~ msgstr "金牌是十分罕见的。"
 
-msgid "answer tips"
-msgstr "受欢迎的提问"
+#~ msgid "Gold badge is the highest award in this community."
+#~ msgstr "获得金牌意味着你在某个层次上已经达到了顶峰。"
 
-msgid "try to give an answer, rather than engage into a discussion"
-msgstr "建议您提的问题是可以被答复的，而不仅仅是可以讨论。"
+#~ msgid "Obtaining silver badge requires significant patience."
+#~ msgstr "银牌需要经过长时间的奋斗才能获得。"
 
-msgid "gold badge: the highest honor and is very rare"
-msgstr "金牌:十分罕见之最高荣耀"
-
-msgid ""
-"silver badge: occasionally awarded for the very high quality contributions"
-msgstr "银牌:偶尔颁发之优质奖章"
-
-msgid "Gold badge is very rare."
-msgstr "金牌是十分罕见的。"
-
-msgid "Gold badge is the highest award in this community."
-msgstr "获得金牌意味着你在某个层次上已经达到了顶峰。"
-
-msgid "Obtaining silver badge requires significant patience."
-msgstr "银牌需要经过长时间的奋斗才能获得。"
-
-msgid "%s ago"
-msgstr "于%s<font class=\"darkred\">关闭</font>"
+#~ msgid "%s ago"
+#~ msgstr "于%s<font class=\"darkred\">关闭</font>"
