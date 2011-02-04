@@ -1,4 +1,5 @@
 import os.path
+from django.http import HttpResponse
 from django.conf.urls.defaults import *
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from django.contrib import admin
@@ -82,4 +83,5 @@ urlpatterns = patterns('',
     url(r'^search/$', app.search, name='search'),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    (r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain")),
 )

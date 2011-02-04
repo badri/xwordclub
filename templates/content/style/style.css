@@ -1026,6 +1026,7 @@ div.started .reputation-score {
 .score {font-weight:800; color:#333;}
 .footerLinks {color:#EEE; font-size:13px; 
 	/* letter-spacing:1px;*/
+        height: 180px;
 	}
 .footerLinks a {color:#FFF; font-size:18px;}
 .subSearch {margin-bottom:12px; padding:4px;}

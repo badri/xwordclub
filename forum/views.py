@@ -72,6 +72,7 @@ def _get_tags_cache_json():
 
 def index(request):
     view_id = request.GET.get('sort', None)
+    '''
     view_dic = {
         "latest":"-last_activity_at",
         "hottest":"-answer_count",
@@ -90,6 +91,8 @@ def index(request):
         questions = Question.objects.get_questions_by_pagesize(orderby, INDEX_PAGE_SIZE)
     # RISK - inner join queries
     questions = questions.select_related()
+    '''
+    questions = Question.objects.get_questions_by_pagesize("-last_activity_at", INDEX_PAGE_SIZE)
     tags = Tag.objects.get_valid_tags(INDEX_TAGS_SIZE)
 
     awards = Award.objects.get_recent_awards()
