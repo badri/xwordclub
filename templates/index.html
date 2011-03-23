@@ -56,16 +56,7 @@
 {% endblock %}
 
 {% block sidebar %}
-{% if not request.user.is_authenticated %}
-<div class="boxA">
-	<h3>{% trans "What is all this?" %}</h3>
-	<div class="body">
-      {{ settings.APP_INTRO|safe }}
-	  <div class="more"><a href="/about">Learn more here</a></div>
-	</div>
-</div>
-{% endif %}
-<div class="sidebar">  
+<div class="sidebar">
 <a href="http://twitter.com/xwordclub" title="{% trans "follow @xwordclub on twitter" %}">  
 <img src="/content/images/twitter.png" width="100" height="100"/>
 <br/>
