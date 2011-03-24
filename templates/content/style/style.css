@@ -84,7 +84,7 @@ blockquote
     background:#FFF;
 }
 #room {padding:10px 0 10px 0;background-color:#FFF;}
-#CALeft{width:710px; float:left; position:relative;}
+#CALeft{width:610px; float:left; position:relative;}
 #CARight{width:240px; float:right;}
 #CAFull{float:left;padding:0 5px 0 5px;width:950px;}
 #ground {width:100%;border-top:1px solid #000; padding-top:6px; padding-bottom:0px; text-align:center;background:#777;}
@@ -154,7 +154,7 @@ blockquote
 #listA .qstA .from IMG {vertical-align:middle;}
 #listA .qstA .author {font-weight:400; }
 #listA .qstA .author a{ }
-#listA .qstA .summary{margin-right:5px;}
+#listA .qstA .summary{margin-right:5px; font-size:12px;}
 
 .evenMore {font-size:14px; font-weight:800;}
 .questions-count{font-size:32px;font-family:sans-serif;font-weight:600;padding:0 0 5px 7px;color:#a40000;}

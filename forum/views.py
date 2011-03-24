@@ -128,7 +128,11 @@ def questions(request, tagname=None, unanswered=False):
     """
     # template file
     # "questions.html" or "unanswered.html"
-    template_file = "questions.html"
+    if request.is_ajax():
+        time.sleep(1)
+        template_file = "question-page.html"
+    else:
+        template_file = "questions.html"
     # get pagesize from session, if failed then get default value
     pagesize = request.session.get("pagesize", 10)
     try:

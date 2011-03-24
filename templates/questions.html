@@ -6,6 +6,7 @@
 {% load extra_filters %}
 {% block title %}{% spaceless %}{% trans "All crosswords" %}{% endspaceless %}{% endblock %}
 {% block forejs %}
+       <script type='text/javascript' src='/content/js/jquery.infinitescroll.js'></script>
        <script type="text/javascript">
         $().ready(function(){
             var tab_id = "{{ tab_id }}";
@@ -14,8 +15,14 @@
             Hilite.exact = false;
             Hilite.elementid = "listA";
             Hilite.debug_referrer = location.href;
+
+            $(window).infinitescroll({
+                        url: "?sort=latest",
+                        triggerAt:150,
+                        appendTo: "div#listA"
+                    });
         });
-         
+
         </script>
 {% endblock %}
 {% block content %}
@@ -33,13 +40,12 @@
         </div>
         
         <div class="from">
-            {% comment %}{% gravatar question.last_activity_by 24 %}{% endcomment %}
             <span class="author"><a href="{{ question.last_activity_by.get_profile_url }}">{{ question.last_activity_by }}</a></span>
-            <span class="score">{% get_score_badge question.last_activity_by %} </span>
-            <span class="date" title="{{ question.last_activity_at }}">{% diff_date question.last_activity_at %}, {{ question.view_count|cnprog_intword|safe }} views</span>
+            <span class="score">({% get_score_badge question.last_activity_by %})</span>
+            <span class="date" title="{{ question.last_activity_at }}">{% diff_date question.last_activity_at %}</span>
 	    <span class="tags">
 	    {% for tag in question.tagname_list %}
-	    <a href="{% url forum.views.tag tag|urlencode %}" title="{% trans "see questions tagged" %}'{{ tag }}'{% trans "using tags" %}" rel="tag">{{ tag }}</a>
+	    <a href="#" title="{{ tag }}'{% trans "using tags" %}" rel="tag">{{ tag }}</a>
 	    {% endfor %}
 	    </span>
         </div>
@@ -48,19 +54,6 @@
 </div>
 
 {% endblock %}
-
-{% block tail %}
-                            
-                        <div class="pager">
-                            {% cnprog_paginator context %}
-                            
-                        </div>
-                        <div class="pagesize">
-                            {% cnprog_pagesize context %}
-                        </div>
-                        
-{% endblock %}
-
 {% block sidebar %}
 <div class="boxC">
     <p>

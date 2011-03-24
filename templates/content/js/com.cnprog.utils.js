@@ -1,12 +1,11 @@
 var showMessage = function(object, msg) {
-    var div = $('<div class="vote-notification"><h3>' + msg + '</h3>('
-				+ $.i18n._('click to close') + ')</div>');
+    var div = $('<div class="vote-notification"><h5>' + msg + '</h5></div>');
     div.click(function(event) {
         $(".vote-notification").fadeOut("fast", function() { $(this).remove(); });
     });
     object.parent().append(div);
     div.fadeIn("fast");
-  //div.fadeOut('slow');
+    div.fadeOut(3000);
 };
 
 var notify = function() {
