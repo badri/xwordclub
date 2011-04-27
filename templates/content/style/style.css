@@ -295,7 +295,7 @@ a:hover.medal  {color:#333; text-decoration:none; background:url(/content/images
 	padding: 0 11px 0 11px;
 	text-decoration: none;
 }
-.tabsA a:hover, .tabsB a:hover {background: #fff;border: 1px solid #777;border-bottom:3px solid #FFF;}
+
 .headlineA {font-size:13px; border-bottom:1px solid #777; padding-bottom:2px; font-weight:800; margin-bottom:12px; text-align:right; height:30px;}
 .headQuestions {float:left; height:23px; line-height:23px; margin:5px 0 0 5px;padding:0px 6px 0px 15px; font-size:15px; font-weight:700; border-bottom:0px solid #777; border-left:0px solid #darkred; background-color:#FFF;background:url(/content/images/dot-list.gif) no-repeat left center;}
 .headAnswers {float:left; padding:3px; font-size:18px; font-weight:800; background:url(/content/images/ico_answers.gif) left 2px no-repeat; padding-left:24px;}
@@ -309,6 +309,8 @@ a:hover.medal  {color:#333; text-decoration:none; background:url(/content/images
 #feeds {margin:10px 0; }
 #feeds a {/*background:url(/content/images/feed-icon-small.png) no-repeat 0; padding-left:18px; font-weight:700;*/ font-size:20px; text-decoration:none;}
 
+
+a#latest {background: #fff;border: 1px solid #777;border-bottom:3px solid #FFF;}
 
 #question {margin-bottom:30px;}
 #question h1{font-size:15px;background:#CCC; padding:6px 8px;;}

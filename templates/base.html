@@ -2,6 +2,7 @@
 <!-- template base.html -->
 {% load extra_filters %}
 {% load i18n %}
+{% load facebook_tags %}
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>{% block title %}{% endblock %} - {{ settings.APP_TITLE }}</title>
@@ -26,6 +27,7 @@
         <script type='text/javascript' src='/content/js/com.cnprog.i18n.js'></script>
 		<script type='text/javascript' src='/content/js/jquery.i18n.js'></script>
         <script type='text/javascript' src='/content/js/com.cnprog.utils.js'></script>
+        {% facebook_js %}
 		<!-- todo move this to settings -->
         {% if messages %}
         <style type="text/css">
@@ -92,6 +94,7 @@
         {% include "footer.html" %}
         {% block endjs %}
         {% endblock %}
+        {% initialize_facebook_connect %}
     </body>
 </html>
 <!-- end template base.html -->
