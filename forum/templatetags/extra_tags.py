@@ -115,9 +115,28 @@ def cnprog_pagesize(context):
 @register.simple_tag
 def get_score_badge(user):
     BADGE_TEMPLATE = '<span class="score" title="%(reputation)s %(reputationword)s">%(reputation)s</span>'
+    if user.gold > 0 :
+        BADGE_TEMPLATE = '%s%s' % (BADGE_TEMPLATE, '<span title="%(gold)s %(badgesword)s">'
+        '<span class="badge1">&#9679;</span>'
+        '<span class="badgecount">%(gold)s</span>'
+        '</span>')
+    if user.silver > 0:
+        BADGE_TEMPLATE = '%s%s' % (BADGE_TEMPLATE, '<span title="%(silver)s %(badgesword)s">'
+        '<span class="silver">&#9679;</span>'
+        '<span class="badgecount">%(silver)s</span>'
+        '</span>')
+    if user.bronze > 0:
+        BADGE_TEMPLATE = '%s%s' % (BADGE_TEMPLATE, '<span title="%(bronze)s %(badgesword)s">'
+        '<span class="bronze">&#9679;</span>'
+        '<span class="badgecount">%(bronze)s</span>'
+        '</span>')
     BADGE_TEMPLATE = smart_unicode(BADGE_TEMPLATE, encoding='utf-8', strings_only=False, errors='strict')
     return mark_safe(BADGE_TEMPLATE % {
         'reputation' : user.reputation,
+        'gold' : user.gold,
+        'silver' : user.silver,
+        'bronze' : user.bronze,
+		'badgesword' : _('badges'),
 		'reputationword' : _('reputation points'),
     })
     
